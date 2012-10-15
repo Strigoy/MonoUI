@@ -44,6 +44,9 @@ local L = {
   ["Tricks of the Trade"] = GetSpellInfo(57934),
 	--warlock
   ["Soulstone"] = GetSpellInfo(20707),
+	--mage
+  ["Dalaran Brilliance"] = GetSpellInfo(61316),
+  ["Arcane Brilliance"] = GetSpellInfo(1459),
 }
 local x = "M"
 
@@ -125,7 +128,7 @@ oUF.Tags.Methods['raid:ws'] = function(u) if UnitDebuff(u, L["Weakened Soul"]) t
 oUF.Tags.Events['raid:ws'] = "UNIT_AURA"
 oUF.Tags.Methods['raid:fw'] = function(u) if UnitAura(u, L["Fear Ward"]) then return "|cff8B4513"..x.."|r" end end
 oUF.Tags.Events['raid:fw'] = "UNIT_AURA"
-oUF.Tags.Methods['raid:fort'] = function(u) local c = UnitAura(u, L["Power Word: Fortitude"]) if not c then return "|cff00A1DE"..x.."|r" end end
+oUF.Tags.Methods['raid:fort'] = function(u) local c = UnitAura(u, L["Power Word: Fortitude"]) or UnitAura(u, L["Commanding Shout"]) if not c then return "|cff00A1DE"..x.."|r" end end
 oUF.Tags.Events['raid:fort'] = "UNIT_AURA"
 oUF.Tags.Methods['raid:wsTime'] = function(u)
   local name, _,_,_,_,_, expirationTime = UnitDebuff(u, L["Weakened Soul"])
@@ -155,8 +158,8 @@ oUF.Tags.Events['raid:motw'] = "UNIT_AURA"
 --warrior
 oUF.Tags.Methods['raid:bsh'] = function(u) if UnitAura(u, L["Battle Shout"]) or UnitAura(u, L["Horn of Winter"]) then return "|cffff0000"..x.."|r" end end
 oUF.Tags.Events['raid:bsh'] = "UNIT_AURA"
-oUF.Tags.Methods['raid:csh'] = function(u) if UnitAura(u, L["Power Word: Fortitude"]) or UnitAura(u, L["Commanding Shout"]) then return "|cffffff00"..x.."|r" end end
-oUF.Tags.Events['raid:csh'] = "UNIT_AURA"
+--oUF.Tags.Methods['raid:csh'] = function(u) if UnitAura(u, L["Power Word: Fortitude"]) or UnitAura(u, L["Commanding Shout"]) then return "|cffffff00"..x.."|r" end end
+--oUF.Tags.Events['raid:csh'] = "UNIT_AURA"
 oUF.Tags.Methods['raid:SW'] = function(u) if UnitAura(u, L['Shield Wall']) then return "|cff9900FF"..x.."|r" end end
 oUF.Tags.Events['raid:SW'] = "UNIT_AURA"
 
@@ -239,6 +242,10 @@ oUF.Tags.Events['raid:lc'] = "UNIT_AURA"
 oUF.Tags.Methods['raid:ss'] = function(u) if UnitAura(u, L["Soulstone"]) then return "|cff33FF33"..x.."|r" end end
 oUF.Tags.Events['raid:ss'] = "UNIT_AURA"
 
+--mage
+oUF.Tags.Methods['raid:brill'] = function(u) local c = UnitAura(u, L["Dalaran Brilliance"]) or UnitAura(u, L["Arcane Brilliance"]) if not c then return "|cff00A1DE"..x.."|r" end end
+oUF.Tags.Events['raid:brill'] = "UNIT_AURA"
+
 oUF.classIndicators={
 		["DRUID"] = {
 				["TL"] = "[raid:regrow][raid:wg]",
@@ -273,7 +280,7 @@ oUF.classIndicators={
 				["TL"] = "",
 				["TR"] = "",
 				["BL"] = "[raid:wrack]",
-				["BR"] = "[raid:csh][raid:bsh]",
+				["BR"] = "[raid:fort][raid:bsh]",
 				["Cen"] = "",
 		},
 		["DEATHKNIGHT"] = {
@@ -308,7 +315,7 @@ oUF.classIndicators={
 				["TL"] = "",
 				["TR"] = "",
 				["BL"] = "[raid:wrack]",
-				["BR"] = "",
+				["BR"] = "[raid:brill]",
 				["Cen"] = "",
 		},
 		["MONK"] = {

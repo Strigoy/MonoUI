@@ -1,0 +1,8 @@
+## Interface: 50001
+## Author: Allez
+## Title: alDamageMeter
+## Version: 40000.7
+## Notes: Damage meter
+
+embeds.xml
+alDamageMeter.lua

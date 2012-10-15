@@ -1,0 +1,13 @@
+## Interface: 50001
+## Title: NugRunning
+## Notes: Spelltimers
+## Author: d87
+## SavedVariablesPerCharacter: NRunDB_Char
+## SavedVariables: NRunDB_Global
+helpers.lua
+config.lua
+NugRunning.lua
+frame.lua
+special.lua
+totems.lua
+nameplates.lua

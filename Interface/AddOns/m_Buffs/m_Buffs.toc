@@ -1,0 +1,8 @@
+## Interface: 50001
+## Title: mono|cffffffffBuffs|r
+## Author: Monolit
+## Notes: Buffs styling
+## Version:  2.0.1
+
+cfg.lua
+m_Buffs.lua

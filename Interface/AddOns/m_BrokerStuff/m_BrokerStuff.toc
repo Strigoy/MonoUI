@@ -1,0 +1,26 @@
+## Interface: 50001
+## Author: Monolit
+## Version: 1.6.0
+## Title: mono|cffffffffBrokerStuff|r
+## Notes: Broker plugins compilation
+## X-Credits: All the original authors: Funkydude(Durability), p3lim(Equipment), Curney(NameToggle), Torhal(Volumizer)
+## SavedVariables: MoneyDB
+## SavedVariablesPerCharacter: Broker_EquipmentDB, SB_MEM_KILL 
+
+libs\LibStub.lua
+libs\tekKonfigScroll.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+libs\AceTimer-3.0.lua
+libs\LibCargoShip-2.1.lua
+
+elements\Ampere.lua
+elements\Broker_Durability.lua
+elements\Broker_Equipment.lua
+elements\Broker_FPS.lua
+elements\Broker_Latency.lua
+elements\Broker_Memory.lua
+elements\Broker_Equipment.lua
+elements\Broker_Money.lua
+
+layout.lua

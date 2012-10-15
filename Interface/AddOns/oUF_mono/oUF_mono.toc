@@ -1,0 +1,28 @@
+## Interface: 50001
+## Version: 5.0.4
+## Title: oUF |cffffffffmono|r
+## Notes: oUF layout
+## RequiredDeps: oUF
+## OptionalDeps: oUF_Smooth, oUF_HealComm, oUF_boring_totembar, oUF_Swing
+## X-Credits: zork for his oUF_Simple and Freebaser for oUF_Freebgrid
+## X-Category: UnitFrame
+
+embeds\Smooth.lua
+embeds\AuraTracker.lua
+embeds\Trinkets.lua
+embeds\CombatFeedback.lua
+embeds\PartyPets.xml
+
+embeds\WarlockSpecBars.lua
+embeds\MonkHarmonyBar.lua
+embeds\TotemBar.lua
+
+cfg.lua
+tags.lua
+embeds\Castbar.lua
+lib.lua
+core.lua
+
+raid_tags.lua
+raid_debuffs.lua
+raid\raid.xml

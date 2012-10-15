@@ -1,0 +1,8 @@
+﻿## Interface: 50001
+## Title: mono|cffffffffLoot|r
+## Version: 4.1
+## Notes: Reworked Butsu + teksLoot compilation, so credits to the original authors
+
+cfg.lua
+m_Loot.lua
+m_LootGroup.lua

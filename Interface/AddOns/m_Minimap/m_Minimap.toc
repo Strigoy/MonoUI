@@ -1,0 +1,8 @@
+## Interface: 50001
+## Title: mono|cffffffffMinimap|r
+## Notes: Minimap modifications
+## Author: Monolit
+## Version: 3.0
+## OptionalDeps: Blizzard_TimeManager
+
+m_Minimap.lua

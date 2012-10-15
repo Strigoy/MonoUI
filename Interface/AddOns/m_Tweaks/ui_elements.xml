@@ -1,0 +1,16 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+	<Script file='elements\Settings.lua' />
+	<Script file='elements\Mountz.lua' />
+	<Script file='elements\SpellID.lua' />
+	<Script file='elements\StyleDBM.lua' />
+	<Script file='elements\StyleBW.lua' />
+	<Script file='elements\StyleNRun.lua' />
+	<Script file='elements\XP.lua' />
+	<Script file='elements\shoutCD.lua' />
+	<Script file='elements\ThreatMeter.lua' />
+	
+	<Script file='elements\RaidBuffs.lua' />
+	<Script file='elements\MailGet.lua' />
+	
+
+</Ui>

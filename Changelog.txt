@@ -1,0 +1,1709 @@
+TODO / KNOWN ISSUES:
+- resize postupdate for class bars
+- threat indication for target frame
+- marker bars events
+? alternative class indication @ unitframes?
+x The Spell IDs in talents window are doubled (seems to be OnTooltipSetSpell handler bug, it fires twice).
+
+====== v. 11.2 rev 2 ======
+oUF_mono: altPowerBar applied to pet unit to prevent it disappearing when in vehicle
+oUF_mono: repositioned player's altPowerBar
+oUF_mono: added monks to dispell table
+oUF_mono: added various raid tags and indicators for monks (healing)
+oUF_mono: added multiple indicators for various classes, also fixed old indicators appearence
+m_Bags: cargbags core update, fixed issue with oppening bags when you reload/relog in combat
+m_Buffs: fixed timers overlapping icons @ debuffs; also adjusted border anchors which were off due to texture changes
+m_Chat: removed styling of default time stamps (for now)
+m_Map: added option to display decimal part of map coordinates
+m_Map: removed tooltip fix for quest blobs
+m_ActionBars: exit vehicle button when docked will always have its position locked by last available Bar1 button
+m_Loot: adjusted size and position of several elements; overall made loot frames bigger
+
+====== v. 11.2 rev 1 ======
+m_Bags: fixed caged battle pets being invisible in bags
+m_Bags: added quality coloring for caged battle pets
+m_BrokerStuff: volume controll panel restyled and repositioned
+m_Chat: major changes to style function
+m_Chat: added pet battle combat log stylizations
+m_Chat: removed few config vars
+m_MailGet: removed
+m_Tweaks: added new MailGet module, added config var to cfg.lua (cfg.EnableMailGet)
+m_Tweaks: raid buffs module brought back to life with updated spell ids and buffs sets
+m_Tweaks: added new flask IDs to the buffs checker
+m_Tweaks: minor tweaks for StyleNRun module
+m_CombatText: aoe list updated for shamans
+m_Minimap: added Pets Journal to the right-click menu
+m_ActionBars: fixed the issue with bars not disappearing properly during a pet battle
+m_ActionBars: raid mark bar will be shown in party group even if you are not a leader
+m_ActionBars: 4 more buttons for the middle cluster making it 2x10buttons bar in default state
+oUF_mono: player & target unitframes repositioned
+oUF_mono: added missing indicators for monks
+oUF_mono: fixed tags counter tags for POM, ES, etc.
+oUF_mono: fixed error with abbrev function of totembar module
+oUF_mono: removed abbreviations from totem bar
+oUF_mono: reworked class specific powers to fit new ClassIcons design in oUF
+oUF_mono: added option to undock AltPowerBar from the player frame (cfg.UnDockAltPowerBar) and set custom position for it (cfg.AltPoiwerBarPosition)
+m_Loot: attempt to fix missing color varriable error
+m_Loot: group loot module reworked based on teksloot, counters are back now
+NugRunning: updated to the latest (5.0.8) version
+MonoUI: updated .blp textures in /interface/Buttons and /interface/Tooltips
+
+====== v. 11.1 rev 4 ======
+oUF_mono: fixed tag error occuring when some tracked buffs return 0 as its' stack number
+oUF_mono: added different coloring for player's own prayer of mending or earth shield
+alDamageMeter: fixed OnClick script for LDB object
+m_Tweaks: implemented option to disable custom bar coloring
+
+====== v. 11.1 rev 3 ======
+m_ActionBars: added [petbattle][overridebar] macro conditions to the OverrideBar frame (to fix some bars issues in DMF quests)
+m_ActionBars: removed holy power coloring for Templar's Verdict in RangeCheck module (tullaRange update)
+m_Loot:: implemented tooltip for icons at mLoot roll frames
+alDamageMeter: updated to the latest version
+oUF_mono: altpowerbar position replaced to the bottom of HP frame, still WIP to find a better position
+oUF_mono: added option to move class-specific power bar (check cfg.lua)
+
+====== v. 11.1 rev 2 ======
+m_Loot: fixed the error
+m_Tweaks: fixed auto-invite module
+m_Buffs: rewwritten from the scratch, fixed multiple things like second row positioning, debuffs highlights etc.
+m_ActionBars: adjusted visibility conditions for raid mark bar
+oUF_mono: fixed aura timers not showing @ debuff icons when debuff source is not player
+oUF_mono: implemented new reworked totembar plugin
+oUF_mono: layout adjusted to reflect totembar changes
+oUF_mono: implemented timers for totembar
+oUF: .toc version updated
+NugRunning: updated to the last version
+
+
+====== v. 11.1 rev 1 ======
+alDamageMeter: events updated
+m_BrokerStuff: fixed durability plugin errors 
+m_ActionBars: fixed new action bars texture names (to hide)
+m_CombatText: added Cone of Cold & Freeze spells into aoe list
+m_Minimap: added 'Dungeon Finder' instead of LFD/LFR to the context menu
+m_Loot: implemented localization and fixed group loot module (now it doesn't try to crush your client and kill your kittens)
+oUF_mono: raid debuffs updates
+oUF_mono: new Shadow orbs implementation
+oUF_mono: implemented warlock, monks, shadow priest and paladin specific power bars
+oUF_mono: modified DK runes to fit new style of class specific powers
+oUF_mono: reworked eclipse bar for druids
+oUF_mono: altPowerBar moved to the bottom of the frame, will need to figure out a better positioning for this thing
+oUF: core update
+NugRunning: removed some deprecated DKs' spellIDs
+
+====== v. 11.0 rev 2 BETA ======
+m_Tweaks: cfg.ThreatBar will function as intended now
+m_ActionBars: added possess bar (swaps with stance bar)
+m_ActionBars: added styling for possess bar
+m_ActionBars: reworked how the main bar works
+m_ActionBars: propperly implemented OverrideBar
+m_ActionBars: fixed taint issues with extra action bar (bar6)
+m_ActionBars: updated raid / world mark bars spawning logic
+m_ActionBars: code refactoring cfg.lua MUST BE UPDATED
+oUF_mono: added full list of known raid debuffs to the raid_debuffs.lua, some of them may be useless - it's up for you to decide as I don't raid @ beta servers
+oUF_mono: raid_tags.lua updated, might need some tweaks but all current IDs are up to date
+oUF_mono: fixed division by zero error in ReverseBar function
+oUF_mono: updated list of spellIDs in AuraTracker
+alDamageMeter: updated few functions, still wip
+
+====== v. 11.0 rev 1 BETA ======
+m_ActionBars: removed depricated frames, updated styling function, fixed hooks
+m_ActionBars: updated RaidMark with new group status requests
+m_ActionBars: fixed extra action bar not updating on page swap, locking it to page 1
+m_ActionBars: bye bye totembar, you sure wasted allot of my time
+m_ActionBars: removed totembar styling functions and config vars
+m_ActionBars: removed raid button from micro menu (replaced with companion and mounts button)
+m_ActionBars: removed updater script to keep micro menu after swapping a spec
+m_ActionBars: reworked art removing function
+m_ActionBars: enabled stance bar & updated stance bar styling
+m_ActionBars: Broker_Equipment updated to reflect API changes
+m_ActionBars: new petbar varriable in cfg file - scale
+m_ActionBars: simplified mAB.ShowInCombat function using RegisterStateDriver
+m_ActionBars: added petbar holder state conditions so it's no longer clickable when invisible
+m_ActionBars: fixed taint on manual page swap when in combat
+m_ActionBars: updated cfg.lua, changed var names, but old versions should be fully compatible
+oUF: assistant and leader module update (for some reason haste's WoW 5.0 compatibility didn't work for me)
+oUF: removed 4.x compatibility for eclipsebar element
+oUF_mono: fixed aura size error
+oUF_mono: tags system, new syntax
+oUF_mono: updated tag events
+oUF_mono: raid frames updated
+oUF_mono: special powers for warlocks now displayed as number @ player unit frame (temp. solution)
+oUF_mono: lightning shield display fixed
+oUF_mono: threat border edge size increased to 1 for party frames (needs testing)
+m_Tweaks: disabled raidBuffs module untill I get a full new list of raid buffs in MOP
+m_Tweaks: updated spec detection function in various modules
+m_Tweaks: fixed /ptr and /rtp /radisband (/rd) commands
+m_Tweaks: updated Mountz macro with new logic, so now it should never fail to understand what mount you want summoned (added underwater mounts support aswell)
+m_Tweaks: StyleNRun module reworked and now working with the latest version of NugRunning, disabled totems module
+m_BrokerStuff: updated /ss module and set assigning module
+m_MailGet: fixed button and check boxes position
+m_Minimap: removed depricated frames from hiding func
+m_Minimap: added new LFG icon
+m_Buffs: getting rid of consolidated buff frame hook, I just never ever use it, nor should any of you!
+m_Buffs: fixed temp enchant frame position
+m_Nameplates: fixed frame hooks
+m_Nameplates: reworked targeting frame, fixed border distortion for targeted nameplates
+m_Loot: few fixes to reflect WoW 5.0 API changes
+m_Loot: disabled MasterLooter and GroupLoot module due to client crashes 
+m_CombatText: fixed white hits display
+NugRunning: updated to the latest version
+NugRunning: adjusted config vars to fit the UI style 
+NugRunning: updated few class-specific spells
+alDamageMeter: few fixes to reflect changes in WoW 5.0 API
+
+=================================================================================================================
+================================================== PATCH 5.0 ====================================================
+=================================================================================================================
+
+====== v. 10.9 rev 5 ======
+m_Bags: fixed taint issue
+m_Tweaks: fully implemented (rewritten) RaidBuffs module to detect missing important raid buffs (requires cfg.lua update)
+oUF_mono: added cfg.Enable3DPortrait to the cfg.lua file
+
+====== v. 10.9 rev 4 ======
+oUF_mono: fix for debuff module, aparently class varriable went missing ...
+
+====== v. 10.9 rev 3 ======
+m_ActionBars: slight ExtraActionBarButton1 rework
+m_ActionBars: few fixes for the ButtonStyler module to avoid taint
+m_ActionBars: little fix for the marking bar, now you should only see it in raid if you're either raid leader or assistant
+m_BrokerStuff: fixed lua error when trying to update the set
+m_Chat: cleaned up few blank functions to avoid taints
+m_Tweaks: fixed spellIDs in tooltip (back to old version)
+oUF_mono: small castbar fix for the latency display
+oUF_mono: raid debuffs updated, removed/modified old debuffs
+oUF_mono: added ability to use spellIDs instead of spell names in raid_debuffs.lua to give some certain debuff priority (screw you Deep Corruption)
+oUF_mono: added debuff timers for the raid frames (new option in cfg.lua), it's on by default
+oUF: core update to the latest version
+
+====== v. 10.9 rev 2 ======
+m_ActionBars: reposition (update cfg.lua) for new ExtraActionButton1
+oUF_mono: added few Dragon Soul raid debuffs
+oUF_mono: implemented oUF_Swing support (you need oUF_Swing plugin for it to work)
+NugRunning: updated to the most recent version
+m_Tweaks: disabled profanity filter........... (for some reason it kept turning on in 4.3)
+m_Minimap: fixed Dungeon Journal button
+m_Map: fixed WorldMap options dropdown position
+
+
+====== v. 10.9 rev 1 ======
+m_Minimap: added new RaidManager to right click menu
+oUF_mono: castbar will now correctly display tick marks on 2 consecutive channeling casts with different channeling time
+m_ActionBars: minor fix for RangeCheck module
+m_ActionBars: marking bar will now be available in party even if you are not a leader
+m_ActionBars: fixed macro text being hidden even if set otherwise in cfg.lua
+m_ActionBars: implemented new ExtraBar button (4.3)
+tullaCC: updated to work with 4.3
+m_Chat: editbox is now clickable when you copy URLs or text lines from the chat frame
+MonoUI: .toc updates for 4.3
+
+====== v. 10.8 rev 9 ======
+m_ActionBars: accidentally included old version of the add-on that caused huge CPU cycles leaks, so it's fixed now
+
+====== v. 10.8 rev 8 ======
+aThreatMeter: removed (merged into m_Tweaks)
+alDamageMeter: hostile npc detection fix
+oUF_mono: added buffs for the boss frames
+oUF_mono: reverted right click menu change, so we get our precious 'set MT/assist' options (although /mt is just much easier way to set MTs)
+oUF: core update to the latest version
+m_Tweaks: reworked add-on structure so it's a little easier to maintain, merged in aThreatMeter add-on
+m_Tweaks: modification to the AutoAcceptDE function (now also automatically accepts greed rolls on bop items)
+m_Tweaks: added CastBy module by Compost, removed old SpellID module
+
+PTR:
+m_Map: removed advancedMap cVar, so it now properly funcitons @ 4.3 /PTR
+m_ActionBars: reworked button styler module, now compatible with 4.3 /PTR
+m_ActionBars: removed old cooldown scaling function (replaced with a simplier solution)
+m_Tweaks: changed LFD- to LFGSearchStatus, compatible with 4.3 /PTR
+
+====== v. 10.8 rev 7 ======
+m_ActionBars: typo in combat visibility function for raid marks bar
+m_ActionBars: raid marks bar visibility conditions
+alDamageMeter: npc flags filter
+
+====== v. 10.8 rev 6 ======
+alDamageMeter: broker tooltip modifications
+alDamageMeter: implemented a fix for totem and guardians pets so they properly associate with their owners
+alDamageMeter: implemented "Pet" abilities indication for the detailed tooltip
+m_BrokerStuff: tooltip modifications
+m_BrokerStuff: world latency instead of local latency
+m_BrokerStuff: modified FPS display update frequency (once every 2 seconds)
+m_BrokerStuff: added toggle backpack functionality to gold display module (click to show/hide bags)
+m_Buffs: added option to toggle buff timers in cfg.lua (for people who dont go well with in-game config)
+NugRunning: spellIDs updated
+NugRunning: added shamans t12 4p bonus proc
+m_Minimap: added dungeon journal button to the right click micro menu
+m_Tweaks: implemented Bigwigs styling module
+m_Tweaks: added /setbw command to inject my bigwigs settings (optional and only for 1920x1080 resolution)
+m_ActionBars: petbar will not 'jump' for shamans if it does not overlap with totembar anymore
+m_ActionBars: added TotemBar holder to the testing function
+m_ActionBars: removed 'hide side bars' option as it was a little confusing, /extra will now toggle all hidden/disabled bars instead (remember to update cfg.lua)
+m_Nameplates: implemented target indicator border for nameplates
+m_Nameplates: implemented totem icons display (works without localization)
+oUF_mono: implemented threat indications for party frames
+m_Chat: new chat tabs style
+alTooltip: fixed an issue with item icons sometimes appearing behind the background
+
+====== v. 10.8 rev 5 ======
+m_CombatText: (fix) less 6 AM coding
+alDamageMeter: re-added 3 states for broker display plug-in that are tied to player's role
+alDamageMeter: fixed an issue with unclickable broker plugin
+
+====== v. 10.8 rev 4 ======
+m_ActionBars: added Dungeon Journal and Raid buttons to MicroMenu bar
+alDamageMeter: fixed swing damage event var
+alDamageMeter: updated LibBossIDs for Firelands, added option for showing only boss fights (default - off)
+alDamageMeter: added total damage tracking
+oUF_mono: added few Ragnaros and Majordomo spells in raid_debuffs.lua
+
+====== v. 10.8 rev 3 ======
+NugRunning: updated with a workaround for updating debuffs
+m_Tweaks: implemented NugRunning script (StyleNRun.lua) that will set add-on's appearance and position without changing add-on itself
+m_BrokerStuff: increased ammount of lines you can see in AddOns menu due to 4.2 addons menu changes
+m_CombatText: restored changes made in previous revisions (thx bozo)
+m_Bags: added some simple configuration options in form of cfg.lua
+oUF_mono: raid_debuffs updated with Firelands debuffs
+
+====== v. 10.8 rev 2 ======
+m_Nameplates: implemented new way to set castbar point to fix the bug with misplaced castbars under specific circumstances
+m_Nameplates: new level/elite/boss indicator position (it will no longer overlap with castbar icon)
+m_Nameplates: interruptable castbar color tuned up to be a bit brighter to match castbar on unitframes
+m_ActionBars: adjusted petbar and micromenu position due to scale of those bars, so changes in cfg.lua required for those 2 bars
+m_CombatText: fixed varriables for COMBAT_LOG_EVENT_UNFILTERED change in 4.2
+m_Loot: reworked link button positioning (fixing scaling issue)
+m_Loot: added short list of settings in cfg.lua file
+alDamageMeter: fixed varriables for COMBAT_LOG_EVENT_UNFILTERED change in 4.2
+NugRunning: fixed varriables for COMBAT_LOG_EVENT_UNFILTERED change in 4.2
+MonoUI: .toc version update
+
+====== v. 10.8 rev 1 ======
+m_Nameplates: implemented % hp display
+m_Tweaks: shoutCD module modified, warnings will now only appear in combat
+m_Tweaks: applied a small fix for shoutCD module so you don't get multiple errors when respec
+m_Tweaks: implemented new slash command: /cr to check group roles
+m_Tweaks: implemented cloak/helm toggle check boxes @ PaperDoll frame
+m_Tweaks: modified DBM style and position to fit new UI layout (/setdbm)
+m_Bags: implemented a workaround to 'OpenAllBags problem', changing keybinding to 'Toggle Backpack' is not necessary anymore
+m_Bags: removed Keyring support due to 4.2 changes
+m_BrokerStuff: NameToggle plug-in integrated into 'Config' data object (see tooltip for more info)
+m_BrokerStuff: Volume control panel is now accesable by alt-clicking the 'Config' button
+m_BrokerStuff: Top mouseover panel removed
+m_BrokerStuff: removed Hatter, Volumizer and NameToggle plug-ins, their functionality is integrated in Ampere
+m_ActionBars: removed old totembar scale and opacity vars
+m_ActionBars: petbar repositioned to be right on top of your 2 main action bars (cfg.lua)
+m_ActionBars: removed specific petbar position for Death Knights and Shamans
+m_ActionBars: default value for ammount of buttons displayed @ stance bar now set to 6
+m_ActionBars: fixed EVB_user_placed var
+m_ActionBars: implemented 1 more action bar
+m_ActionBars: modified visibility conditions for ExtraActionBar
+m_ActionBars: added ability to set keybinginds for new ExtraActionBar via /kb mode
+m_ActionBars: implemented experimental fix for a prowling bar hack incorrectly functioning after talent switch
+m_ActionBars: removed MainMenuBar_UpdateKeyRing() call due to 4.2 changes
+m_ActionBars: complete code overhaul and restructure
+m_ActionBars: config file redesigned so it's easier to maintain and update it, so unfortunately you must update your cfg.lua
+m_MailGet: fixed a little problem with check boxes preventing them to properly update when changed
+oUF_mono: player debuffs/auras/buffs frame repositioned to the left of player unit frame
+oUF_mono: optimized initial config settings for units/headers, removed few unnecessary varriables in core.lua and core_raid.lua
+oUF_mono: removed 'set focus' from the player menu
+oUF_mono: added option to enable/disable right-click menu for raid frames
+oUF_mono: player/target frames moved few pixels down
+NugRunning: moved bars to to the top of player frame
+NugRunning: added script to change bars position for DKs, Druids (boomkins) and shamans with boring_totembar enabled
+NugRunning: removed few outdated spellIDs
+aThreatMeter added script to move threat bar if the PetBar is present
+
+====== v. 10.7 rev 5 ======
+alDamageMeter: implemented 3 new states for broker display plug-in that are tied to player role (HPS for healers, Avoidance for tanks and DPS for everything else)
+m_Bags: applied search plug-in to all containers
+m_Bags: adjusted few small elements positions
+oUF_mono: added maelstrom weapon stacks (for enh. shamans) display to the special power indication
+m_Tweaks: implemented new feature - CD shout out, see options in cfg.lua
+
+====== v. 10.7 rev 4 ======
+oUF_mono: 3d portrait fix for worgen male charracters
+m_Chat: editbox repositioned to the top of chat frame, lets see if I'll be able to get used to it...
+m_Bags: implemented cargbags filter for Equipment Manager, all set items will now be stored into separate section of your bags
+
+====== v. 10.7 rev 3 ======
+m_BrokerStuff: implemented new feature to Broker_Equipment, you may now Alt-click the set to assign it to the current spec
+m_Tweaks: removed gear swap functionality from /ss function due to m_BrokerStuff
+
+====== v. 10.7 rev 2 ======
+oUF: updated to version 1.5.10
+oUF_mono: clean up, removed useless SetAtributes
+oUF_mono: added uninterruptable cast coloring for boss frames' cast bars
+m_ActionBars: implemented style for flyout multicast buttons (hunters, mages and warlocks rejoice!)
+m_ActionBars: fixed a bug with totembar for low level shamans who didn't have any totems yet
+m_ActionBars: fix for recall totems button position
+m_ActionBars: and another fix for totembar slot buttons having wrong size and missplaced anchores
+m_ActionBars: reanchor totemtimers frame to buttons' slots so we can have them for any "Call" page
+m_ActionBars: totembar moved down a little to compensate for summon button position adjustements
+m_CombatText: added DK specific double strikes code for aoe_merge module (credits to bozo)
+m_CombatText: altered crits and count display for merged spells
+m_Nameplates: castbar colors adjusted to match unitframes' ones
+m_Tweaks: removed GM ticket status frame code as it's no longer present in the game since 4.1
+
+====== v. 10.7 rev 1 ======
+tullaCC: reduced the minScale value to enable trinket timers @ arena frames
+oUF_mono: fixed kinda missanchored default position for party/arena/boss frames (bleh...)
+oUF_mono: fixed number od buffs/debuffs displayed @ player frame
+oUF_mono: re-implemented aura tracker for arena frames
+oUF_mono: added timer for arena aura tracker
+oUF_mono: updated optional deps in .toc
+oUF_mono: eclipse bar direction indicators fixed
+oUF_mono: removed pet happiness color from the name tag for 4.1
+m_Nameplates: remaped global regions for nameplates elements, fixed for 4.1
+m_Bags: replaced OpenAllBags with ToggleBag function, so due to changes to 'Open All Bags' binding you have to modify 'B' keybinding from 'Open All Bags' to 'Toggle Backpack'
+m_CombatText: fixed varriables for COMBAT_LOG_EVENT_UNFILTERED change in 4.1
+NugRunning: fixed varriables for COMBAT_LOG_EVENT_UNFILTERED change in 4.1
+alDamageMeter: fixed varriables for COMBAT_LOG_EVENT_UNFILTERED change in 4.1
+MonoUI: client version updates for all .toc files
+
+====== v. 10.6 rev 3 ======
+oUF_mono: holy power and soul shards display is back!
+
+====== v. 10.6 rev 2 ======
+oUF_mono: typo
+
+====== v. 10.6 rev 1 ======
+oUF_mono: fixed statusbar texture sometimes causing little distortions at the sides
+oUF_mono: fixed party pets and arena tot frames' dimensions
+oUF_mono: removed some left over stuff from raid background 
+oUF_mono: implemented new specific power display for party frames (supports ES for shamans, PRoM for priests and LB for druids) much like in raid frames
+oUF_mono: ES, PrOM and LB raid tags has been moved from raid_tags.lua to tags.lua
+oUF_mono: implemented new look for unit frames: 'Reverse HP bars', it is on by default and can be disabled in cfg.lua (cfg.ReverseHPbars)
+oUF_mono: minor structure changes in lib.lua and tags.lua
+oUF_mono: fixed auras overlay texture distortion
+oUF_mono: reworked player auras position updater
+oUF_mono: added new feature to display aura timers only for auras cast by player, new option available in cfg.lua: cfg.PlayerTimersOnly
+oUF_mono: modified aura timers so they remain visible with cfg.PlayerTimersOnly enabled on player's debuffs
+oUF_mono: fixed Wrack debuff tag so it doesn't give you any lua errors if it's missing time value (i.e. when you released)
+oUF_mono: stack text color changed to white instead of grey
+oUF_mono: aura timers colors adjusted (yellow by default and red when about to expire)
+oUF_mono: increased auras size and decreased the ammount of debuffs per row for target/player units
+oUF_mono: small adjustments to player/target frames' width
+oUF_mono: repositioned and reworked ToT/Pet/Focus/Focus target frames
+oUF_mono: pet and target frames now only display debuffs
+oUF_mono: increased player, target and focus castbar size
+oUF_mono: increased buffs/debuffs size and spacing on party/arena/tot/pet frames to avoid overlay texture distortion
+oUF_mono: aura timers moved down a bit to avoid outline overlapping overlay texture
+oUF_mono: arena, party and boss frames position adjusted
+m_ActionBars: added totem timers coloring according to the totem group (earth, fire, water, wind)
+m_ActionBars: fixed hotkey text on MulticastSummon/Recall button
+m_Map: some structural changes, general code clean up
+m_Map: fixed coordinates 'jumpy' behaviour when large world map is opened
+m_Map: adjusted positions for number of elements including levelUP/DOWN buttons, WorldMapTitle frame and button, etc.
+m_BrokerStuff: Broker_Money gold display modified, 'g' color -> white
+ 
+====== v. 10.5 rev 2 ======
+oUF_mono: raid_debuffs updated
+oUF_mono: implemented specific indicator for Sinestra's 'Wrack' debuff allowing players to determine the ammount of time it's been active by color (indicators.lua & raid_tags.lua)
+
+====== v. 10.5 rev 1 ======
+m_ActionBars: disabled default PetActionBar frame
+m_ActionBars: fixed some transparent frames being clickable
+m_ActionBars: petbar visibility and transparency adjusted in cfg.lua
+oUF_mono: minor mono:hp tag change
+oUF_mono: minor hp/pp bar size adjustments
+oUF_mono: improved fake target frame
+oUF_mono: removed brackets from resting indicator
+oUF_mono: added Engulfing Darkness (Maloriak) debuff to the raid_debuffs.lua
+oUF: core update to version 1.5.9
+m_Panels: fixed panels' bg insets in panels spawning functions
+m_Panels: entire layout adjusted to work with modified functions
+m_Panels: fixed /pnl
+m_Minimap: fixed the issue with right and middle clicks on minimap producing pings instead of just opening menus
+m_Minimap: fixed right click on the Time Frame causing TimeManager to toggle, now it will propperly open just Calendar frame as intended
+m_CombatText: simplified the way this add-on loads to avoid confusion with blizzard's built in combat text
+m_BrokerStuff: implemented world latency display in latency tooltip
+m_BrokerStuff: removed unnecesarry tekKonfigScroll lib 
+eXPeritia_basic: removed (replaced with completely rewritten XP module within m_Tweaks)
+m_Tweaks: /setdbm is now part of StyleDBM module
+m_Tweaks: fully featured experience bar added, some config options may be fount in cfg.lua
+m_Tweaks: proper handling of reputation updates for exp. bar
+m_Tweaks: experience / reputation bar will now hide automatically whenever player enters the raid with 15 or more people
+
+====== v. 10.4 rev 4 ======
+oUF_mono: visibility fix for 40 man raid groups with party/raid5 option(s) enabled.
+
+====== v. 10.4 rev 3 ======
+oUF_mono: PLAYER_TOTEM_UPDATE correctly handled as Unitless event, thus wild mushrooms display issue should be resolved
+
+====== v. 10.4 rev 2 ======
+m_ActionBars: bugfix for totem bar
+
+====== v. 10.4 rev 1 ======
+alDamageMeter: broker plug-in functionality altered so the damage meter will switch between damage/healing modes on click instead of toggling visibility
+m_UIconfig: new set of settings for DBM (specifically for 1920x1080 resolution, type /setdbm to inject this set of settings)
+m_UIconfig: removed for now, as no add-on in this UI actually require injecting saved varriables
+oUF_mono: improved lightning shield display tag for shamans
+oUF_mono: implemented Wild Mushrooms display as one of the specifig powers (not tested)
+oUF_mono: player and target frame moved up a bit
+oUF_mono: added option to choose what kind of player auras you want to see on the player frame
+oUF_mono: removed frame dragging function, as it had pretty much no use
+oUF_mono: properly adjusted comments and some of the config settings in cfg.lua (doesn't need any modifications if you wish to keep old config files)
+m_Tweaks: /ss or /spec function has been improved so now it will also equip the corresponding set of equipment (i.e. you have to name your gear sets according to your talent specs)
+m_Tweaks: another modification to /ss func; now if you have 2 simmilar specs (e.g. Fury/Fury) in order for gear swap to function correctly you have to add index number after the set name (i.e. Fury1/Fury2)
+m_Tweaks: moved /config function here from m_UIconfig
+m_Tweaks: new more efficient way of primary spec identification for /ss func
+m_Tweaks: fixed LFD tooltip strata
+m_Tweaks: fixed typo in cfg.CaptureBarPosition varriable
+m_ActionBars: reworked the way TotemBar spawns, so now user has full controll of buttons (size, spacing)
+m_ActionBars: new config section for totem bar in cfg.lua
+m_ActionBars: main/bottomleft/totem-bars moved down few pixels
+m_ActionBars: totem bar will now be visible for <30 level shamans 
+NugRunning: improved bars look
+NugRunning: repositioned, run /config to reset position
+aThreatMeter: lowered bar's strata so it no longer overlapps totem flyout buttons
+
+====== v. 10.3 rev 2 ======
+oUF_mono: fixed Shadow Protection buff display on raid units for other than enGB clients
+m_Tweaks: general code clean up, removed some really old unused features
+m_Tweaks: structure reworked so now all the configuration varriables exported to the cfg.lua
+m_Tweaks: implemented special DBM style for bars and range check based on DBM-Styler (original plug-in by Affli)
+m_Tweaks: updated a number of options in cfg.lua so it's much easier to enable/disable or change some specific m_Tweaks feature
+
+====== v. 10.3 rev 1 ======
+m_ActionBars: removed mainmenubar artwork at the bottom of the screen
+m_CombatText: completely rewritten, now includes varriaty of new features like outgoing healing/damage (inspired by Affli's xCT)
+m_CombatText: implemented merged damage for aoe spells
+m_CombatText: implemented overhealing display
+m_CombatText: added some config options and some comments in cfg.lua
+
+====== v. 10.2 rev 5 ======
+oUF_mono: implemented alternative power bar for player and boss frames
+m_ActionBars: fixed hotkeys sometimes not working after talent switch
+m_ActionBars: fixed the problem causing additional bars to disapear after reload ui / zoning
+
+====== v. 10.2 rev 4 ======
+m_ActionBars: fixed the main action bar page for rogues during shadow dance
+m_ActionBars: added little fix for world mark bar to prevent tainting (it will be hidden during the combat)
+m_ActionBars: also changed available options for world mark bar
+m_ActionBars: flares bar will only be visible for party/raid leaders.
+m_ActionBars: implemented special visibility conditions for Main Action Bar, make sure to UPDATE CFG.LUA
+m_ActionBars: added ability to completely disable main action bar 
+m_ActionBars: added opacity setting for totem bar
+m_Map: applied a small hack to prevent World Map frame problems when map_scale = 1
+oUF_mono: 8 groups layout will only toggle if there are more than 35 people in the group
+oUF_mono: removed Drain Mana ticks from castbar code
+oUF: core update 1.5.8
+
+====== v. 10.2 rev 3 ======
+oUF_mono: bulletproof visibility options for raid frames
+oUF_mono: raid background disabled by default (untill I manage to come up with some amazingly efficient way to resize it based on group size)
+oUF_mono: raid debuffs updated
+
+====== v. 10.2 rev 2 ======
+oUF_mono: ...bah forgot to include 'custom' in visibility condition, fixed.
+
+====== v. 10.2 rev 1 ======
+oUF_mono: removed some leftover debug code from raid frames
+oUF_mono: re-implemented PartyPets
+oUF_mono: new way of spawning raid groups
+oUF_mono: removed 'soloON' option from config.cfg as it was useless
+oUF_mono: raid frames now dynamically change their size to 8 group mode if there are more than 30 people in the group
+oUF_mono: added new option to cfg.lua: cfg.raid40swap allowing you to disable dynamic raid frames resize
+oUF_mono: reworked visibility conditions for raid and party
+oUF_mono: arena frames will be automatically disabled if Gladius is loaded
+oUF_mono: player power value will be updated 5 times a second now
+oUF_mono: removed Drain Soul ticks from the castbar
+oUF_mono: corrected Drain Life and Drain Mana ticks indicators on castbar
+oUF_mono: MT frames are properly resizeable now
+oUF_mono: de/buffs timers fixed for player and tartget, it should work correctly with existing options now
+oUF_mono: BOTTOMRIGHT and TOPRIGHT indicators switched positions on the raid frames, i.e. LB/PRoM/ES counters now will be in TOPRIGHT corner
+m_BrokerStuff: removed some leftover code for old threat plug-in
+m_ActionBars: Removed Holy power spells that only do linear scaling (Inquisition)
+m_Panels: removed minimap border
+m_Minimap: added minimap border
+m_Minimap: added zone/subzone text on mouseover
+m_Chat: added option to enable specific time stamps and when you click on one of them it will allow you to copy the line
+m_Chat: reworked url copy filter, now it should never ever ever (...) fail to copy url
+m_Chat: pop-up window replaced with simple edit box opening
+m_Chat: removed notifications filtering such as chat leave/join etc.
+alDamageMeter: added experimental breif spell details tooltips
+
+====== v. 10.1 rev 2 ======
+m_ActionBars: implemented action bars alpha
+m_ActionBars: added option to set actionbar alpha to cfg.lua
+m_ActionBars: added option to set fade out alpha for action bars with "show on mouseover" enabled
+m_ActionBars: new position for raid marks bar
+m_ActionBars: removed pitchbar code
+m_ActionBars: REMEMBER TO UPDATE YOUR OLD CFG.LUA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+oUF_mono: fixed error for channeling castbars in vehicles (those actually DO exist! o_O )
+oUF_mono: added magic debuffs highlights on raidframes for druids and shamans
+m_Tweaks: Mountz function improvements: now you don't have to set the name of the swimming mount to be able to use Abyssal Seahorse in Vashj'ir
+m_Tweaks: Mountz function: and now it will only try to summon that underwater mount in Vashj'ir so it won't bother you in other zones
+m_Tweaks: Mountz function: swimming override key for Vashj'ir set to Alt (so you can use your fly mount when you're at the surface)
+m_Loot: added suppress_loot_spam option to the very top of m_LootGroup.lua
+m_Map: small adjustments to the coordinates font string
+
+====== v. 10.1 rev 0 ======
+oUF_mono: fixed typo in core.lua preventing target frame from scaling propperly
+m_ActionBars: RangeCheck module update: Removed Holy power spells that only do linear scaling © Tuller
+m_Tweaks: removed temp. code for Mountz function thus it's now working on live realms
+eXPiritia_basic: removed temp. code so now XP bar will be visible untill you hit level 85
+
+====== v. 10.0 rev 8 ======
+m_ActionBars: added HoverBind functionality for totem bar
+m_ActionBars: now sets a single key binding to the selected set of totems!
+m_ActionBars: getting rid of the default totem bar multicast buttons' borders
+m_ActionBars: and from the "empty" totem button too!
+m_ActionBars: added right click to destroy totem functionality
+m_ActionBars: implemented totem timers right on the totem bar buttons
+m_ActionBars: added slightly transparent background to the totem timer
+m_ActionBars: added option to enable/disable totem timers in cfg.lua (cfg.totembar_enable_timers)
+oUF_mono: implemented totem bar plugin based on oUF_boring_totembar
+oUF_mono: added abbreviated totem names for totem bars
+oUF_mono: fixed RiadBG position on entering a big raid after being part of a group
+oUF_mono: RaidBG frame now has a dynamic size based on what sizes you set in cfg.lua
+MonoUI: shamanized duckyea
+
+====== v. 10.0 rev 7 ======
+oUF: core update fixing name update bug and runebar sometimes incorrectly appearing on exiting some vehicle
+oUF_mono: removed temporary fix for name text fields
+oUF_mono: fixed safezone going beyond castbar borders in vehicles
+MonoUI: added FRIENDS.ttf font to the Fonts folder to avoid display glitch with cyr. fonts in friend list
+
+====== v. 10.0 rev 6 ======
+alDamageMeter: removed some leftover debug code resulting damage meter not working
+alDamageMeter: fixed gUID for absorbs (again)
+
+====== v. 10.0 rev 5 ======
+oUF_mono: Abomination might for DKs on raid frames, removed AM from BOM indicator
+oUF_mono: removed OnUpdate from hpval on raid and party frames as it was slowing down the update on those fields
+oUF_mono: added (again) option to turn raid frames off if there are less than 5 people in the raid group (cfg.raid5ON)
+oUF_mono: added raid background with options in cfg.lua
+oUF_mono: MTT frames visibility modified
+m_Panels: removed raid background and updater script from layout.lua
+m_Tweaks: /cl -> /clfix to avoid conficts
+MonoUI: reverted UI-Tooltip-Border to the previous version
+
+====== v. 10.0 rev 4 ======
+m_ActionBars: RangeCheck update
+oUF_mono: bug fixes... less 6 AM coding
+oUF_mono: increased the frequentUpdate clock to 1 second which should draw close to nothing CPU usage outprint while fixing the name/hpvalue tags update bug
+oUF_mono: added oUF_CombatFeedback as part of the default functionality (new option in cfg.lua)
+oUF_mono: enable CombatFeedback on the target frame
+oUF_mono: canged files structure a bit: Castbar.lua moved to the \embed folder
+eXPiritia_basic: typo ...
+m_BrokerStuff: added "wipe gathered gold data" functionality to the broker_money plug-in
+
+====== v. 10.0 rev 3 ======
+oUF_mono: reverted TagEvents change
+oUF_mono: added frequentUpdate to the hpval tag for raid frames in attempt to fix impropperly updated names
+oUF_mono: removed safezone on player vehicle's castbar to avoid it overlapping whole cast bar after relog
+oUF_mono: removed dynamic castbar cooring for cast bar, thus added option to set specific cast bar color in cfg.lua (cfg.cbcolor)
+oUF_mono: resting indicator moved few pixels to the right to avoid overlapping with level text
+m_Tweaks: Mountz macro fixed for live realms and 4.0.3a
+eXPiritia_basic: XP bar and reputation bar visibility fix for 4.0.3a
+alDamageMeter: fixed nil value error on unit id if out of range
+m_ActionBars: added specific option to 'disembed' exit vehicle button from the main bar and to set custom position for it
+m_ActionBars: holder name and test mode for exit vehicle button
+
+Known issues: 
+--Temporary fix for name and hp value tags not updating properly: added .frequentUpdate for each of them, thus it may result in a bit higher CPU outprint for raid frames.
+--Wrong safezone size after entering a vehicle without triggering any cast
+
+====== v. 10.0 rev 2 ======
+eXPeritia_basic: fixed the XP bar size to properly work on lower resolutions
+m_ActionBars: added overlay coloring for exit vehicle button
+m_ActionBars: MiddleButton is now bindable via /kb
+m_ActionBars: you can keybind spells straight from your spell book via /kb
+m_ActionBars: fixed gametooltips sometimes not disappearing even if you're not in key bindings mode
+oUF_mono: safezone visible at channelling cast bars
+oUF_mono: fixed DDG info update being wacky at times on raid frames
+oUF_mono: modified paladins' and druids' tags
+oUF_mono: updated TagEvents for most of the tags to fix the issue with *stuck* name/hp/status
+oUF_mono: fixed grid name tag events
+oUF_mono: more comments in tags.lua
+oUF_mono: implemented resting indicator
+oUF_mono: removed few unused power colors
+oUF_mono: removed happiness bar coloring from all the frames
+oUF_mono: fixed player's pet name tag color to correctly display happiness
+alDamageMeter: zero values no longer included in the reports 
+m_Tweaks: removed automatic UI scale function as we don't need it anymore.
+
+====== v. 10.0 rev 1 ======
+m_ActionBars: cfg.lua updated with new options so you HAVE TO reconfigure your bars
+m_ActionBars: added abiliy to set spacing for each bar individually
+m_ActionBars: option to show micromenu on mouseover
+m_ActionBars: fixed HotKeys apearing in combat even if cfg.hide_hotkey set to true
+m_ActionBars: added "show when in combat" feature
+m_ActionBars: cfg.lua updated again :S Captain Obvious was waay to generous this time
+m_ActionBars: added /tm or /mab function allows user to enter testmode to see bars' holders
+m_ActionBars: the buttons grid on main actionbar will be hidden by default to prevent it overlaping exit vehicle button
+m_ActionBars: new border texture for exit vehicle button to match other bars style
+m_ActionBars: adjusted exit vehicle button's dimensions so it fits exactly @ 8th button slot
+m_ActionBars: exit vehicle button now propperly anchored to ActionButton8 slot
+m_ActionBars: added overlay for totembar's holder
+m_ActionBars: added 2 special bars: RaidIcon and WorldMarker
+m_ActionBars: applied buttons style for RaidIcon and WorldMarker bars
+m_ActionBars: added Mouseover and ShowInCombat functionality to special raid bars
+m_ActionBars: overlay highlight for raid mark bars
+m_ActionBars: orientation settings for raid mark bars now in cfg.lua
+m_ActionBars: raid mark bar's holder frames adjusted relatively to orientation setting
+m_ActionBars: tooltip anchor changed to "ANCHOR_TOPRIGHT" for raid mark bars
+m_ActionBars: fixed typo preventing /eb and /extra commands to function properly
+m_ActionBars: structure reworked
+m_ActionBars: integrated tullaRange instead of present range check due to better CPU usage
+m_ActionBars: show grid lock removed
+m_ActionBars: removed update frequency option, now it's set to 0.15 sec.
+m_Tweaks: removed temp. beta code
+m_Tweaks: PlayerPowerBarAlt repositioned
+m_BrokerStuff: added spaces for Memory, Letency and FPS plugin lable to look more consistant
+m_BrokerStuff: added tooltip for Latency plug-in displaying incoming and outgoing bandwidth
+alDamageMeter: updated absorbs tracking function
+alDamageMeter: .toc update (removed add-on name coloring to keep alphabetical order in the add-on list)
+oUF_mono: player's name will be properly displayed in raid frames when player drives the vehicle
+NugRunning: updated to the new version 
+NugRunning: apply style
+
+====== v. 0.9 rev 16 ======
+m_ActionBars: fixed MicroMenu bar disapearing after talent switch
+m_ActionBars: enabling default action bars and enabling action buttons borders moved past Dominos load check
+m_BrokerStuff: removed 2nd tooltip line on durabiity plug-in due to global string mistake
+m_Buffs: DEBUFF_MAX_DISPLAY var.
+m_Loot: fixed Self Loot & Random Player strings for master looters
+m_Nameplates: added 'Boss' and 'Elite' indicators to the level text display
+m_Nameplates: removed hidelevel option
+m_Nameplates: repositioned raid icon to the TOP of a nameplate
+m_Nameplates: added specific raidIconSize option to cfg.lua
+m_Bags: core cargBags update
+m_Bags: complete code overhaul with few performance optimisations
+m_Bags: added keyring
+m_Bags: added button for toggling keyring
+m_Bags: fixed the bug with tracking currencies, now it will always display money
+m_Bags: added close button
+m_Bags: tagDisplay error fix
+m_Bags: search text field position and size adjusted to avoid overlaping with close button
+
+====== v. 0.9 rev 15 ======
+m_ActionBars: fixed vertical layout with multiple rows
+m_Nameplates: added option to enable/disable level text
+m_Buffs: fixed buffs position when player has 3 weapon enchants (for real this time)
+
+====== v. 0.9 rev 14 ======
+m_ActionBars: cleaned up code a bit, removed few unused variables etc.
+m_ActionBars: fixed mainbar button1 anchor
+m_ActionBars: fixed /eb and /extra commands (now they actually do work)
+m_ActionBars: hidden bars toggling function reworked to avoid conflicts with other visibility options you may set in cfg.lua
+m_ActionBars: added option to scale Micromenu
+m_ActionBars: few bars position adjustments in cfg.lua
+m_Buffs: index typo fix
+m_Buffs: fixed buffs point anchor for temp enchant #3
+m_Nameplates: due to vast code modifications dNameplates got renamed into m_Nameplates to avoid confusion with dNameplates and prevent possible update mistakes
+m_Nameplates: console variables updated
+m_Nameplates: set of configuration options got moved into a separate file (cfg.lua) making it easier to update modified add-on versions
+m_Nameplates: removed few unused frames and textures
+
+====== v. 0.9 rev 13 ======
+m_ActionBars: fixed mainbar holder size
+m_ActionBars: fixed totembar error when it's actually disabled
+m_ActionBars: Captain Obvious passed by the other day and left more comments in cfg.lua file
+
+====== v. 0.9 rev 12 ======
+m_Chat: duplicate timestamps fix
+oUF_mono: frames scaling fixed
+oUF_mono: repositioned pet and tot frame (cfg.lua)
+m_ActionBars: buttons borders always visible now
+m_ActionBars: implemented "show on mouseover" feature, make sure you update you cfg file!
+m_ActionBars: added micromenu, cfg.lua updated
+m_ActionBars: added option to disable additional bars
+NugRunning: the default position of shaman's bars will be higher to prevent overlapping due to totembar
+NugRunning: now dispays only 1 Shock spell CD
+m_UIconfig: cleaned up some long-time unused settings
+m_Minimap: added "guild" tab to minimap dropdown
+m_Buffs: fixed debuuffs type highlight at last!!!
+MonoUI: removed few unused textures from \TargetingFrame\ and \Buttons\ folders, modified tooltip texture in \Tooltips\
+
+====== v. 0.9 rev 11 ======
+alDamageMeter: updated with new options to anounce to specific channel or player
+m_ActionBars: few code optimizations
+m_ActionBars: fixed the mainbar holder size so it doesn't screw mainbar positioning
+oUF_mono: fixed raid frames stye for 8 groups layout
+
+====== v. 0.9 rev 10 ======
+dNameplates: removed castbar holder
+dNameplates: fixed castbar icon sometimes staying sticked to the screen
+dNameplates: fixed raid mark icon sometimes staying sticked to the screen
+dNameplates: fixed nameplates HP bar improper color updates
+m_Minimap: fixed "Achievements" typo.. doh..
+oUF_mono: added config option to remove RaidManager button
+
+====== v. 0.9 rev 9 ======
+m_Panels: typo fix
+m_ActionBars: added little script to enable default optional actionbars
+oUF: core updated to v.1.5.4
+oUF_mono: disabled incoming heal text by default
+oUF_mono: moved up player and target frames a bit, so they don't overlap cluster backgrounds at lower resolutions
+
+====== v. 0.9 rev 8 ======
+oUF_mono: updated raid tags for paladins
+oUF_mono: threat border lines
+oUF_mono: core optimizations
+oUF_mono: re-implemented MT targets
+oUF_mono: optimized raid frames code and structure
+oUF_mono: fixed earth shield raid tag
+oUF_mono: implemented healing prediction support (bars and text)
+oUF_mono: adjusted background color and alpha for all frames (0 opacity) makes it easier to read
+oUF_mono: 3d portraits size and frame level adjustments
+oUF: temporarily replaced ready check code
+m_Panels: script for spawning raid background updated so you don't see it if you don't use built in raid frames
+m_Panels: fixed /pnl function, adjusted grid thickness
+m_Buffs: added style for the 3rd weapon enchant
+m_Tweaks: updated few slash commands
+m_Tweaks: fixed ALT+Right_click to buy a stack function
+m_ActionBars: added key-bindings shortcuts
+m_ActionBars: major code revamp
+m_ActionBars: mainbar modifications are now done via RegisterStateDriver func (credits to Tukz)
+m_ActionBars: config file is backward compatible!
+m_ActionBars: fixed main bar size, position and rows settings
+m_ActionBars: now includes ncHoverBind as module (credits to Nightcracker)
+m_ActionBars: added global function name for toggling key bindings mode
+m_ActionBars: OOR and OOM colors smoothened up a bit in cfg.lua
+Ampere: added ability to enter key-bindings mode by clicking middle mouse button
+Ampere: consolidated within m_BrokerStuff
+Dominos: removed, however if you want to continue using it all the configurations are still there
+caelNamePlates: implemented default set of console variables
+m_Minimap: GuildInstanceDifficulty flag properly positioned @ minimap
+m_Loot: replaced ASCII symbols with normal ones for UTF-8 unfriendly fonts
+m_Chat: re-enabled timestamps (fixed taint issue)
+m_Chat: url copy update
+aThreatMeter: bar height increased and width adjusted to fit action bars width
+dNameplates: replaced caelNamePlates
+dNameplates: added glowing border
+dNameplates: adjusted sizes and fonts
+dNameplates: implemented threat display @ glow borders
+dNameplates: adjusted castbar icon position
+dNameplates: dimmed down the default colors 
+m_media: removed, therefore all the add-ons that were feeding on it got their own copy of textures
+
+====== v. 0.9 rev 7 ======
+oUF_mono: typo in raid tags
+oUF_mono: fixed spell IDs for castbar ticks detection
+oUF_mono: .toc bump
+
+====== v. 0.9 rev 6 ======
+oUF: updated to version 1.5.2
+oUF: applied temp fix for eclipse bar
+oUF_mono: added maintank frame , no MTtargets yet though
+oUF_mono: updaed to work with oUF 1.5.X
+oUF_mono: disabled default raid frames if cfg.showraid option is on
+oUF_mono: added position and size settings for player and target cast bars
+oUF_mono: reduced the ammount of debuffs displayed on pet and tot frames
+oUF_mono: re-implemented threat coloring for raid frame borders
+oUF_mono: updated raid tags for paladins
+oUF_mono: implemented direction indicator for eclipse bar
+m_Chat: removed timestamps coloring to avoid taint
+m_Panels: raidBG script updated
+eXPeritia: added version check so the XP bar will remain hidden @ level 80 on live (4.0.1)
+
+
+KNOWN ISSUES:
+alternative powerbar style missing
+MTtargets missing
+
+====== v. 0.9 rev 5 ======
+Dominos: updated
+NugRunning: updated
+NugRunning: disabled custom colors for specific debuffs (you can re-enable this feature by un-commenting colors in the table in config.lua)
+NugRunning: statubars offsets remaped
+m_Buffs: repositioned count text field for ConsolidatedFrame, Buffs and Debuffs
+m_Buffs: increased font size of count value
+m_Buffs: increased frame level of count text field
+m_Buffs: added option to set icon size
+m_Buffs: added option to set time font size and Y offset, count (stack) font size
+m_Buffs: fixed ConsolidatedBuffsContainer tooltip
+m_Buffs: added Y-offset option for time text
+m_Buffs: disabled consolidated buff frame and enabled time display by default
+m_Chat: fixed few patterns issues in replacement function
+m_Chat: removed spam filterring function
+m_Tweaks: scoreframe and bar moved a bit down
+oUF_mono: fixed background and size for Mirror Cast Bar
+oUF_mono: little hack added to properly register all unitframes clicks
+
+
+KNOWN ISSUES:
+alternative powerbar style missing
+
+====== v. 0.9 rev 4 ======
+m_Buffs: added for skinning buffs
+m_Buffs: added overlay texture to indicate debuff type
+m_Buffs: enchant frame skin
+m_Buffs: consolidate buffs button reworked
+m_Buffs: tooltip fix for consolidate buffs
+m_Buffs: added some config options
+oUF_mono: removed player buff frame styling code and options values
+oUF_mono: aura overlay texture modified
+m_Chat: fixed URL copy error
+m_Minimap: mail icon position change
+
+
+KNOWN ISSUES:
+alternative powerbar style missing
+slow party and raid frames "click detection" (can't do a jack about that untill blizzard resolve the problem with input handling for secure headers)
+
+====== v. 0.9 rev 3 ======
+m_BrokerStuff: removed equipmentManager cvar
+m_Minimap: StreamingIcon repositioned to the topright map corner
+m_UIconfig: altered dominos layout and posses bar ¹
+m_Tweaks: temporary FeedbackUI_CompanionHook() fix by SDPhantom added
+m_Map: fixed "Show dig sites" button scale and positioning
+oUF_mono: added orbs display for shadow priests like one of the specific powers
+oUF_mono: fixed default buff frame positioning so it doesn't jump to the default position when consolidate holder is shown
+oUF_mono: changed LFD role indicator from icons to text tag display (T, H, D) for both party and raid frames
+oUF_mono: repositioned LFD role indicator
+oUF_mono: debuff icon border altered to look sharper
+oUF_mono: re-enabled raid and party frames (more or less stable)
+oUF_mono: fixed power tag issue for unknown powertypes
+oUF_mono: level display altered (now it won't hide info text for level 80 units)
+
+
+KNOWN ISSUES:
+CancelUnitBuff() is only available for BlizzardUI therefore player BuffFrame style is disabled
+alternative powerbar style missing
+slow party and raid frames "click detection" (can't do a jack about that untill blizzard resolve the problem with input handling for secure headers)
+
+====== v. 0.9 rev 2 ======
+Dominos: added back as my main action bar mod (m_ActionBars still awailable however)
+m_ActionBars: updated add-on structure and added option to completely disable actionbars modifications
+oUF_Tweaks: underwater mounts support for Mountz function
+m_CombatText: fixed power update events
+m_CombatText: cleaned up the code
+m_UIconfig: removed MSBT options
+m_UIconfig: modified Dominos layout
+m_UIconfig: replaced bar 2 with bar 7
+m_UIconfig: posses bar remap
+m_BrokerStuff: Ampere "Config" broker plug-in modified to allow toggling actionbars visibility
+m_BrokerStuff: Ampere tooltip updated, now supports Dominos and m_ActionBars
+oUF: core update
+oUF_mono: removed MT frames for now
+oUF_mono: fixed range check
+oUF_mono: added aggro indicator (small square at the bottom of the frame)
+oUF_mono: implemented Soulshards and Holy power display
+oUF_mono: new way of displaying combo points
+oUF_mono: aura border texture adjusted
+
+
+KNOWN ISSUES:
+CancelUnitBuff() is only available for BlizzardUI therefore player BuffFrame style is disabled
+alternative powerbar style missing
+
+====== v. 0.9 rev 1 ======
+.toc interface version bump
+m_Map: removed custom group icons
+m_Map: added size option for new group icons
+m_Map: fixed BlobFrame toggling function
+m_Map: WorldMapLevelDropDown button removed from the mini world map
+m_Map: fixed WorldMapLevelUp/Down scaling on the big world map
+Dominos: removed
+iActionButtons: removed
+m_Tweaks: added code to enable /script, /run and /dump slash commands
+NugRunning: updated to cataclysm version, modified the looks
+m_Minimap: fixed pvp frame toggling
+m_Minimap: repositioned blizz feedback button
+m_ActionBars: add-on based on AlBarMods by Allez added to replace action bar add-ons
+m_ActionBars: hide all unnecessary frames
+m_ActionBars: reworked positioning and spawning of the action buttons
+m_ActionBars: new 8 button bars
+m_ActionBars: new slash command /extra to show or hide extra bars
+m_ActionBars: extra bars are hidden by default
+m_ActionBars: thicker button borders
+m_ActionBars: reduced buttons spacing and adjusted position
+m_ActionBars: added a hack to prevent bonusbar from rescaling when in vehicle
+m_ActionBars: added propper style for vehicle bar
+m_ActionBars: reworked petbar positioning
+m_ActionBars: option to hide shapeshift/stance bar completely
+m_ActionBars: toc update
+m_ActionBars: reworked ActionButtons styling
+m_ActionBars: added few font related options in ButtonsStyler.lua
+m_ActionBars: added totembar support for shamans
+m_ActionBars: fixed style for totembars
+m_ActionBars: consolidated 2 of the bar styling functions
+m_ActionBars: allow player to choose the exact amount of buttons he want to see for each bar
+m_ActionBars: new ability to set up to 3 rows for each action bar
+m_ActionBars: bar holder size now adjusts dynamically when you change the amount of visible buttons
+m_ActionBars: added option for totembar scaling
+m_ActionBars: added extensive options list
+m_ActionBars: all the options transfered into a new file cfg.lua
+m_ActionBars: Added PitchBar modifications (position and scale may be set in cfg.lua)
+m_ActionBars: cfg.enable_totembar option added to cfg.lua to replace cfg.hide_totem_bar
+eXPeritia_basic: level cap -> 85
+eXPeritia_basic: fixed XB bar borders display
+eXPeritia_basic: XP bar width now automatically adjusts depending on your resolution
+eXPeritia_basic: cleaned up varriables code, proper lua config now
+OmniCC_basic: removed
+tullaCC: added to replace OmniCC_basic
+tullaCC: added element.noCooldownCount
+oUF_mono: changed tick detection method for castbars (now requires localization though)
+oUF_mono: removed rescomm and healcomm
+oUF_mono: raid disabled for now
+oUF_mono: added .noCooldownCount
+oUF_mono: changed spellids to actual spell names in AuraTracker 
+oUF_mono: disabled oUF_AuraTracker for arena frames for now
+oUF_mono: fixed smooth updates
+oUF_mono: removed partypets
+oUF_mono: temporary solution for buff frames position for Beta if cfg.stylebuffs set to false
+oUF_mono: fixed range check for party frames
+oUF_mono: fixed and updated aura indicators for raid indicators
+oUF_mono: fixed tag events for power updates
+oUF_mono: updated cfg.lua options
+oUF_mono: fixed raid spawning functions
+oUF_mono: temporary removed range check on raid units 
+oUF_mono: disabled threat display untill I figure out how to fix it
+m_Panels: fixed gradient border
+m_Panels: fixed little issue with /pnl command
+m_BrokerStuff: fixed incorrect memmory display for values < 1mb
+m_BrokerStuff: NameToggle tooltip changed, updated bindings
+m_BrokerStuff: removed useless code from layout.lua + adjusted position of top plug-ins
+alTooltip: changed scale of the tooltip to prevent border distortion
+
+
+KNOWN ISSUES:
+CancelUnitBuff() is only available for BlizzardUI therefore player BuffFrame style is disabled
+no raid frames threatborders
+no range check on raid units
+alternative powerbar style missing
+soulshards/holy power is not implemented
+
+=================================================================================================================
+================================================== PATCH 4.0.1 ==================================================
+=================================================================================================================
+
+====== v. 8.4 rev 1 ======
+oUF_mono: oUF_CombatFeedback support
+iActionButtons: removed
+Dominos: removed
+m_ActionBars: add-on based on AlBarMods by Allez added to replace Dominos and iActionButtons (considered as beta)
+m_ActionBars: hide all unnecessary frames
+m_ActionBars: reworked positioning and spawning of the action buttons
+m_ActionBars: new 8 button bars
+m_ActionBars: new slash command /extra to show or hide extra bars
+m_ActionBars: extra bars are hidden by default
+m_ActionBars: thicker button borders
+m_ActionBars: reduced buttons spacing and adjusted position
+m_ActionBars: workaround to prevent bonusbar from rescaling when in vehicle
+m_ActionBars: added propper style for vehicle bar
+m_ActionBars: reworked petbar positioning
+m_ActionBars: option to hide shapeshift/stance bar completely
+m_ActionBars: toc update
+m_ActionBars: reworked ActionButtons styling
+m_ActionBars: added few font related options in ButtonsStyler.lua
+m_ActionBars: added totembar support for shamans
+m_ActionBars: fixed style for totembars
+m_ActionBars: consolidated 2 of the bar styling functions
+m_ActionBars: allow player to choose the exact amount of buttons he want to see for each bar
+m_ActionBars: new ability to set up to 3 rows for each action bar
+m_ActionBars: bar holder size now adjusts dynamically when you change the amount of visible buttons
+m_ActionBars: added option for totembar scaling
+m_ActionBars: added extensive options list
+m_ActionBars: all the options transfered into a new file cfg.lua
+m_ActionBars: cfg.enable_totembar option added to cfg.lua to replace cfg.hide_totem_bar
+m_Panels: removed action bars background frame
+m_Panels: fixed border texture issue (getting ready for Cataclysm)
+eXPeritia_basic: XP bar width now automatically adjusts depending on your resolution
+eXPeritia_basic: cleaned up varriables code, proper lua config now
+m_BrokerStuff: fixed incorrect memmory display for values < 1mb
+m_BrokerStuff: NameToggle tooltip changed, updated bindings
+
+====== v. 8.3 rev 15 ======
+oUF_mono: reworked the way party pets spawn (again)
+oUF_mono: removed cfg.showpartypet option from the config file since they are on by default now.
+
+====== v. 8.3 rev 14 ======
+aTotemBar: no longer listens to VARIABLES_LOADED event, pure lua-only config
+m_Panels: raid background frame shows only if there are more than 5 people in the raid group
+m_Panels: added option to disable raid background
+m_Panels: updated raid background sizes for groups 1-5
+m_Panels: raid background should be only spawning if oUF_mono raid frames are on (dummy proof!)
+oUF_mono: disabled debuff and enabled buff types highlight for arena frames (yeah that makes more sense)
+oUF_mono: Runebar's border adjusted a little to look a bit sharper
+oUF_mono: added oUF_TotemBar support
+oUF_mono: added oUF_AuraTracker support and it's also been integrated into arena frames
+oUF_mono: added few options to set font size and icon size threshold for aura timers
+oUF_mono: added option to turn raid frames off if there are less than 5 people in the raid group (cfg.raid5ON)
+oUF_mono: reworked combo points display method (now mimicking rune- and totem bars)
+oUF_mono: target auras will move up when combo points are being displayed
+oUF_mono: few minor code optimizations
+oUF_mono: adjusted raid marks' frame level so it doesn't overlap unit's name
+oUF_mono: partypets reworked and now properly attach to their owners
+oUF_mono: added Leader, Assist and ML icons for party and player frames
+oUF_mono: changed the way frames recieve their names so be careful and make sure to check cfg.lua and edit frames' position
+oUF_mono: removed old CP texture
+
+====== v. 8.3 rev 13 ======
+oUF_mono: oops.. ToT and pet frames are back again!
+oUF_mono: cleaned up some cfg vars
+
+====== v. 8.3 rev 12 ======
+oUF_mono: more config varriables
+oUF_mono: custom position for focus cast bar
+oUF_mono: removed abbility to set position via dragging for some frames
+oUF_mono: ability to set size and opacity for raid marks
+oUF_mono: disable Blizzard party and focus frames when cfg.showparty and cfg.showfocus are set to false
+oUF_mono: reworked sizing method for castbars and icons (now even more precies)
+oUF_mono: and even MORE config options
+
+====== v. 8.3 rev 11 ======
+m_Map: major code revamp
+m_Map: enabled quest blobs on the MiniWorldMap
+m_Map: and now they actually work and give no errors!
+oUF_mono: eh.. decreased square indicator size :S
+m_Tweaks: added options for CaptureBar and ScoreFrame positioning
+
+====== v. 8.3 rev 10 ======
+oUF_mono: adjusted castbar icon size and position
+
+====== v. 8.3 rev 9 ======
+m_Panels: proper coords and scale detection for /pnl function
+m_Tweaks: removed /pvpon and /pvpoff functions
+oUF_mono: casting bar moved to the bottom of the arena frame
+oUF_mono: added debuff icons for arena frame
+oUF_mono: fixed color for vehicles with ammo and fuel
+oUF_mono: fixed castbar fading
+oUF_mono: fixed channeling castbar for targets
+oUF_mono: fixed a glitch that would inappropriately show uninterpretable cast bar for interruptible abilities
+oUF_mono: reduced the amount of aura icons you can see on player/target frames
+oUF_mono: changed size and positioning for target's aura icons
+oUF_mono: removed few unused functions, code clean up
+
+====== v. 8.3 rev 8 ======
+m_UIconfig: added localization for Skada broker display text
+
+====== v. 8.3 rev 7 ======
+oUF_mono: level/classification tag events fix
+
+====== v. 8.3 rev 6 ======
+m_Chat: duplicate timestamps fix
+m_BrokerStuff: fixed DPS display for Skada users
+
+====== v. 8.3 rev 5 ======
+m_Panels: removed fake target and handlers from layout.lua
+oUF: core update to version 1.4.3
+oUF_mono: group 6-8 position is now relative to group 1-5
+oUF_mono: now even more precies group 6-8 positioning!
+oUF_mono: fake target frame added + option in cfg.lua
+oUF_mono: added proper right click menu for player frame while in vehicle
+oUF_mono: tags clean up
+oUF_mono: fix to avoid partypet frames from showing if party frames disabled
+oUF_mono: consolidated raid textures in a single media folder thus raid\media removed
+oUF_mono: debuff icon border adjustments so it looks more clear
+oUF_mono: added few explanatory comments in cfg.lua
+oUF_mono: experimenting with overlay texture for aura icons: cd frame doesn't overlap the border anymore
+
+====== v. 8.3 rev 4 ======
+oUF_mono: added option to toggle aura timers
+oUF_mono: added option to toggle small aura frame for player
+oUF_mono: fixed aura timers so the numbers don't show up on small icons
+oUF_mono: new position for small player auras for Deathknights (due to rune bar)
+FreebTip: removed
+alTooltip: added
+alTooltip: fixed error that happens when destructable object's hp bar is shown
+alTooltip: added position and guild text color options
+alTooltip: added option to scale tooltips
+m_Chat: fixed buttons for multiple chat windows
+
+====== v. 8.3 rev 3 ======
+oUF_mono: fixed self display in grid party frames
+
+====== v. 8.3 rev 2 ======
+oUF_mono: media path location fix
+m_Map: option to disable group icons
+
+====== v. 8.3 rev 1 ======
+oUF_Freebgrid: removed
+oUF_mono: added raid module based on oUF_Freebgrid
+oUF_mono: major structure rework
+oUF_mono: added more config options in cfg.lua
+oUF_mono: tags update
+oUF_mono: fixed group 6-8 positioning
+oUF_mono: raid tags updated, replaced symbol font with normal one so you can actually see the specific buff stack at bottom right indicator
+oUF_mono: the ammount of auras you can see on focus target frame now redusced to 10
+oUF_mono: added raid mark icons to other than player frame
+oUF_mono: fixed partypets frame sometimes not disappearing upon entering raid group
+oUF_mono: all media files are now embed within add-on
+oUF_mono: when player is controlling a vehicle raid frames will show his name instead of vehicle's
+m_Chat: updated with few fixes
+m_Chat: chat window can be resized without min/max limits
+m_Chat: removed copy chat button from the bottom right corner (double click a chat tab to access this feature)
+m_Map: fixed stack overflow error
+m_Map: locals...well... you know that variable scoping thing...
+m_Map: WorldMapUnit_Update function fix in attempt to diminish fps lag when toggling map on and off
+
+====== v. 8.2 rev 5 ======
+m_Map: fixed miniWorldMap border to inherit map's opacity 
+m_Map: tiny frame and text position adjustments
+m_Map: new background and border texture
+m_Map: close and sizeup buttons repositioned to the topright corner of the whole frame
+m_Map: levelup/down and zone level dropdown buttons now also inerit map's opacity
+aTotemBar: added positiion and scale settings to the very top of aTotemBar.lua
+cargoShip: now embed as lib in m_BrokerStuff
+m_BrokerStuff: properly structurized and now easier to configure
+m_BrokerStuff: updated to LibCargoShip-2.1
+oUF_mono: added new current target indicator for party and arena frames
+oUF_mono: added pvp trinket support (oUF_Trinkets) for arena frames
+oUF_mono: code clean up and more comments!
+
+====== v. 8.2 rev 4 ======
+m_Map: fixed coordinates OnUpdate script so it doesn't draw any CPU usage when map is hidden
+m_Map: coordinates code reworked, general code clean up
+m_Tweaks: added slash commands for switching specs /ss or /spec
+all m_* add-ons: *.toc updated
+
+====== v. 8.2 rev 3 ======
+oUF_mono: runes backdrop rewrite so it looks a bit better
+m_Map: added map special blips for party/raid members (inspired by Mapster!)
+m_Tweaks: removed silly mistake with local names for autoaccept duels/invitation
+
+====== v. 8.2 rev 2 ======
+oUF_mono: conditions to spawn party frames adjusted (thx Sojik), in a nutshell party frames will be visible until your raid exceeds 5 members (yay party frames in arenas!)
+oUF_mono: small fix for value shortening function in tags
+oUF_Freebgrid: tag fix (same thing as in oUF_mono)
+
+====== v. 8.2 rev 1 ======
+eXPeritia_basic: minimalistic simple experience bar added to the !extras folder
+m_Panels: /pnl function rewritten, and works better than evah!
+m_CombatText: text anchor moved slightly to the bottom
+oUF_mono: fixed anchor for party frames so it doesn't overlap the chat frame at lower resolutions
+oUF_mono: party frames grow upwards
+oUF_mono: added druid mana tag (when shape-shifted)
+oUF_mono: arenaenemys, arenatargets, partypet and boss frames are back, boss frames aren't tested though
+oUF_Freebgrid: fixed anchor for MT frames so they don't overlap the minimap
+oUF_Freebgrid: few tag fixes to avoid errors when raid rooster changes
+m_Map: fixed an issue with mispositioned arrow on MiniWorldMap (where did this glitch come from?!)
+Skada: removed, however options are still in m_UIconfig, so you may use it if you like it
+alDamageMeter: minimalistic damage meter added, credits to Allez
+cargoship: layout modified to display DPS feed from alDamageMeter
+NugRunning: Deathknights ... err.. emm.. well.. Unbreakable Armor! (no idea what would that mean)
+
+====== v. 8.1 rev 2 ======
+oUF_mono: custom castbars modification added, such as letency display, tick detection, fading etc.
+m_UIconfig: NugRunning recieves proper position if player is shaman (so it doesn't overlap aTotemBar)
+m_Chat: new patterns for channel replacements (added locale support + fixed GEN/LD patterns for ruRU client)
+m_Bags: scaled down both bank and bag frame + few display tweaks so it meets general UI layout design
+m_Bags: it's now possible to drag bags by alt-draging main backpack, however position will reset each time UI is loeaded, i.e. you still have to set up bags position manually via editing m_Bags.lua
+m_Map: moved WorldMapLevelDropDown to the appropriate position
+m_Tweaks: auto duel decline + auto accept invites options
+
+====== v. 8.1 rev 1 ======
+m_ChatMods renamed to m_Chat (screw long names)
+m_Chat: more options added, such as fontsize, enable/disable mouseclicks on editbox etc.
+m_Chat: /chatmove command renamed to /setchat (cause it does more than just moving!)
+m_Chat: SetChat() function now always performs when interface is loaded, however you can disable this (AutoApply=false)
+m_Chat: timestamps coloring
+m_Chat: removed few unused options and textures
+m_Chat: few improvements in replacing channel names logic
+m_Chat: added workaround for editbox to be clickable when active and not clickable when inactive (FIXED!)
+oUF_mono: default castbar color is now set to match player's power type
+oUF_mono: added option to set specific color for uninterruptable casts
+oUF_mono: FIXED the problem with vehicles, when player frame was incorrectly appearing as pet's.
+oUF_mono: proper style and position for pet's castbar
+m_Panels: small fix for fake target frame sometimes not showing up after zoning
+cargBags_mono: renamed to m_Bags
+cargBags: sripped down all the unused modules and now embed into m_Bags
+m_Bags: repositioned bagframes slightly
+m_Settings: renamed to m_Tweaks
+m_Tweaks: some settings clean up
+m_Tweaks: added function that sets default dominos profile when you run /config for the first time
+(so you actually don't need to run /setbars manually when you load this interface for the first time!)
+m_UIconfig: petbar position and scale changed to fit new unitframes position, removed some old unused functions 
+(remember, you have to enable this addon and run /config for those changes to take place)
+aTotembar: (extras) fixed error with initial positioning of the totembar
+
+====== v. 8.0 rev 2 ======
+oUF_mono: temp enchant frame fix + new style (sexier than evah!)
+oUF_Freebgrid: debuff filtering fix
+oUF_Freebgrid: raid_debuff.lua updated and now can define debuffs for specific instances
+oUF_Freebgrid: HP display fix for MT frames
+oUF_Freebgrid: MT targets are back!
+
+====== v. 8.0 rev 1 ======
+oUF: core update to version 1.4
+oUF_mono: complete rewrite, new add-on structure
+oUF_mono: oUF 1.4 support
+oUF_mono: added raid icons
+oUF_mono: highligh on mouseover
+oUF_mono: tag system
+oUF_mono: new overlay texture for Debuff hilights
+oUF_mono: added interruption detection for castbars
+oUF_mono: new smooth update behaviour
+oUF_mono: added Trinkets module
+oUF_mono: fixed runebar
+oUF_mono: properly stylize Mirror Casting Bar
+oUF_mono TODO: (fix (de)buff timers on pet/vehi frame, boss/arena/ppet frames not spawning, possibly HealComm support)
+oUF_Freebgrid: oUF 1.4 support
+oUF_Freebgrid: major rework
+oUF_Freebgrid: new tag system
+oUF_Freebgrid: removed tweaked range check (temporarily untill i find a fix)
+oUF_Freebgrid: rescomm re-added
+oUF_Freebgrid: new way of spawning power bars
+oUF_Freebgrid: removed options for pets (FFFFFFFFFFFUK PETS) and reverse color display
+oUF_Freebgrid TODO: workaround raid layout switch
+m_ChatMods: ChatTabs behave as pre 3.3.5, i.e. completely fade out when not mouseovering
+m_ChatMods: adjustments/fixes to channel name replacements
+m_ChatMods: position adjustment for BNet notification
+m_ChatMods: added BNet whispers pattern to channel replacements
+m_ChatMods: sticky channels system updated
+m_ChatMods TODO: (editbox clickable)
+m_Panels: few panel adjustments in layout.lua
+m_Panels: added fake target script
+m_Map: framelevel fix so it always overlaps unitframes
+cargBags_mono: BagBar texture color
+
+====== v. 7.9 rev 3 ======
+m_ChatMods: fixed for 3.3.5
+m_ChatMods: /chatmove should work for everyone
+m_ChatMods: still WIP, but it's stable and fully functional
+
+====== v. 7.9 rev 2 ======
+oUF_mono: Runebar repositioned (to stop it from overlapping with aThreatMeter)
+oUF_mono: some minor size'n'shape fine tunning
+m_Loot: close button position adjusted
+m_ChatMods: fixed editbox error, /chatmove command should be fully functional now
+FreebTip: tooltip scale increased
+
+====== v. 7.9 rev 1 ======
+oUF_mono, oUF_Freebgrid, m_Panels: adjusted to propperly fit HD resolutions
+m_Panels: tiny cluster adjustments in main layout
+oUF_mono: fixed runebar position
+oUF_Freebgrid: fixed bad arguments for range check for Mages and Warlocks
+oUF_Freebgrid: added ResComm
+oUF_Freebgrid: reworked several things: add-on structure, frequent updates for indicator timers, res/healcomm lib update
+m_Map: tiny fix for coords overlapping checkbox
+Skada: updated to the latest versions
+m_ChatMods: minor update to fix 3.3.5 issues
+cargBags: updated to new version (2.0)
+cargBags_mono: Work In Progress: rebuilding my layout (for cargBags 2.0) based on cargBags_Simplicity, basic functionality is available
+
+
+====== v. 7.8 rev 4 ======
+oUF_Freebgrid: fixed range bug for mages and warlocks
+
+====== v. 7.8 rev 3 ======
+aTotemBar: updated with with cooldown frames allowing to spawn timers via OmniCC
+oUF_Totembar: removed
+oUF_mono: removed support for oUF_Totembar
+oUF_mono: added option to enable glowing backdrop
+oUF_mono: added castbar feature to recognize uninterruptable casts
+
+====== v. 7.8 rev 2 ======
+oUF_Freebgrid: small update for cooldown frames on
+m_Panels: added 'option' to adjust width of bottom cluster panels (xadj value)
+Broker_DBM, Buffet, Clique, Examiner, ncSpellalert removed from extras! folder
+
+====== v. 7.8 rev 1 ======
+MikScrollingBattleText: replaced with m_CombatText
+aTotemBar: removed from main pack (still exists in extras!)
+Buffet: removed
+cargoShip: layout update to fix top panel
+Various Broker plugins now moved to the new single add-on
+AraBrokerMoney: replaced with brand new Broker plugin based on VertiBroker_Money
+m_UIconfig: removed few unnecessary config functions
+
+====== v. 7.7 rev. 9 ======
+Dominos: updated
+oUF: core update
+NugRunning: added nontargetopacity option, anySource and target options added, deathknight module for tracking blood plague and frost fever 
+oUF_Freebgrid: makes use of oUF's own vehicle switch module, updated HealComm and fixed Ready Check icons
+m_Map: swapped Player and Cursour coordinates' positions
+
+====== v. 7.7 rev. 8.3 ======
+m_Settings: new position GM ticket frame 
+oUF_Freebgrid: new debuffs
+NugRunning: new debuffs
+
+====== v. 7.7 rev. 8.2 ======
+m_ChatMods: added Party Guide abbreviation as [PG]
+
+====== v. 7.7 rev. 8.1 ======
+m_Map: removed WorldMapBlobFrame from showing, therefore no more taint issues when you open map with POIs during combat.
+
+====== v. 7.7 rev. 8 ======
+oUF_mono: thicker Health bar for player and target frame
+m_Panels: fake target frame update to fit new unit frames' atributes
+
+====== v. 7.7 rev. 7.5 ======
+MikScrollingBattleText: updated to the latest version
+m_Map: uninterractable size up button in combat
+m_ChatMods: new option to disable timestamps
+
+====== v. 7.7 rev. 7.4 ======
+oUF_Freebgrid: (bugfix) fixed reversecolor display
+
+====== v. 7.7 rev. 7.3 ======
+m_UISettings: autoscaling function updated
+
+====== v. 7.7 rev. 7.2 ======
+oUF_mono: minor fix for 3d portraits updates
+m_Map: ... i actually dont remember
+
+====== v. 7.7 rev. 7.1 ======
+oUF_mono: small fix for 3d portraits alpha on target frame
+
+====== v. 7.7 rev. 7 ======
+m_ChatMods: Editbox border is now part of this addon, Editbox itself adjusted to be <more> in the middle
+m_ChatMods: few new options in the config "section"
+m_ChatMods: (bugfix) "scroll to the bottom" button is back to it's old position!
+m_Panels: tiny modifications to the bottom cluster
+m_Panels: Editbox panel removed
+Dominos: updated
+Broker_Durability: the value turns red when you are below 20% dura, just so you never miss it
+oUF_mono: added 3d portraits (EXPERIMENTAL!!!)
+
+
+====== v. 7.7 rev. 6.8 ======
+m_ChatMods: further code optimisations, few new options now available + spammfilter is off by default (yet again)
+
+====== v. 7.7 rev. 6.7 ======
+oUF_Freebgrid: raid debuffs update
+
+====== v. 7.7 rev. 6.6 ======
+m_ChatMods: (bugfix) new fix for /tt function, it now works propperly even if the target is out of range
+oUF_mono: (bugfix) fixed the error on boss targets frames despawn
+oUF_mono: (bugfix) tot and pets debuffs are back!
+
+====== v. 7.7 rev. 6.5 ======
+oUF_Freebgrid: more pets tweaking:	it's now a seperate header with its own position;
+									it's also possible to disable/enable pets for just party frames;
+									check config.lua for new options
+
+====== v. 7.7 rev. 6.4 ======
+m_ChatMods: fixed small issue which caused garbage leak (3rd time is the charm!), spamm filter is off by default
+m_ChatMods: /tt will not give error when used without a target
+
+====== v. 7.7 rev. 6.3 ======
+m_ChatMods: fixed small issue which caused garbage leak (again)
+
+====== v. 7.7 rev. 6.2 ======
+m_ChatMods: fixed small issue which caused garbage leak
+
+====== v. 7.7 rev. 6 ======
+oUF_mono: fixed pets/arenaframes' targets not coloring propperly
+m_Minimap: fixed strata issue for minimap itself and LFD tooltip
+m_UISettings -> m_Settings: added some quick options
+m_Loot: autoacceptDE function moved to m_Settings
+m_BasicChatMods -> m_ChatMods: few code and structure modifications, added some general options
+m_ChatMods: new option to filter spamm in chat channels
+m_Map: fixed glitch with positioning of coords when WorldMap's locked
+
+====== v. 7.7 rev. 5 ======
+oUF_Freebgrid: raid debuffs update
+oUF_Freebgrid: vehicles now shown as raid units
+m_UISettings: fixed /pvpoff command
+oUF_mono: few modificaions to boss target frame, attempt to fix minor bug on boss targets despawn
+oUF_mono: reworked (cleaned up) auras code
+oUF_mono: combopoints belong to target frame now
+m_Loot: autoacceptDE option is set to false  by default
+
+====== v. 7.7 rev. 4 ======
+OmniCC_basic: added few options for coloring/setting cooldown treshold
+oUF: core update
+oUF_Freebgrid: code cleanup
+oUF_Freebgrid: new way of handling pets (beta state, so yes its buggy)
+oUF_Freebgrid: added oRA3 MT list sorting support from original freebgrid
+Broker_Equipment: updated
+m_Loot: added new option to group loot module for auto accepting DE roll in partys
+NugRunning: (updated) now propperly handles haste buffs and recast mark, slightly modified looks and position
+m_UIconfig: minor position updates for NugRunning options
+oUF_mono: health text on target boss frames now displayed as shorten values (i.e. 1k,2m etc.)
+m_Minimap: difficulty flag strata changed so it doesn't hide behind minimap
+
+====== v. 7.7 rev. 3 ======
+m_Minimap: fixed Minimap strata so it's not beign overlapped with panels
+m_UISettings: some code cleanup
+m_BasicChatMods: reworked(fixed) telltarget func, removed some unnecessary code
+OmniCC(+Options): replaced by OmniCC_basic
+m_UIconfig: removed OmniCC data
+m_Loot: more texture specifications
+
+====== v. 7.7 rev. 2 ======
+oUF_mono: Removed glowing texture behind frames :S
+m_Panels: Removed glowing texture behind fake target frame
+oUF_Freebgrid: Disembed (removed) oUF core
+m_Loot: local textures can be set in the very top of .lua files
+
+====== v. 7.7 rev. 1 ======
+oUF_mono: added glow backdrop to the unitframes
+m_Panels: (core change) added the abbility to set blend mode for panels and fixed a propper backdrop for gradient and advanced panels
+m_Panels: major layout change, restylized bottom cluster
+m_Panels: commented out support for multiple resolutions, since noone actually uses it :S
+oUF_Freebgrid: fixed an issue with wrong size/position updates for groups 6,7,8 when they spawned
+
+====== v. 7.6 rev. 8 ======
+m_UIconfig: slightly modified DBM settings
+
+====== v. 7.6 rev. 7 ======
+oUF_Freebgrid: debuffs texture updated/fixed so it never distorts
+oUF_Freebgrid: target/focus/mana border frame also fixed from distorting at any size
+oUF_Freebgrid: debuffs size got slightly increased
+oUF_Freebgrid: slight code cleanup
+oUF_Freebgrid: updated with a new features (see config.lua): threatborder option enables/disables threat 
+			   borders for oUF_Freebgrid, this however disables tiny dot indicator in the middle of the frame
+
+====== v. 7.6 rev. 6 ======
+m_Loot: fixed border texture for group rolls
+
+====== v. 7.6 rev. 5 ======
+m_Loot: (bugfix) error when looting chests
+m_Loot: the announce function can now identify chest loot (sort of)
+m_media useless textures removed
+
+====== v. 7.6 rev. 4 ======
+m_Loot: new texture for loot frame, close/link buttons restylized
+cargBags_mono: close button changed
+m_UISettings: added quick option for turning autoloot on and off at the very top of the file
+m_Panels: fixed alignment grid
+
+====== v. 7.6 rev. 3 ======
+m_Panels: fixed updater for raid backgrop NOW FOR REAL!
+
+====== v. 7.6 rev. 2 ======
+oUF_Freebgrid: (bugfix) applyAuraIndicators() now in place and spawns indicators propperly
+FreebTip: changed guild tag color
+m_Panels: fixed updater for Freebgrid backgrop
+
+====== v. 7.6 rev. 1 ======
+m_Minimap: anchor is set to "BOTTOMRIGHT"
+cargoShip: bottom plugins now spawn from corners
+m_Panels: layouts are now sepparated from the core in, layout.lua now contain all the user created panels
+m_Panels: brand new background for bottom broker plugins
+Clique: moved to !extras folder
+Readme.txt updated with some clarifications
+
+====== v. 7.5 rev. 1 ======
+oUF_Smooth: merged with oUF_mono
+oUF_AuraSort: merged with oUF_mono
+oUF_mono: oUF_Totembar propper support
+(extras) oUF_Totembar: updated
+(extras) aTotemBar: code cleanup, removed the abbility to set position and scale ingame, lua config only
+NugRunning: removed totembars timers
+aTooltip: removed
+FreebTip: added with some code modifications
+m_UISettings: added autogreed on greens
+m_UIconfig: updated with new OmniCC and NugRunning settings
+Readme.txt update
+
+====== v. 7.4 rev. 1 ======
+oUF_Freebgrid: reworked spawning function, added propper toggle for 25/40 man raid layouts
+oUF_Freebgrid: options for operating with Healcomm slightly changed, see config.lua
+oUF_Freebgrid: oUF core and Healcomm4 updated
+Readme.txt update
+m_Panels: Grid background now appears when there is at least one raid member in group 3 or higher
+
+====== v. 7.3 rev. 9 ======
+m_Map: fixed background frame's strata level so it doesn't get overlapped by other UI elements
+m_UISettings: added /radisband slash command for group disbanding
+Skada: updated
+m_UISettings: fixed typo
+
+====== v. 7.3 rev. 8 ======
+m_Map(I hate it already): fixed POI frames position after map restore. 
+Buffet: Updated
+oUF: core update 
+oUF_mono: added LFD iconds for players role to party frames
+m_UIconfig: cooldowns font outline changed to normal in OmniCC
+
+====== v. 7.3 rev. 7 ======
+aLoot: added filter for suppressing detailed loot info and it doesn't require localization
+m_Map: removed "Big map stylizing" to fix taints :S
+NugRunning: updated
+Skada: updated
+
+====== v. 7.3 rev. 6 ======
+m_Minimap: removed old LFG option from "right click menu" and added new LFRaid and LFDungeon
+
+====== v. 7.3 rev. 5 ======
+m_UISettings: removed WorldMap code
+m_Map: (added) addon that handles WorldMap stilization
+aLoot: code cleanup
+MikScrollingBattleText: updated
+
+====== v. 7.3 rev. 4 ======
+aLoot: "NEED" and "DISENCHANT" buttons swapped their places
+
+====== v. 7.3 rev. 3 ======
+oUF_Freebgrid: partypets option removeed from config file, use grouppets instead
+aLoot: fixed group roll counters FOR REAL!
+
+====== v. 7.3 rev. 2 ======
+aLoot: added a little fix for group roll parser on other than enGB/US locales (untill I figure out a better way)
+m_UISettings: added WorldMap stylization
+
+====== v. 7.3 rev. 1 ======
+toc updates
+aLoot: added disenchant button in group loot module
+aMinimap renamed to m_Minimap (the reason for that is that I actually merged 2 versions of this add-on and added some custom code)
+m_Minimap: repositioned new LFG button and InstanceDifficulty icon
+cargoShip: adjusted top show_on_mouseover panel
+Dominos: updated to most current version
+m_BasicChatMods: added "Party Leader" shortcut ("P")
+MailGet renamed to m_MailGet to avoid problems with autoupdater users, adjusted button position and size
+MSBT: updated to most current version
+cargBags_mono: default frames position adjusted a bit
+NugRunning: removed VE from priests spells
+oUF: core update
+oUF_Freebgrid: healcomm and core updates
+OmniCC: updated to most current version
+Snoopy: removed
+Buffet: moved to the !extras folder
+m_UISettings: removed world Map stilization
+Readme.txt updated
+
+====== v. 7.2 rev. 1 ======
+oUF update (v.1.3.24)
+oUF_mono: - removed temp enchant timers (screw that, use default icons)
+			- added timers for player's buffs/debuffs (so we don't need OmniCC for that anymore)
+			- added quartz-like safezone to the castbar which shows the actual delay for your casts
+			- changed castbar color to lighen up things a bit!
+Fonts: got rid of Citynova font (skurri.ttf replaced with Calibri_Bold), so now it's one and only font for entire interface
+
+====== v. 7.1 rev. 3 ======
+oUF_mono: fixed focustarget position
+oUF_Freebgrid: fixed MT frames positioning and size
+oUF_Freebgrid: added MTsize option to config file
+m_Panels: action bars background frames adjusted (again)
+
+====== v. 7.1 rev. 2 ======
+m_Panels: action bars background frames adjusted
+
+====== v. 7.1 rev. 1 ======
+Broker_Threat replaced with aThreatMeter
+oUF_mono, m_UIconfig(Dominos): Adjusted positions of unitframes and actionbars
+m_Panels: removed few unused panels
+
+====== v. 7 rev. 1 ======
+MAJOR LAYOUT MODIFICATION
+aMinimap: removed "N"
+Broker_Threat: threat bar modified to fit new layout
+cargBags_mono: code clean up
+cargoShip: changed position of all visible elements in layout.lua
+m_BasicChatMods: editbox repositioned
+m_media: border.tga texture updated
+m_Panels: new panels layout (pixel-perfect sort of)
+m_UIconfig: initial configuration function updated for new layout
+m_UISettings: removed some not necessary crap
+NugRunning: new position, fixed spelltext position to be more in "center"
+oUF_Freebgrid: bigger raid frames (YAY!)
+oUF_mono: alot of elements got changed to fit new looks!
+God Bless Russia!
+
+====== v. 6.6 rev. 12 ======
+added ncSpellalert as optional addon (find it in !extras folder)
+NugRunning: updated + fixed the issue with laggy multi targets tracking updates
+
+====== v. 6.6 rev. 11 ======
+aLoot: (new feature) "Link" button when you loot anything allows you to list those items to guild or raid chat
+
+====== v. 6.6 rev. 10 ======
+oUF_Freebgrid: pets disabled (by default) for greater fucking good
+m_Panels: MiddleBG panel (under raid frames) now changes it's height dynamically for 10/25 man raid groups
+aMinimap: clock module rewrite, clicking on game time frame will bring up standart clock manager options
+iActionButtons: (bugfix) implemented function to fix action bar grid color when you move a button (credits to zork)
+oUF: updated
+
+====== v. 6.6 rev. 9 ======
+oUF_Freebgrid: party pet display options reworked (see config.lua)
+oUF_Freebgrid: by default grid doesn't show up if player's in party
+m_Panels: fixed raid background spawning to fit Freebgrid changes
+oUF_mono: (bugfix) tot debuffs now grow towards left
+
+====== v. 6.6 rev. 8 ======
+m_BasicChatMods: added LinkHover functionality, credits to Adys
+m_BasicChatMods: removed LibSharedMedia support from font.lua module
+oUF_mono: no longer require oUF_Runebar to spawn rune bars
+oUF_mono: changed player pet's and tot buffs/debuffs display
+oUF_mono: arena and party frames look and position changed
+oUF_Runebar: removed from extras
+
+====== v. 6.6 rev. 7 ======
+oUF_mono: added arena tarrget's targets
+
+====== v. 6.6 rev. 6 ======
+oUF_Freebgrid: (bugfix) earth shield tag for shamans
+cargBags_mono: added new functionality - dynamic item types sorting by pressing alt + right click on the item
+cargBags_mono: general code clean up
+
+====== v. 6.6 rev. 5 ======
+aMinimap: (bugfix) Minimap cluster doesn't intercept mouseclicks (in top left corner)
+oUF_Freebgrid: updated with new features, such as raid pets and party pets (see config.lua)
+oUF_Freebgrid: cleaned up spawning function
+oUF_Freebgrid: enlarged MT(T) frames
+m_UISettings: default Blizzard error frame (red text) now always hidden 
+oUF_mono: removed MT frames code since oUF_Freebgrid handling that
+oUF_mono: reworked partypets, now spawns a tiny pet frame next to the party unit frame
+oUF_mono: added fully functional arena frames (with auto disabling if Gladius loaded)
+
+====== v. 6.6 rev. 4 ======
+oUF_Freebgrid: (bugfix) healcomm bars will actually be horizontal if you set vertical = false in config.lua
+oUF_Freebgrid: (updated) oUF_HealComm4
+oUF_Freebgrid: minor change to raid_debuffs.lua
+
+====== v. 6.6 rev. 3 ======
+Broker_Threat: merged threat bar functionality in threat display plug-in
+
+====== v. 6.6 rev. 3 ======
+Broker_Threat: removed background from the bar so it looks much cleaner in combination with small texture panel
+m_UIconfig: adjusted position and size of NugRunning bars
+
+====== v. 6.6 rev. 2 ======
+Dominos: updated to fix the issue with patch 3.3
+m_UIconfig: included Gladius settings
+m_UISettings: added slash command for easy Gladius profile set up; Readme.txt updated
+m_UISettings: removed some old unused functions, UIErrorFrame now hidden only in combat.
+Skada updated
+oUF_mono: reworked (fixed) pet casting bar
+aMinimap: removed unused frames from hiding function (little fix for 3.3)
+Broker_Threat: added visual threat bar
+m_Panels: fixed threat bar border sometimes not appearing when player is present in threat list
+oUF_mono: totembar positions adjusted
+rActionButtonsStyler replaced by iActionButtons
+
+====== v. 6.6 rev. 1 ======
+aLoot: removed grouploot text replacements (aparently in some cases it caused the client to crash)
+oUF_Freebgrid: removed trans.tga and statusbar texture from a dummy frame to avoid the UI error in upcoming patch
+cargBags_mono: adjusted default position of player's bags and bank frame so it actually look inplace without additional movements
+NugRunning updated: Sync between UNIT AURA and CLEU, added commanding shout; added refresh timer indication to several casts
+Variety of included addons got updated: aTotemBar, Broker_Equipment, Dominos, OmniCC, Skada
+m_UIconfig: MikScrollingBattleText has its scrolling zones' position changed; variety of (useless) notification triggers are now disabled
+m_UIconfig, m_Panels: adjusted dominos visible bar position + panel under it (so it even might work for orther resolutions)
+m_UIconfig, Skada: changed bar colors to fit UI style
+oUF_mono: fixed player's debuffs positioning (so they don't overlap 3rd row of buffs)
+oUF_mono: adjusted runebar position
+oUF_mono, m_Panels: changed the color of health bars
+oUF_mono: power/race/lvl values position slightly readjusted
+Deadly Boss Mods: removed, people may feel free to install whatever boss mod they like/want
+Broker_DBM moved to !extras folder
+
+====== v. 6.5 rev. 4 ======
+oUF_mono: removed UTF8 lib and reworked function for names updates
+oUF_Freebgrid: likewise removed UTF8 lib
+
+====== v. 6.5 rev. 3 ======
+oUF_mono: general code clean up, reworked some color update functions
+
+====== v. 6.5 rev. 2 ======
+fixed player's debuffs position in oUF_mono
+some (class) specific addons now moved to the !extras folder, just move the ones you need to AddOns folder
+applied small fix to oUF_Smooth to correctly update bars with forced value
+
+====== v. 6.5 rev. 1 ======
+m_Panels updated so it _might_ work on other resolutions
+removed gradient from some panels in the middle block
+NugRunning is updated with spells for shamans
+ADDED: m_UIconfig addon for initial interface configuration
+REMOVED: WTF folder, since m_UIconfig now contains all the options for included addons
+Updated Readme.txt with new installation manual (READ IT! The installation process is now literally trivial)
+Replaced old version of DBM broker plugin with official one + modified cargoship layout to properly display it @ top panel.
+
+====== v. 6.4 rev. 5 ======
+doh! I accidentally removed m_BasicChatMods, it's there now!
+oUF_mono is updated and now fully supports oUF_WeaponEnchant
+Mirror cast bars will be stylized propperly now
+DBM update (Onyxia)
+
+====== v. 6.4 rev. 4 ======
+small adjustments of temp. enchant frame in oUF_mono
+added changelog (yaaay!)
+
+Lets see if i'll be patient enough to propperly log all the changes..

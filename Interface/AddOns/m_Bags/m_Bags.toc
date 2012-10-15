@@ -1,0 +1,9 @@
+## Interface: 50001
+## Title: mono|cffffffffBags|r
+## Author: Monolit, Cargor
+## Version: 2.4
+## Notes: Simple all-in-one inventory.
+## OptionalDeps: cargBags
+cfg.lua
+cargBags\embed.xml
+m_Bags.lua

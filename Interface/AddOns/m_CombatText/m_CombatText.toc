@@ -1,0 +1,10 @@
+## Interface: 50001
+## Notes: Scrolling combat text
+## Title: mono|cffffffffCombatText|r
+## Author: Monolit
+## Version: 2.2.0
+## Credits: Affli, Alza
+
+cfg.lua
+aoe_spells.lua
+mCT.lua

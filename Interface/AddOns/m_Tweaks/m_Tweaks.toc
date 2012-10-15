@@ -1,0 +1,10 @@
+## Interface: 50001
+## Notes: A combination of little UI tweaks. 
+## Title: mono|cffffffffTweaks|r
+## Author: Monolit
+## Version: 4.4.0
+## OptionalDeps: DBM-Core, NugRunning, Bigwigs, TinyDPS
+## Credits: Special thanks to Adys, ALZA, Silverwind and Affli
+
+cfg.lua
+ui_elements.xml

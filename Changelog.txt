@@ -17,6 +17,8 @@ m_Chat: removed styling of default time stamps (for now)
 m_Map: added option to display decimal part of map coordinates
 m_Map: removed tooltip fix for quest blobs
 m_ActionBars: exit vehicle button when docked will always have its position locked by last available Bar1 button
+m_ActionBars: PARTY/RAID events replaced with new GROUP_ROSTER_UPDATE event to propperly handle mark bars
+m_ActionBars: removed couple config values from RaidMark and WorldMarker bars
 m_Loot: adjusted size and position of several elements; overall made loot frames bigger
 
 ====== v. 11.2 rev 1 ======

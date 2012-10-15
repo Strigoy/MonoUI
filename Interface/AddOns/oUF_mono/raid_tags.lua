@@ -212,7 +212,7 @@ oUF.Tags.Methods['raid:ssh'] = function(u)
     end
 end
 oUF.Tags.Events['raid:ssh'] = "UNIT_AURA"
-oUF.Tags.Methods['raid:forb'] = function(u) if not UnitDebuff(u, L["Forbearance"]) then return "|cffFF0000"..x.."|r" end end
+oUF.Tags.Methods['raid:forb'] = function(u) if UnitDebuff(u, L["Forbearance"]) then return "|cffFF0000"..x.."|r" end end
 oUF.Tags.Events['raid:forb'] = "UNIT_AURA"
 
 --shaman

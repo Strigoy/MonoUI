@@ -137,35 +137,27 @@ SetRaidMarksAlpha(raidmarkbar,RaidIconButtons,cfg.bars["RaidIconBar"].show_on_mo
 SetRaidMarksAlpha(worldmarkbar,WorldMarkButtons,cfg.bars["WorldMarkerBar"].show_on_mouseover,cfg.bars["WorldMarkerBar"].bar_alpha,cfg.bars["WorldMarkerBar"].fadeout_alpha,true)
 
 -- set up visibility conditions for WorldMark and RaidMark bars
-if cfg.bars["RaidIconBar"].only_in_combat then 
-	RaidIconBar_holder:RegisterEvent("PLAYER_REGEN_DISABLED")
-	RaidIconBar_holder:RegisterEvent("PLAYER_REGEN_ENABLED")
-end
 RaidIconBar_holder:RegisterEvent("PLAYER_ENTERING_WORLD")
-RaidIconBar_holder:RegisterEvent("PARTY_MEMBERS_CHANGED")
 RaidIconBar_holder:RegisterEvent("PARTY_LEADER_CHANGED")
-
-RaidIconBar_holder:RegisterEvent("RAID_ROSTER_UPDATE") -- assistant changes
+RaidIconBar_holder:RegisterEvent("GROUP_ROSTER_UPDATE")
 --RaidIconBar_holder:RegisterEvent("PLAYER_TARGET_CHANGED")
+--RaidIconBar_holder:RegisterEvent("PARTY_MEMBERS_CHANGED")
 RaidIconBar_holder:Show()
 RaidIconBar_holder:SetScript("OnEvent", function(self, event, ...)
 	if cfg.bars["RaidIconBar"].hide then self:Hide() return end
-	if cfg.bars["RaidIconBar"].only_in_combat and (event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_ENTERING_WORLD" ) then self:Hide() return end
 	if cfg.bars["RaidIconBar"].in_group_only and not IsInGroup() then self:Hide() return end
-	--if not (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player") or (IsInGroup() and not IsInRaid())) then 
-	if IsInRaid() and not (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")) then 
-		self:Hide() return 
-	end
+	if IsInRaid() and not (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")) then self:Hide() return end
+	--if not IsInGroup() then self:Hide() return end
 	--if IsInGroup() and not (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player")) then self:Hide() return end
+	--if not (UnitIsGroupAssistant("player") or UnitIsGroupLeader("player") or (IsInGroup() and not IsInRaid())) then 
 	self:Show()
 end)
 
 WorldMarkerBar_holder:RegisterEvent("PLAYER_REGEN_DISABLED")
 WorldMarkerBar_holder:RegisterEvent("PLAYER_REGEN_ENABLED")
 WorldMarkerBar_holder:RegisterEvent("PLAYER_ENTERING_WORLD")
-WorldMarkerBar_holder:RegisterEvent("PARTY_MEMBERS_CHANGED")
+WorldMarkerBar_holder:RegisterEvent("GROUP_ROSTER_UPDATE")
 WorldMarkerBar_holder:RegisterEvent("PARTY_LEADER_CHANGED")
-WorldMarkerBar_holder:RegisterEvent("RAID_ROSTER_UPDATE") -- assistant changes
 WorldMarkerBar_holder:Show()
 WorldMarkerBar_holder:SetScript("OnEvent", function(self, event, ...)
 	if cfg.bars["WorldMarkerBar"].hide then self:Hide() return	end

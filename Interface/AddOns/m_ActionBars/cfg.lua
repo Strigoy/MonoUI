@@ -90,14 +90,14 @@
 		},
 
 	["RaidIconBar"] = {
-		hide = false,					only_in_combat = false,		in_group_only = true,
+		hide = false,					in_group_only = true,
 		show_on_mouseover = true,		bar_alpha = 1,				fadeout_alpha = 0.5,
 		orientation = "HORIZONTAL",		rows = 1,					buttons = 12,	
 		button_size = 20,				button_spacing = 3,
 		position = {a="BOTTOM", x=-2, y=0},
 		},
 	["WorldMarkerBar"] = {
-		hide = false,					disable_in_combat = true,	in_group_only = true,
+		hide = false,					disable_in_combat = true,	
 		show_on_mouseover = true,		bar_alpha = 1,				fadeout_alpha = 0.5,
 		orientation = "VERTICAL",		rows = 1,					buttons = 12,	
 		button_size = 23,				button_spacing = cfg.spacing,

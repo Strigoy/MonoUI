@@ -1,11 +1,12 @@
 TODO / KNOWN ISSUES:
 - resize postupdate for class bars
 - threat indication for target frame
-- marker bars events
 ? alternative class indication @ unitframes?
 x The Spell IDs in talents window are doubled (seems to be OnTooltipSetSpell handler bug, it fires twice).
 
 ====== v. 11.2 rev 2 ======
+alTooltip: tooltip style for caged battle pets
+alTooltip: set default border color to black
 oUF_mono: altPowerBar applied to pet unit to prevent it disappearing when in vehicle
 oUF_mono: repositioned player's altPowerBar
 oUF_mono: added monks to dispell table

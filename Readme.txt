@@ -1,4 +1,9 @@
-[img]http://u.snelhest.org/i/2010/11/21_6598.png[/img]
+[img]http://i.imgur.com/lUIjx.png[/img]
+
+[SIZE="3"][COLOR="DarkOrange"][FONT="Trebuchet MS"]This version works on both [b]LIVE and BETA[/b] servers. 
+Make sure to check [B]CHANGE LOG[/B] as there's been allot of changes made including .cfg files structures in couple of add-ons, so you have to update your old config files.
+[/FONT][/COLOR][/SIZE]
+
 This UI was originally designed for multiple resolutions ranging from [B]1280*1024[/B] to [B]1920*1080[/B]. 
 [B]So unless your resolution is lower than 1280*XXX you should need no changes to use this interface[/B]
 Most add-ons are configured through editing lua files and do not have any GUI.
@@ -37,6 +42,7 @@ Also please keep in mind that I develop this interface to fit MY needs, thus
 [COLOR="SlateGray"]/kb[/COLOR] - enter keybinding mode
 [COLOR="SlateGray"]/rd[/COLOR] - remove everyone from raid/party
 [COLOR="SlateGray"]/rc[/COLOR] - ready check
+[COLOR="SlateGray"]/cr[/COLOR] - role check
 [COLOR="SlateGray"]/gm[/COLOR] - open GM ticket
 [COLOR="SlateGray"]/ss[/COLOR] - initiate talent specialization and gear set swap
 [/FONT]
@@ -94,7 +100,6 @@ the addon will pick a propper mount depends on the location you are in (includin
 [*]	[COLOR="Wheat"]m_Chat[/COLOR] - chat modifications based on BasicChatMods by Funkydude
 [*]	[COLOR="Wheat"]m_CombatText[/COLOR] - lightweight add-on for tweaking default  combat text 
 [*]	[COLOR="Wheat"]m_Loot[/COLOR] - Butsu + MasterLoot + sGroupLoot compilation with some stylization
-[*]	[COLOR="Wheat"]m_MailGet[/COLOR] - Get all the mail items in your mailbox
 [*]	[COLOR="Wheat"]m_Map[/COLOR] - WorldMap modification
 [*]	[COLOR="Wheat"]m_Minimap[/COLOR] - Minimap tweaks (modified version)
 [*]	[COLOR="Wheat"]m_Nameplates[/COLOR] - minimalistic name plates

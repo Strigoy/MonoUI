@@ -1,20 +1,20 @@
   local addon, ns = ...
   local cfg = ns.cfg
+  local oUF = ns.oUF or oUF
   local lib = ns.lib
   local lib_raid = ns.lib_raid
   local f = CreateFrame("Frame")
   f:SetScript("OnEvent", function(self, event, ...) return self[event](self, ...) end)
-  local uw8 = ((cfg.width+cfg.spacing)*5/8-cfg.spacing) -- calculating unit width for 8 goups raid
+  local uw8 = ((cfg.oUF.frames.raid.width+cfg.oUF.frames.raid.spacing)*5/8-cfg.oUF.frames.raid.spacing) -- calculating unit width for 8 goups raid
   -----------------------------
   -- STYLE FUNCTIONS
   -----------------------------
-  if not cfg.RAIDpos then cfg.RAIDpos = cfg.pos end -- compatability with old config files
   
   local function genStyle(self)
 	self:RegisterForClicks("AnyUp")
     self:SetScript("OnEnter", UnitFrame_OnEnter)
     self:SetScript("OnLeave", UnitFrame_OnLeave)
-	if cfg.raid_menu then 
+	if cfg.oUF.frames.raid.raid_menu then 
 		self.menu = lib.menu
 		self:SetAttribute("*type2", "menu")
 	end
@@ -27,8 +27,8 @@
   end 
 
   local function RaidStyle(self)
-    self.width = cfg.width
-    self.height = cfg.height
+    self.width = cfg.oUF.frames.raid.width
+    self.height = cfg.oUF.frames.raid.height
     self.scale = 1
     self.mystyle = "raid"
     genStyle(self)
@@ -40,7 +40,7 @@
   
   local function Raid40Style(self)
     self.width = uw8
-    self.height = cfg.height
+    self.height = cfg.oUF.frames.raid.height
     self.scale = 1
     self.mystyle = "raid"
     genStyle(self)
@@ -51,8 +51,8 @@
   end 
     
   local function MTStyle(self)
-    self.width = (1+(cfg.MTsize)/10)*cfg.width
-    self.height = cfg.height
+    self.width = (1+(cfg.oUF.frames.raid.main_tank.scale)/10)*cfg.oUF.frames.raid.width
+    self.height = cfg.oUF.frames.raid.height
     self.scale = 1
     self.mystyle = "mtframe"
     genStyle(self)
@@ -64,21 +64,21 @@
   -----------------------------
   -- SPAWN UNITS
   -----------------------------
-if cfg.showraid then  
+if cfg.oUF.frames.raid.enable then  
   oUF:RegisterStyle("oUF_monoRaid", RaidStyle)
   oUF:SetActiveStyle"oUF_monoRaid"
 
   local visible -- my ASS
-  if cfg.raid40swap and cfg.raid5ON then
+  if cfg.oUF.frames.raid.raid40 and cfg.oUF.frames.raid.raid5 then
 	visible = 'custom [@raid36,exists] hide;[group:party]show;show'
-  elseif cfg.raid40swap and not cfg.raid5ON then
+  elseif cfg.oUF.frames.raid.raid40 and not cfg.oUF.frames.raid.raid5 then
 	visible = 'custom [@raid36,exists]hide;[@raid6,exists]show;[group:party]show;hide'
-	if not cfg.partyON then visible = 'custom [@raid36,exists]hide;[@raid6,exists]show;hide' end
-  elseif not cfg.raid40swap and cfg.raid5ON then
+	if not cfg.oUF.frames.raid.party then visible = 'custom [@raid36,exists]hide;[@raid6,exists]show;hide' end
+  elseif not cfg.oUF.frames.raid.raid40 and cfg.oUF.frames.raid.raid5 then
 	visible = 'raid,party'
-  elseif not cfg.raid40swap and not cfg.raid5ON then
+  elseif not cfg.oUF.frames.raid.raid40 and not cfg.oUF.frames.raid.raid5 then
 	visible = 'custom [group:party]show;[@raid6,exists,group:raid]show;hide'
-	if not cfg.partyON then visible = 'custom [@raid6,exists,group:raid]show;hide' end
+	if not cfg.oUF.frames.raid.party then visible = 'custom [@raid6,exists,group:raid]show;hide' end
   end
   -- raid = {}
   -- for i = 1, 5 do 
@@ -86,46 +86,46 @@ if cfg.showraid then
 	  -- 'oUF-initialConfigFunction', ([[
                 -- self:SetWidth(%d)
                 -- self:SetHeight(%d)
-                -- ]]):format(cfg.width, cfg.height),
+                -- ]]):format(cfg.oUF.frames.raid.width, cfg.oUF.frames.raid.height),
       -- 'showPlayer', true,
       -- 'showSolo', true,
-      -- 'showParty', cfg.partyON,
+      -- 'showParty', cfg.oUF.frames.raid.party,
       -- 'showRaid', true,
-      -- 'xoffset', cfg.spacing, 
+      -- 'xoffset', cfg.oUF.frames.raid.spacing, 
       -- 'yOffset', 0,
       -- 'point', "LEFT",
       -- 'groupFilter', i)
     -- if i == 1 then
-      -- group:SetPoint(cfg.RAIDpos[1], cfg.RAIDpos[2], cfg.RAIDpos[3], cfg.RAIDpos[4], cfg.RAIDpos[5])
+      -- group:SetPoint(cfg.oUF.frames.raid.position[1], cfg.oUF.frames.raid.position[2], cfg.oUF.frames.raid.position[3], cfg.oUF.frames.raid.position[4], cfg.oUF.frames.raid.position[5])
     -- else
-      -- group:SetPoint("TOPLEFT", raid[i-1], "BOTTOMLEFT", 0, -cfg.spacing)
+      -- group:SetPoint("TOPLEFT", raid[i-1], "BOTTOMLEFT", 0, -cfg.oUF.frames.raid.spacing)
     -- end
     -- raid[i] = group
   -- end
   
-	local raid = oUF:SpawnHeader("oUF_Raid", nil, visible, --'custom [@raid36,exists]hide;[@raid6,exists]show;hide',--"custom [@raid26,exists] hide;show", 
+	local raid = oUF:SpawnHeader("oUF_Raid", nil, visible, --'custom show',
 	"showRaid", true,  
 	"showPlayer", true,
-	"showSolo", false,
-	"showParty", cfg.partyON,
-	"xoffset", cfg.spacing,
-	"yOffset", cfg.spacing,
+	"showSolo", false, -- true,
+	"showParty", cfg.oUF.frames.raid.party,
+	"xoffset", cfg.oUF.frames.raid.spacing,
+	"yOffset", cfg.oUF.frames.raid.spacing,
 	"groupFilter", "1,2,3,4,5",
 	"groupBy", "GROUP",
 	"groupingOrder", "1,2,3,4,5",
 	"sortMethod", "INDEX",
 	"maxColumns", "5",
 	"unitsPerColumn", 5,
-	"columnSpacing", cfg.spacing,
+	"columnSpacing", cfg.oUF.frames.raid.spacing,
 	"point", "LEFT",
 	"columnAnchorPoint", "TOP",
 	"oUF-initialConfigFunction", ([[
 		self:SetWidth(%d)
 		self:SetHeight(%d)
-	]]):format(cfg.width, cfg.height))
-	raid:SetPoint(unpack(cfg.RAIDpos))	
+	]]):format(cfg.oUF.frames.raid.width, cfg.oUF.frames.raid.height))
+	raid:SetPoint(unpack(cfg.oUF.frames.raid.position))	
 
-	if cfg.raid40swap then
+	if cfg.oUF.frames.raid.raid40 then
 		oUF:RegisterStyle("oUF_monoRaidB", Raid40Style)
 		oUF:SetActiveStyle"oUF_monoRaidB"
 		local raid40 = oUF:SpawnHeader("oUF_Raid40", nil, "custom [@raid36,exists] show;hide", 
@@ -133,43 +133,43 @@ if cfg.showraid then
 		"showPlayer", true,
 		"showSolo", false,
 		"showParty", false,
-		"xoffset", cfg.spacing,
-		"yOffset", -cfg.spacing,
+		"xoffset", cfg.oUF.frames.raid.spacing,
+		"yOffset", -cfg.oUF.frames.raid.spacing,
 		"groupFilter", "1,2,3,4,5,6,7,8",
 		"groupBy", "GROUP",
 		"groupingOrder", "1,2,3,4,5,6,7,8",
 		"sortMethod", "INDEX",
 		"maxColumns", "8",
 		"unitsPerColumn", 5,
-		"columnSpacing", cfg.spacing,
+		"columnSpacing", cfg.oUF.frames.raid.spacing,
 		"point", "TOP",
 		"columnAnchorPoint", "LEFT",
 		"oUF-initialConfigFunction", ([[
 			self:SetWidth(%d)
 			self:SetHeight(%d)
-		]]):format(uw8, cfg.height))
-		raid40:SetPoint(cfg.RAIDpos[1], cfg.RAIDpos[2], cfg.RAIDpos[3], cfg.RAIDpos[4]+2, cfg.RAIDpos[5])
+		]]):format(uw8, cfg.oUF.frames.raid.height))
+		raid40:SetPoint(cfg.oUF.frames.raid.position[1], cfg.oUF.frames.raid.position[2], cfg.oUF.frames.raid.position[3], cfg.oUF.frames.raid.position[4]+2, cfg.oUF.frames.raid.position[5])	
 	end
   
   -- spawn MT targets
   oUF:RegisterStyle("oUF_monoMT", MTStyle)
   oUF:SetActiveStyle"oUF_monoMT"
-  if cfg.MTframes then
+  if cfg.oUF.frames.raid.main_tank.enable then
     local tank = oUF:SpawnHeader('oUF_monoMT', nil, 'raid,party',
 	  'oUF-initialConfigFunction', ([[
             self:SetWidth(%d)
             self:SetHeight(%d)
-      ]]):format((1+(cfg.MTsize)/10)*cfg.width, cfg.height),
+      ]]):format((1+(cfg.oUF.frames.raid.main_tank.scale)/10)*cfg.oUF.frames.raid.width, cfg.oUF.frames.raid.height),
       'showRaid', true,
-      'yOffset', -cfg.spacing,
+      'yOffset', -cfg.oUF.frames.raid.spacing,
 	  'groupFilter', 'MAINTANK',
 	  'template', 'oUF_MainTank'
 	  )
-    tank:SetPoint(cfg.MTpos[1], cfg.MTpos[2], cfg.MTpos[3], cfg.MTpos[4], cfg.MTpos[5])
+    tank:SetPoint(unpack(cfg.oUF.frames.raid.main_tank.position))
   end
 
   local raid_visible
-  function kill_raid()
+  local function kill_raid()
 	if InCombatLockdown() then return end
 	raid_visible = CompactRaidFrameManager_GetSetting("IsShown")
 	CompactRaidFrameManager:UnregisterAllEvents()
@@ -178,7 +178,7 @@ if cfg.showraid then
 	  CompactRaidFrameManager_SetSetting("IsShown", "0")
 	end
   end
-  if cfg.DisableBlizzRaidManager then 
+  if cfg.oUF.frames.raid.DisableRaidManager then 
 	hooksecurefunc("CompactRaidFrameManager_UpdateShown",function() kill_raid() end)
 	CompactRaidFrameManager:HookScript('OnShow', kill_raid)
 	CompactRaidFrameManager:SetScale(0.000001)

@@ -26,7 +26,7 @@ cast.setBarTicks = function(castBar, ticknum)
 		for k = 1, ticknum do
 			if not ticks[k] then
 				ticks[k] = castBar:CreateTexture(nil, 'OVERLAY')
-				ticks[k]:SetTexture(cfg.statusbar_texture)
+				ticks[k]:SetTexture(cfg.oUF.media.statusbar)
 				ticks[k]:SetVertexColor(0.8, 0.6, 0.6)
 				ticks[k]:SetWidth(1)
 				ticks[k]:SetHeight(castBar:GetHeight())
@@ -59,7 +59,8 @@ if GetNetStats() == 0 then return end -- test
 				self.Time:SetFormattedText('%.1f | |cffff0000%.1f|r', duration, self.casting and self.max + self.delay or self.max - self.delay)
 			elseif self.Lag then -- to avoid errors with the bars that actually have no Lag display
 				self.Time:SetFormattedText('%.1f | %.1f', duration, self.max)
-				self.Lag:SetFormattedText("%d ms", self.SafeZone.timeDiff * 1000)
+				--if self.SafeZone.timeDiff ~= 0 then self.Lag:SetFormattedText("%d ms", self.SafeZone.timeDiff * 1000) end
+				if self.SafeZone and self.SafeZone.timeDiff ~= 0 then self.Lag:SetFormattedText("%d ms", self.SafeZone.timeDiff * 1000) end
 			end
 		else
 			self.Time:SetFormattedText('%.1f | %.1f', duration, self.casting and self.max + self.delay or self.max - self.delay)
@@ -82,6 +83,7 @@ end
 cast.OnCastSent = function(self, event, unit, spell, rank)
 	if self.unit ~= unit or not self.Castbar.SafeZone then return end
 	self.Castbar.SafeZone.sendTime = GetTime()
+	self.Castbar.SafeZone.castSent = true
 end
 
 cast.PostCastStart = function(self, unit, name, rank, text)
@@ -93,14 +95,19 @@ cast.PostCastStart = function(self, unit, name, rank, text)
 		self.Lag:Hide()
 	elseif unit == 'player' then
 		if GetNetStats() == 0 then return end -- test
-		local sf = self.SafeZone 
-		if not sf then return end -- fix for swapped vehicles' cast bars when channeling
-		if not sf.sendTime then sf.sendTime = GetTime() end
-		sf.timeDiff = GetTime() - sf.sendTime
-		sf.timeDiff = sf.timeDiff > self.max and self.max or sf.timeDiff
-		sf:SetWidth(self:GetWidth() * sf.timeDiff / self.max)
-		sf:Show()
-		if not UnitInVehicle("player") then sf:Show() else sf:Hide() end
+		local sz = self.SafeZone 
+		if not sz then return end -- fix for swapped vehicles' cast bars when channeling
+		--if not sz.sendTime then sz.sendTime = GetTime() end
+		sz.timeDiff = 0
+		self.Lag:SetText("")
+		if sz.castSent == true then
+			sz.timeDiff = GetTime() - sz.sendTime
+			sz.timeDiff = sz.timeDiff > self.max and self.max or sz.timeDiff
+			sz:SetWidth(self:GetWidth() * sz.timeDiff / self.max)
+			sz:Show()
+			sz.castSent = false
+		end
+		if not UnitInVehicle("player") then sz:Show() self.Lag:Show() else sz:Hide() self.Lag:Hide() end
 		if self.casting then
 			cast.setBarTicks(self, 0)
 		else
@@ -109,9 +116,9 @@ cast.PostCastStart = function(self, unit, name, rank, text)
 			cast.setBarTicks(self, self.channelingTicks)
 		end
 	elseif (unit == "target" or unit == "focus" or (unit and unit:find("boss%d"))) and self.interrupt then
-		self:SetStatusBarColor(cfg.interruptcb[1],cfg.interruptcb[2],cfg.interruptcb[3],1)
+		self:SetStatusBarColor(unpack(cfg.oUF.castbar.color.uninterruptable))
 	else
-		self:SetStatusBarColor(cfg.cbcolor[1], cfg.cbcolor[2], cfg.cbcolor[3],1)
+		self:SetStatusBarColor(cfg.oUF.castbar.color.normal[1], cfg.oUF.castbar.color.normal[2], cfg.oUF.castbar.color.normal[3],1)
 	end
 end
 

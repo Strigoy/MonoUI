@@ -1,9 +1,0 @@
-## Interface: 50001
-## Notes: Minimalistic panels yummyum
-## Title: mono|cffffffffPanels|r
-## Author: Monolit
-## Version: 2.5
-## OptionalDeps: oUF_mono
-
-Panels.lua
-layout.lua

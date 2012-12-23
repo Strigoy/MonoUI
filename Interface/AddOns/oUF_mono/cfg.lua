@@ -1,144 +1,193 @@
   local addon, ns = ...
   local cfg = CreateFrame("Frame")
 
-  -----------------------------
-  -- MEDIA
-  -----------------------------
-  local MediaPath = "Interface\\Addons\\oUF_mono\\media\\"
-  cfg.statusbar_texture = MediaPath.."statusbar"
-  cfg.auratex = MediaPath.."iconborder" 
-  cfg.font = MediaPath.."font.ttf"
-  cfg.backdrop_texture = MediaPath.."backdrop"
-  cfg.backdrop_edge_texture = MediaPath.."backdrop_edge"
-  -- raid specific stuff
-  cfg.aurafont = MediaPath.."auras.ttf"
-  cfg.debuffborder = MediaPath.."iconborder"
-  cfg.highlightTex = "Interface\\Buttons\\WHITE8x8"
-  cfg.symbols = cfg.font
+  cfg.oUF = { 
+    -- CONFIG
+	settings = {		-- general settings
+		ReverseHPbars = false,				-- fill health bars from right to left instead of standard left -> right direction 
+		health_spark = true,				-- add spark to the health bar
+		class_color_power = false,			-- class color power bar
+		show_class = false,					-- display additional class indication @ unit frames
+		playerauras = "DEBUFFS",  			-- small aura frame for player, available options: "BUFFS", "DEBUFFS", "AURAS", "NONE"
+		auratimers = {
+			["enable"] = true,				-- aura timers
+			["font_size"] = 11,				-- aura timer font size
+		},
+		ghost_target = true, 				-- fake target bars that spawn if you don't have anything targeted
+		raid_mark = {
+			["enable"] = true,				-- enable raid marks
+			["alpha"] = 0.6,				-- raid mark opacity
+			["size"] = 16,					-- raid mark size
+		},
+		CombatFeedback = false,				-- enables CombatFeedback on player and target unit frames
+		SwingTimer = false,					-- enables oUF_Swing module for player's auto attack/shot timer
+		Portrait = true,					-- enables 3d portraits on player and target unit frames
+		ClassBars = {
+			["enable"] = true,				-- enable class specific bars (totems, runes etc.)
+			["undock"] = false,				-- set a custom position for this element
+			["position"] = {"CENTER",UIParent,"BOTTOM",0,250},
+		},
+		AltPowerBar = {
+			["enable"] = true,				-- let oUF handle alternative powerbar
+			["undock"] = true,				-- set custom position for it
+			["position"] = {"BOTTOM", "UIParent", "BOTTOM", 0, 275},
+		},
+		click2focus = {					
+			["enable"] = true,				-- set focus macro on modified frame click (may cause taint)
+			["key"] = "Shift",				-- modifier key to focus
+		},
+	},
+	frames = {			-- unit frames settings
+		player = {						-- Player's frame
+			["position"] = {"TOP","UIParent","BOTTOM", -274, 273},		
+			["width"] = 229,
+			["height"] = 24,
+			["scale"] = 1,
+		},
+		target = {						-- Target's frame
+			["position"] = {"TOP","UIParent","BOTTOM", 274, 273},	
+			["width"] = 229,
+			["height"] = 24,
+			["scale"] = 1,
+		},
+		tot = {
+			["enable"] = true,			-- Target of Target
+			["position"] = {"TOPRIGHT", "oUF_monoTargetFrame", "BOTTOMRIGHT", 0, -42},
+			["width"] = 123,
+			["height"] = 20,
+			["scale"] = 0.9,
+		},
+		pet = {
+			["enable"] = true,			-- Player's pet
+			["position"] = {"TOPLEFT", "oUF_monoPlayerFrame", "BOTTOMLEFT", 0, -42},
+			["width"] = 123,
+			["height"] = 20,
+			["scale"] = 0.9,
+		},
+		focus = {
+			["enable"] = true,			-- Focus target + target of focus target
+			["position"] = {"TOPRIGHT", "oUF_monoPlayerFrame", "BOTTOMRIGHT", 0, -42},
+			["target_position"] = {"TOPLEFT", "oUF_monoTargetFrame", "BOTTOMLEFT", 0, -42},
+			["width"] = 123,
+			["height"] = 20,
+			["scale"] = 0.9,
+		},
+		party = {
+			["enable"] = true,			-- Party frames
+			["position"] = {"BOTTOMLEFT", "UIParent", "BOTTOMLEFT", 120, 362},
+			["spacing"] = 40,			-- spacing between party units
+			["width"] = 196,
+			["height"] = 22,
+			["scale"] = 1,
+		},
+		arena_boss = {
+			["enable_arena"] = true,	-- Boss & Arena frames
+			["enable_boss"] = true,
+			["position"] = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -120, 362},
+			["spacing"] = 56,			-- spacing between units
+			["width"] = 196,
+			["height"] = 22,
+			["scale"] = 1,
+		},
+		raid = {						-- Raid frames configuration
+			["enable"] = true,			
+			["position"] = {"TOPLEFT", "UIParent", "BOTTOM", -156, 177},
+			
+			["party"] = false, 								-- show party as 5 men raid group
+			["raid5"] = false, 								-- show raid frame for 5 (or less) men raid group
+			["raid40"] = true, 								-- allow raid frames to change their size if there are more than 30 players in the group
+			["raid_menu"] = false,							-- enable/disable right-click menu for raid frames
+			main_tank = { 
+				["enable"] = true,														-- enable Main tank frames
+				["position"] = {"BOTTOMLEFT", "UIParent", "BOTTOMRIGHT", -163, 233},	-- MTs frame position
+				["scale"] = 1.5, 														-- MT size relatively to unit size
+			},
+			["width"] = 59, 								-- raid unit width
+			["height"] = 27, 								-- raid unit height
+			["spacing"] = 4, 								-- spacing between units
+			["name_length"] = 4, 							-- number of letters to display
+			["font_size"] = 12, 							-- font size for names / hp values
+			["orientation"] = "HORIZONTAL", 				-- hp/mp bar direction
+			["focus_color"] = {.8, .8, .2, .7}, 			-- focus border color
+			["DisableRaidManager"] = true, 					-- disable default compact Raid Manager button
+			["update_time"] = .25, 							-- Enhances update rate for indicators (can be cpu intensive with lower values)
+			debuff = {	
+				["size"] = 11, 								-- debuff icon size
+				["timer"] = 5,								-- enable/disable timer for raid debuffs 
+			}, 
+			indicators = { 							
+				["enable"] = true,							-- enable/disable raid frames indicators
+				["size"] = 5, 								-- square indicator size
+				["counter_size"] = 11, 						-- bottom right corner counter size
+			},
+			icons = {
+				["size"] = 10, 								-- informative icon size (aka RL,ML,A etc.)
+				["leader"] = true,							-- toggle leader/assistant/master looter icons visibility on raid units
+				["raid_mark"] = true, 						-- toggle raid mark visibility on raid units
+				["ready_check"] = true, 					-- ready check icon
+				["role"] = true, 							-- toggle group role indication on/off
+			},
+			powerbar = {
+				["enable"] = true, 							-- toggle display of tiny power bars on raid frames
+				["size"] = 0.09, 							-- power bar thickness relatively to unit size
+			},
+			healbar = { 								
+				["enable"] = true,							-- enable healing prediction bar
+				["healalpha"] = 0.25, 						-- heal prediction bar alpha
+				["healoverflow"] = 1, 						-- overhealing display (1 = disabled, may take values higher than 1)
+				["healtext"] = false, 						-- show/hide heal prediction text
+			},
+		},
+	},
+	castbar = {			-- cast bars settings
+		color = {
+			["normal"] = {.3,.45,.65},
+			["uninterruptable"] = {1,.49,0},
+		},
+		player = {
+			["enable"] = true,								-- enable cast bar for player frame
+			["undock"] = false,								-- detach cast bar from frame
+			["position"] = {"CENTER",UIParent,"BOTTOM",10,320}, -- custom castbar position if undocked
+			["width"] = 210,								-- cast bar width if undocked
+			["height"] = 17, 								-- cast bar height if undocked
+		},
+		target = {
+			["enable"] = true,
+			["undock"] = false,
+			["position"] = {"CENTER",UIParent,"BOTTOM",10,360},	
+			["width"] = 210,
+			["height"] = 17,
+		},
+		focus = {
+			["enable"] = true,
+			["undock"] = true,
+			["position"] = {"CENTER",UIParent,"BOTTOM",10,470},
+			["width"] = 280,
+			["height"] = 17,
+		},
+	},
+	-- MEDIA
+	media = {
+		statusbar = "Interface\\Addons\\oUF_mono\\media\\statusbar",
+		auratex = "Interface\\Addons\\oUF_mono\\media\\iconborder",
+		font = "Interface\\Addons\\oUF_mono\\media\\font.ttf",
+		backdrop_texture = "Interface\\Addons\\oUF_mono\\media\\backdrop",
+		backdrop_edge_texture = "Interface\\Addons\\oUF_mono\\media\\backdrop_edge",
+		
+		aurafont = "Interface\\Addons\\oUF_mono\\media\\auras.ttf",
+		debuffborder = "Interface\\Addons\\oUF_mono\\media\\iconborder",
+		highlightTex = "Interface\\Buttons\\WHITE8x8",
+	},
+  }
   
-  -----------------------------
-  -- CONFIG
-  -----------------------------
-  -- Additional frames
-  cfg.showtot = true				-- Target of Target
-  cfg.showpet = true				-- Player's pet
-  cfg.showfocus = true				-- Focus target + target of focus target
-  cfg.showparty = true				-- Party frames
-  cfg.showboss = true				-- Boss frames
-  cfg.showarena = true				-- Arena frames
-  cfg.showraid = true				-- Raid frames
-  
-  -- Elements
-  cfg.ReverseHPbars = true			-- fill health bars from right to left instead of standard left -> right direction
-  cfg.playerauras = "DEBUFFS"  		-- small aura frame for player, available options: "BUFFS", "DEBUFFS", "AURAS", "NONE"
-  cfg.auratimers = true 			-- aura timers
-    cfg.ATIconSizeThreshold = 19 	-- how big some icon should be to display the custom timer
-    cfg.ATSize = 11  				-- aura timer font size
-  cfg.showfaketarget = true 		-- fake target bars that spawn if you don't have anything targeted
-  cfg.RMalpha = 0.6 				-- raid mark alpha
-  cfg.RMsize = 16 					-- raid mark size
-  cfg.EnableCombatFeedback = false	-- enables CombatFeedback on player and target unit frames
-  cfg.EnableSwingTimer = false		-- enables oUF_Swing module for player's auto attack/shot timer
-  cfg.Enable3DPortrait = true		-- enables 3d portraits on player and target unit frames
-  cfg.ClassBarsUnlock = false		-- unlocks class-specific bar (rune bar for DK, totem bar for shamans etc.) and allows to set a custom position for it
-	cfg.ClassBarsPosition = {"CENTER",UIParent,"BOTTOM",0,250} -- custom class-specific bar  position
-  cfg.UnDockAltPowerBar = true
-	cfg.AltPoiwerBarPosition = {"BOTTOM", "UIParent", "BOTTOM", 0, 275}
-  
-  -- Cast bars settings
-  cfg.focusCBuserplaced = true		-- false to lock focus cast bar to the focus frame
-    cfg.focusCBposition = {"CENTER",UIParent,"BOTTOM",10,470} -- focus cb position
-    cfg.focusCBwidth = 280			-- focus cb width
-    cfg.focusCBheight = 17			-- focus cb height
-  cfg.playerCBuserplaced = false	-- false to lock player cast bar to the player frame
-    cfg.playerCBposition = {"CENTER",UIParent,"BOTTOM",10,320} -- player cb position
-    cfg.playerCBwidth = 210			-- player cb width
-    cfg.playerCBheight = 17			-- player cb height
-  cfg.targetCBuserplaced = false	-- false to lock target cast bar to the target frame
-    cfg.targetCBposition = {"CENTER",UIParent,"BOTTOM",10,360} -- target cb position
-    cfg.targetCBwidth = 210			-- target cb width
-    cfg.targetCBheight = 17			-- target cb height
-  cfg.cbcolor = {.3,.45,.65}		-- castbar color
-  cfg.interruptcb = {1,.49,0}		-- color setting for uninterruptable casts
-
-  -- Frames position
-  cfg.Ppos = {"TOP","UIParent","BOTTOM", -270, 273} 						-- Player
-  cfg.Tpos = {"TOP","UIParent","BOTTOM", 270, 273} 							-- Target
-  cfg.PEpos = {"TOPLEFT", "oUF_monoPlayerFrame", "BOTTOMLEFT", 0, -38}		-- Pet
-  cfg.TTpos = {"TOPRIGHT", "oUF_monoTargetFrame", "BOTTOMRIGHT", 0, -38}	-- ToT
-  cfg.Fpos = {"TOPRIGHT", "oUF_monoPlayerFrame", "BOTTOMRIGHT", 0, -38}		-- Focus
-  cfg.FTpos = {"TOPLEFT", "oUF_monoTargetFrame", "BOTTOMLEFT", 0, -38}		-- Focus target
-  cfg.PApos = {"BOTTOMLEFT", "UIParent", "BOTTOMLEFT", 120, 362}			-- Party
-    cfg.PAspacing = 40 -- spacing between party units
-  cfg.ARpos = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -120, 362}			-- Arena
-  cfg.BOpos = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -120, 362}			-- Boss
-    cfg.ABspacing = 56 -- spacing between arena and boss units
-  cfg.RAIDpos = {"TOPLEFT", "UIParent", "BOTTOM", -156, 177} 				-- Raid frames
-  
-  -- Size and scale
-  cfg.Pwidth = 229 		-- Player frame
-  cfg.Pheight = 24
-  cfg.Pscale = 1
-  
-  cfg.Twidth = 229 		-- Target frame
-  cfg.Theight = 24
-  cfg.Tscale = 1
-  
-  cfg.PTTwidth = 123 	-- Pet and ToT frames
-  cfg.PTTheight = 20
-  cfg.PTTscale = 0.9
-  
-  cfg.Fwidth = 123 		-- Focus frame
-  cfg.Fheight = 20
-  cfg.Fscale = 0.9
-  
-  cfg.PABwidth = 196 	-- Party (+partypet), Arena (+arenatargets) and Boss frames
-  cfg.PABheight = 22
-  cfg.PABscale = 1
-  
-  -- Raid config
-  cfg.DisableBlizzRaidManager = true 				-- disable default compact Raid Manager button
-  cfg.width = 59 									-- raid unit width
-  cfg.height = 27 									-- raid unit height
-  cfg.spacing = 4 									-- spacing between units
-  cfg.namelength = 4 								-- number of letters to display
-  cfg.fontsize = 12 								-- font size
-  cfg.iconsize = 10 								-- informative icon size (aka RL,ML,A etc.)
-  cfg.symbolsize = 11 								-- bottom right corner counter size
-  cfg.indicatorsize = 5 							-- square indicator size
-  cfg.debuffsize = 11 								-- debuff icon size
-  cfg.focusHLcol = {.8, .8, .2, .7} 				-- focus border color
-  cfg.orientation = "HORIZONTAL" 					-- hp/mp bar direction
-  cfg.MTframes = true 								-- toggle Main tank frames
-    cfg.MTpos = {"BOTTOMLEFT", "UIParent", "BOTTOMRIGHT", -163, 233}	-- MTs frame position
-    cfg.MTsize = 1.5 								-- MT size relatively to unit size
-  cfg.frequent = .25 								-- Enhances update rate for indicators (can be cpu intensive)
-  cfg.indicators = true 							-- enable/disable raid frames indicators
-  cfg.LeaderIcons = true 							-- toggle leader/assistant/master looter icons visibility on raid units
-  cfg.RaidMark = true 								-- toggle raid mark visibility on raid units
-  cfg.RCheckIcon = true 							-- ready check icon
-  cfg.raid40swap = true 							-- allow raid frames to change their size if there are more than 30 players in the group
-  cfg.raid5ON = false 								-- show raid frame for 5 (or less) men raid group
-  cfg.partyON = false 								-- show party as 5 men raid group
-    cfg.lfdIcons = true 							-- toggle group role indication on/off
-  cfg.powerbar = true 								-- toggle display of tiny power bars on raid frames
-    cfg.powerbarsize = 0.09 						-- power bar thickness relatively to unit size
-  cfg.healbar = true 								-- healing prediction bar
-	cfg.healalpha = 0.25 							-- heal prediction bar alpha
-	cfg.healoverflow = 1 							-- overhealing display (1 = disabled, may take values higher than 1)
-  cfg.healtext = false 								-- show/hide heal prediction text
-  cfg.raid_menu = false								-- enable/disable right-click menu for raid frames
-  cfg.DebuffTimer = true							-- enable/disable timer for raid debuffs (NEW!)
-	
-	
   -- my config 
   if GetUnitName("player") == "Strigoy" or GetUnitName("player") == "Strig" then
-	cfg.playerauras = "DEBUFFS"
-	cfg.PApos = {"BOTTOMRIGHT", "oUF_monoPlayerFrame", "TOPLEFT", -50, 70}
-	cfg.ARpos = {"BOTTOMLEFT", "oUF_monoTargetFrame", "TOPRIGHT", 50, 70}
-	cfg.BOpos = {"BOTTOMLEFT", "oUF_monoTargetFrame", "TOPRIGHT", 50, 70}
-	cfg.MTpos = {"TOPLEFT", "UIParent", "BOTTOM", 167, 177}
-	cfg.MTsize = 1.1
+	cfg.oUF.settings.playerauras = "DEBUFFS"
+	cfg.oUF.frames.party.position = {"BOTTOMRIGHT", "oUF_monoPlayerFrame", "TOPLEFT", -50, 70}
+	cfg.oUF.frames.arena_boss.position = {"BOTTOMLEFT", "oUF_monoTargetFrame", "TOPRIGHT", 50, 70}
+	cfg.oUF.frames.arena_boss.position = {"BOTTOMLEFT", "oUF_monoTargetFrame", "TOPRIGHT", 50, 70}
+	cfg.oUF.frames.raid.main_tank.position = {"TOPLEFT", "UIParent", "BOTTOM", 167, 177}
+	cfg.oUF.frames.raid.main_tank.scale = 1.1
   end
   -- HANDOVER
   ns.cfg = cfg

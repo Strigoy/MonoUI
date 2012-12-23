@@ -17,32 +17,32 @@ CombatText:SetScript("OnUpdate", nil)
 CombatText:SetScript("OnEvent", nil)
 CombatText:UnregisterAllEvents()
 
--- Set specific threshold for level 85 players
-if UnitLevel("player") == 85 then
-	cfg.heal_threshold = cfg.heal_threshold_85
-	cfg.damage_threshold = cfg.damage_threshold_85
+-- Set specific threshold for max level players
+if UnitLevel("player") == MAX_PLAYER_LEVEL then
+	cfg.combattext.threshold.heal = cfg.combattext.threshold.heal_maxlvl
+	cfg.combattext.threshold.damage = cfg.combattext.threshold.damage_maxlvl
 end
 -- Create scrolling frames
 local frames = {}
 for i = 1, 3 do
 	local f = CreateFrame("ScrollingMessageFrame", "mCT"..i, UIParent)
-	f:SetFont(cfg.font,cfg.fontsize,cfg.fontstyle)
+	f:SetFont(cfg.combattext.font,cfg.combattext.fontsize,cfg.combattext.fontstyle)
 	f:SetShadowColor(0, 0, 0, 0)
 	f:SetFadeDuration(0.3)
-	f:SetTimeVisible(cfg.time_to_fade)
+	f:SetTimeVisible(cfg.combattext.time_to_fade)
 	f:SetMaxLines(20)
 	f:SetSpacing(2)
 	f:SetWidth(200)
 	f:SetHeight(150)
 	if(i==1) then
 		f:SetJustifyH"RIGHT"
-		f:SetPoint(unpack(cfg.frame1_pos))
+		f:SetPoint(unpack(cfg.combattext.frame1_pos))
 	elseif(i==2) then
 		f:SetJustifyH"LEFT"
-		f:SetPoint(unpack(cfg.frame2_pos))
+		f:SetPoint(unpack(cfg.combattext.frame2_pos))
 	elseif(i==3) then
 		f:SetJustifyH"RIGHT"
-		f:SetPoint(unpack(cfg.frame3_pos))
+		f:SetPoint(unpack(cfg.combattext.frame3_pos))
 		f:SetWidth(300)
 	end
 	frames[i] = f
@@ -77,7 +77,7 @@ mCTi:RegisterEvent"PLAYER_REGEN_DISABLED"
 mCTi:SetScript("OnEvent", function(self, event, subev, arg2, arg3)
 	if event=="COMBAT_TEXT_UPDATE" then
 		info = tbl[subev]
-		if (subev=="HEAL" or subev=="HEAL_CRIT" or subev=="PERIODIC_HEAL") and arg3<cfg.heal_threshold then return end
+		if (subev=="HEAL" or subev=="HEAL_CRIT" or subev=="PERIODIC_HEAL") and arg3<cfg.combattext.threshold.heal then return end
 		if (subev=="HONOR_GAINED") and abs(arg2)<1 then return end
 		if(info) then
 			local msg = info.prefix or ""
@@ -99,7 +99,7 @@ mCTi:SetScript("OnEvent", function(self, event, subev, arg2, arg3)
 	end
 end)
 -- Outgoing damage
-if cfg.show_damage then
+if cfg.combattext.show_damage then
 	local unpack,select,time=unpack,select,time
 	local	gflags=bit.bor(	COMBATLOG_OBJECT_AFFILIATION_MINE,
  			COMBATLOG_OBJECT_REACTION_FRIENDLY,
@@ -112,55 +112,55 @@ if cfg.show_damage then
 		local msg,icon
 		local timestamp, eventType, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlags, destGUID, destName, destFlags, destRaidFlags = select(1,...)
 		if(sourceGUID==UnitGUID"player" and destGUID~=UnitGUID"player")or(sourceGUID==UnitGUID"pet")or(sourceFlags==gflags)then
-			if(eventType=="SWING_DAMAGE" and not cfg.hide_swing )then
+			if(eventType=="SWING_DAMAGE" and not cfg.combattext.hide_swing )then
 				local amount,_,_,_,_,_,critical=select(12,...)
-				if(amount>=cfg.damage_threshold)then -- threshold
+				if(amount>=cfg.combattext.threshold.damage)then -- threshold
 					msg=amount
 					if (critical) then
 						msg="|cffFF0000*|r|cffFAD8AC"..msg.."|r|cffFF0000*|r"
 					end
-					if cfg.show_icons then
+					if cfg.combattext.show_icons then
 						if(sourceGUID==UnitGUID"pet") or (sourceFlags==gflags)then
 							icon=PET_ATTACK_TEXTURE
 						else
 							icon=GetSpellTexture(6603)
 						end
-						msg=msg.." \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+						msg=msg.." \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 					end
 					mCT3:AddMessage(msg)
 				end
 			elseif(eventType=="RANGE_DAMAGE")then
 				local spellId,_,_,amount,_,_,_,_,_,critical=select(12,...)
-				if(amount>=cfg.damage_threshold)then
+				if(amount>=cfg.combattext.threshold.damage)then
 					msg=amount
 					if (critical) then
 						msg="|cffFF0000*|r|cffFAD8AC"..msg.."|r|cffFF0000*|r"
 					end
-					if cfg.show_icons then
+					if cfg.combattext.show_icons then
 						icon=GetSpellTexture(spellId)
-						msg=msg.." \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+						msg=msg.." \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 					end
 					mCT3:AddMessage(msg)
 				end
 			elseif(eventType=="SPELL_DAMAGE")or(eventType=="SPELL_PERIODIC_DAMAGE")then
 				local spellId,_,spellSchool,amount,_,_,_,_,_,critical=select(12,...)
-				if(amount>=cfg.damage_threshold)then
+				if(amount>=cfg.combattext.threshold.damage)then
 					local color={}
 					local rawamount=amount
 					if (critical) then
 						amount="|cffFF0000*|r|cffFAD8AC"..amount.."|r|cffFF0000*|r"
 					end
-					if cfg.show_icons then
+					if cfg.combattext.show_icons then
 						icon=GetSpellTexture(spellId)
 					end
 					if (icon) then
-						msg=" \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
-					elseif(cfg.show_icons)then
-						msg=" \124T"..cfg.blank..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+						msg=" \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
+					elseif(cfg.combattext.show_icons)then
+						msg=" \124T"..cfg.blank..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 					else
 						msg=""
 					end
- 					if cfg.merge_aoe_spam and aoe.spell[spellId] then
+ 					if cfg.combattext.merge_aoe_spam and aoe.spell[spellId] then
 						local spellId = type(aoe.spell[spellId])=="number" and aoe.spell[spellId] or spellId
 						aoe.SQ[spellId]["locked"]=true
 						aoe.SQ[spellId]["queue"]=SpamQueue(spellId, rawamount)
@@ -182,34 +182,34 @@ if cfg.show_damage then
 				end
 			elseif(eventType=="SWING_MISSED")then
 				local missType,_=select(12,...)
-				if(cfg.hide_swing and not (cfg.hide_swing_show_parry and missType == "PARRY"))then return end
-				if(cfg.show_icons)then
+				if(cfg.combattext.hide_swing and not (cfg.combattext.hide_swing_show_parry and missType == "PARRY"))then return end
+				if(cfg.combattext.show_icons)then
 					if(sourceGUID==UnitGUID"pet") or (sourceFlags==gflags)then
 						icon=PET_ATTACK_TEXTURE
 					else
 						icon=GetSpellTexture(6603)
 					end
-					missType=missType.." \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+					missType=missType.." \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 				end
 	
 				mCT3:AddMessage(missType)
 			elseif(eventType=="SPELL_MISSED")or(eventType=="RANGE_MISSED")then
 				local spellId,_,_,missType,_ = select(12,...)
-				if(cfg.show_icons)then
+				if(cfg.combattext.show_icons)then
 					icon=GetSpellTexture(spellId)
-					missType=missType.." \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+					missType=missType.." \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 				end 
 				mCT3:AddMessage(missType)
 			elseif(eventType=="SPELL_DISPEL") then
 				local target,_, _, id, effect, _, etype = select(12,...)
 				local color
-				if(cfg.show_icons)then
+				if(cfg.combattext.show_icons)then
 					icon=GetSpellTexture(id)
 				end
 				if (icon) then
-					msg=" \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
-				elseif(cfg.show_icons)then
-					msg=" \124T"..cfg.blank..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+					msg=" \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
+				elseif(cfg.combattext.show_icons)then
+					msg=" \124T"..cfg.blank..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 				else
 					msg=""
 				end
@@ -222,13 +222,13 @@ if cfg.show_damage then
 			elseif(eventType=="SPELL_INTERRUPT") then
 				local target,_, _, id, effect = select(12,...)
 				local color={1,.5,0}
-				if(cfg.show_icons)then
+				if(cfg.combattext.show_icons)then
 					icon=GetSpellTexture(id)
 				end
 				if (icon) then
-					msg=" \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
-				elseif(cfg.show_icons)then
-					msg=" \124T"..cfg.blank..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+					msg=" \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
+				elseif(cfg.combattext.show_icons)then
+					msg=" \124T"..cfg.blank..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 				else
 					msg=""
 				end
@@ -241,7 +241,7 @@ if cfg.show_damage then
 	end)
 end
 -- Outgoing healing
-if cfg.show_healing then
+if cfg.combattext.show_healing then
 	local unpack,select,time=unpack,select,time
 	local mCTh=CreateFrame"Frame"
 	mCTh:RegisterEvent"COMBAT_LOG_EVENT_UNFILTERED"
@@ -251,27 +251,27 @@ if cfg.show_healing then
 		if(sourceGUID==UnitGUID"player")then
 			if(eventType=='SPELL_HEAL')or(eventType=='SPELL_PERIODIC_HEAL')then
 				local spellId,spellName,spellSchool,amount,overhealing,absorbed,critical = select(12,...)
-				if(amount>=cfg.heal_threshold)then
+				if(amount>=cfg.combattext.threshold.heal)then
 					local color={.1,1,.1}
 					local rawamount=amount
-					if cfg.show_overhealing and abs(overhealing) > 0 then amount = math.floor(amount-overhealing).." ("..floor(overhealing)..")" end
+					if cfg.combattext.show_overhealing and abs(overhealing) > 0 then amount = math.floor(amount-overhealing).." ("..floor(overhealing)..")" end
 					if (critical) then 
 						amount="|cffFF0000*|r"..amount.."|cffFF0000*|r"
 						color={.1,1,.1}
 					else
 						color={.1,.65,.1}
 					end 
-					if(cfg.show_icons)then
+					if(cfg.combattext.show_icons)then
 						icon=GetSpellTexture(spellId)
 					else
 						msg=""
 					end
               			if (icon) then 
-               			msg=" \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
-					elseif(cfg.show_icons)then
-						msg=" \124T"..cfg.blank..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+               			msg=" \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
+					elseif(cfg.combattext.show_icons)then
+						msg=" \124T"..cfg.blank..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
                		end
- 					if cfg.merge_aoe_spam and aoe.spell[spellId] then
+ 					if cfg.combattext.merge_aoe_spam and aoe.spell[spellId] then
 						local spellId = type(aoe.spell[spellId])=="number" and aoe.spell[spellId] or spellId
 						aoe.SQ[spellId]["locked"]=true
 						aoe.SQ[spellId]["queue"]=SpamQueue(spellId, rawamount)
@@ -315,11 +315,11 @@ end
 				local icon
 				local color={}
 				msg=random(40000)
-				if(cfg.show_icons)then
+				if(cfg.combattext.show_icons)then
 					_,_,icon=GetSpellInfo(msg)
 				end
 				if(icon)then
-					msg=msg.." \124T"..icon..":"..cfg.iconsize..":"..cfg.iconsize..":0:0:64:64:5:59:5:59\124t"
+					msg=msg.." \124T"..icon..":"..cfg.combattext.iconsize..":"..cfg.combattext.iconsize..":0:0:64:64:5:59:5:59\124t"
 						color={1,1,0}
 				end
 				frames[i]:AddMessage(msg,unpack(color))
@@ -334,7 +334,7 @@ end
 			insets={left=0,right=0,top=0,bottom=0}})
 		f:SetBackdropBorderColor(.1,.1,.1,.8)
 		f.fs=f:CreateFontString(nil,"OVERLAY")
-		f.fs:SetFont(cfg.font,12,cfg.fontstyle)
+		f.fs:SetFont(cfg.combattext.font,12,cfg.combattext.fontstyle)
 		if(i==1)then
 			f.fs:SetPoint("TOPRIGHT",f,"TOPRIGHT",0,0)
 			f.fs:SetJustifyH("RIGHT")

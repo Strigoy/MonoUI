@@ -1,5 +1,6 @@
 local addon, ns = ...
 local cfg = ns.cfg
+local oUF = ns.oUF or oUF
 -- shorten value
 local SVal = function(val)
 if val then
@@ -52,7 +53,7 @@ local function hex(r, g, b)
 	end
 end
 -- adjusting set of default colors
-pcolors = setmetatable({
+local pcolors = setmetatable({
 	power = setmetatable({
 		['MANA']            = { 95/255, 155/255, 255/255 }, 
 		['RAGE']            = { 250/255,  75/255,  60/255 }, 
@@ -99,6 +100,7 @@ oUF.Tags.Events['mono:gridcolor'] = oUF.Tags.Events.missinghp
 oUF.Tags.Methods['mono:info'] = function(u) 
 	local level = UnitLevel(u)
     local race = UnitRace(u) or nil
+	local class = cfg.oUF.settings.show_class and UnitClass(u) or ""
 	local typ = UnitClassification(u)
 	local color = GetQuestDifficultyColor(level)
 	if level <= 0 then
@@ -112,9 +114,11 @@ oUF.Tags.Methods['mono:info'] = function(u)
 	elseif typ=="rare" then
 		return hex(color)..level..'r'
 	else
-		if u=="target" and UnitIsPlayer("target") then
-			--if level == 80 then level = "" end
-			return hex(color)..level.." |cffFFFFFF"..race.."|r"
+		if UnitIsPlayer(u) then
+			--if level == 80 then level = "" end 
+			-- select(2,UnitClass(u)) hex(oUF.colors.class[select(2,UnitClass(u))])
+			if u=='player' then race = "" end
+			return hex(color)..level.." |cffFFFFFF"..race.."|r "..hex(oUF.colors.class[select(2,UnitClass(u))])..class
 		else
 			return hex(color)..level
 		end
@@ -132,7 +136,7 @@ oUF.Tags.Methods['mono:hp']  = function(u) -- THIS IS FUCKING MADNESS!!!
     local min, max = UnitHealth(u), UnitHealthMax(u)
     if u == "player" then
       if min~=max then 
-        return SVal(min).." | |cffe15f8b"..-def.."|r"
+        return SVal(min).." | |cffe15f8b-"..SVal(def).."|r"
       else
         return SVal(min).." | "..per 
       end
@@ -142,7 +146,7 @@ oUF.Tags.Methods['mono:hp']  = function(u) -- THIS IS FUCKING MADNESS!!!
           if UnitIsEnemy("player","target") then
             return per.." | "..min
           else
-            if def then return "|cffe15f8b"..-def.."|r | "..SVal(min) end
+            if def then return "|cffe15f8b-"..SVal(def).."|r | "..SVal(min) end
           end
         else
           return per.." | "..SVal(min)
@@ -155,7 +159,7 @@ oUF.Tags.Methods['mono:hp']  = function(u) -- THIS IS FUCKING MADNESS!!!
     else
       if UnitIsPlayer(u) and not UnitIsEnemy("player",u) then
         if min~=max then 
-          return SVal(min).." | |cffe15f8b"..-def.."|r"
+          return SVal(min).." | |cffe15f8b-"..SVal(def).."|r"
         else
           return SVal(min).." | "..per 
         end
@@ -192,8 +196,10 @@ oUF.Tags.Events['mono:hpraid'] = 'UNIT_HEALTH UNIT_CONNECTION'
 -- power value tags
 oUF.Tags.Methods['mono:pp'] = function(u)
 	local _, str = UnitPowerType(u)
+	local col = pcolors.power[str] or {250/255,  75/255,  60/255}
+	if cfg.oUF.settings.class_color_power then col = oUF.colors.class[select(2,UnitClass(u))] end
 	if str then
-		return hex(pcolors.power[str] or {250/255,  75/255,  60/255})..SVal(UnitPower(u))
+		return hex(col)..SVal(UnitPower(u))
 	end
 end
 oUF.Tags.Events['mono:pp'] = oUF.Tags.Events.missingpp
@@ -224,7 +230,7 @@ end
 oUF.Tags.Events['mono:shortname'] = 'UNIT_NAME_UPDATE UNIT_CONNECTION'
 
 oUF.Tags.Methods['mono:gridname'] = function(u, r)
-	local namelength = cfg.namelength or 1
+	local namelength = cfg.oUF.frames.raid.name_length or 1
 	local name = UnitName(r or u)
 	return utf8sub(name, namelength, false)
 end

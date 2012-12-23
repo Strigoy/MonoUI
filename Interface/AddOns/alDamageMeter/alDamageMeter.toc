@@ -1,7 +1,7 @@
-## Interface: 50001
+## Interface: 50100
 ## Author: Allez
 ## Title: alDamageMeter
-## Version: 40000.7
+## Version: 50100.13
 ## Notes: Damage meter
 
 embeds.xml

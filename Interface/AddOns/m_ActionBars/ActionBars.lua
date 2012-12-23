@@ -4,10 +4,33 @@ local mAB = ns.mAB
 
 local myclass = select(2, UnitClass("player"))
 
-if not cfg.enable_action_bars then return end
+--if not cfg.enable_action_bars then return end
 if IsAddOnLoaded("Dominos") then return end
 
--- compatibility with old settings
+-- compatibility
+-- for 1280*XXX, 1360*XXX, 1440*XXX resolutions
+local width, _ = string.match((({GetScreenResolutions()})[GetCurrentResolution()] or ""), "(%d+).-(%d+)")
+if width == "1280" or width == "1360" or width == "1440" then
+	if cfg.bars["Bar6"].position.a == "BOTTOMRIGHT" and cfg.bars["Bar6"].position.x == -26 and cfg.bars["Bar6"].position.y == 260 and cfg.bars["Bar6"].orientation == "HORIZONTAL" then
+		cfg.bars["Bar6"].orientation = "VERTICAL" 
+		cfg.bars["Bar6"].position = {a= "RIGHT", x=	-105, y= 0}
+	end
+	if cfg.bars["Bar5"].position.a == "BOTTOMRIGHT" and cfg.bars["Bar5"].position.x == -26 and cfg.bars["Bar5"].position.y == 225 and cfg.bars["Bar5"].orientation == "HORIZONTAL" then
+		cfg.bars["Bar5"].orientation = "VERTICAL"
+		cfg.bars["Bar5"].position = {a= "RIGHT", x=	-70, y= 0}
+	end
+	if cfg.bars["Bar4"].position.a == "BOTTOMRIGHT" and cfg.bars["Bar4"].position.x == -26 and cfg.bars["Bar4"].position.y == 190 and cfg.bars["Bar4"].orientation == "HORIZONTAL" then
+		cfg.bars["Bar4"].orientation = "VERTICAL"
+		cfg.bars["Bar4"].position = {a= "RIGHT", x=	-35, y= 0}
+	end
+	if cfg.bars["StanceBar"].position.a == "BOTTOMRIGHT" and cfg.bars["StanceBar"].position.x == -218 and cfg.bars["StanceBar"].position.y == 295 and cfg.bars["StanceBar"].orientation == "HORIZONTAL" then
+		cfg.bars["StanceBar"].orientation = "VERTICAL"
+		cfg.bars["StanceBar"].position = {a= "BOTTOM", x=	-96, y= 115}
+	end
+	if cfg.bars["MicroMenu"].position.a == "BOTTOMRIGHT" and cfg.bars["MicroMenu"].position.x == -25 and cfg.bars["MicroMenu"].position.y == 300 then
+		cfg.bars["MicroMenu"].position = {a= "BOTTOMRIGHT", x=	-150,	y= 200}
+	end
+end
 
 -- enabling default action bars
 --[[ local f = CreateFrame"Frame"
@@ -214,8 +237,8 @@ veh:SetAllPoints(ve)
 veh:SetParent(ve)
 veh:SetFrameLevel(31)
 veh:EnableMouse(false)
-local veb = veh:CreateTexture(cfg.textures_normal)
-veb:SetTexture(cfg.textures_normal)
+local veb = veh:CreateTexture(cfg.mAB.media.textures_normal)
+veb:SetTexture(cfg.mAB.media.textures_normal)
 veb:SetPoint("TOPLEFT",4,-5)
 veb:SetPoint("BOTTOMRIGHT",-6,5)
 veb:SetVertexColor(0,0,0)
@@ -233,9 +256,9 @@ if not cfg.bars["ExitVehicleButton"].disable then
 		if(((event=="UNIT_ENTERING_VEHICLE") or (event=="UNIT_ENTERED_VEHICLE")) and arg1 == "player") then
 			ve:SetAlpha(1)
 			ve:SetScript("OnEnter", function(self) 
-				veb:SetVertexColor(cfg.colors.highlight.r, cfg.colors.highlight.g, cfg.colors.highlight.b)
+				veb:SetVertexColor(unpack(cfg.buttons.colors.highlight))
 			end)
-			ve:SetScript("OnLeave", function(self) veb:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b) end)
+			ve:SetScript("OnLeave", function(self) veb:SetVertexColor(unpack(cfg.buttons.colors.normal)) end)
 		elseif (((event=="UNIT_EXITING_VEHICLE") or (event=="UNIT_EXITED_VEHICLE")) and arg1 == "player") or (event=="ZONE_CHANGED_NEW_AREA" and not UnitHasVehicleUI("player")) then
 			ve:SetAlpha(0)
 		end

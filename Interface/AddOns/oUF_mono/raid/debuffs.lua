@@ -2,8 +2,6 @@ local _, ns = ...
 local cfg = ns.cfg
 local oUF = ns.oUF or oUF
 
-if cfg.DebuffTimer == nil then cfg.DebuffTimer = true end -- old cfg.lua compatibility (remove with next release)
-
 local _, class = UnitClass("player")
 local dispellClass = {
     PRIEST = { Magic = true, Disease = true, },
@@ -91,7 +89,7 @@ local createAuraIcon = function(debuffs)
 	count:SetPoint("LEFT", button, "BOTTOM", 3, 2)
 
 	local overlay = button:CreateTexture(nil, "OVERLAY")
-	overlay:SetTexture(cfg.debuffborder)
+	overlay:SetTexture(cfg.oUF.media.debuffborder)
 	overlay:SetPoint("TOPLEFT", button, "TOPLEFT", -2, 2)
 	overlay:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
 	overlay:SetTexCoord(0.03, 0.97, 0.03, 0.97)
@@ -99,7 +97,7 @@ local createAuraIcon = function(debuffs)
 	
     local remaining = button:CreateFontString(nil, "OVERLAY")
     remaining:SetPoint("TOPLEFT",-3,2) 
-    remaining:SetFont(cfg.font, cfg.fontsize-4, "THINOUTLINE")
+    remaining:SetFont(cfg.oUF.media.font, cfg.oUF.frames.raid.font_size-4, "THINOUTLINE")
     remaining:SetTextColor(1, 1, 0)
     button.remaining = remaining
 	
@@ -165,7 +163,7 @@ local updateDebuff = function(icon, texture, count, dtype, duration, expires, bu
     icon.expires = expires
     icon.duration = duration
 	-- applying timers
-	if cfg.DebuffTimer then
+	if cfg.oUF.frames.raid.debuff.timer then
 		if icon.asc then
 			icon:SetScript("OnUpdate", SetAscTimer)
 		else

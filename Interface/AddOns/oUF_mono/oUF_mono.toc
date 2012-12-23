@@ -1,11 +1,12 @@
-## Interface: 50001
-## Version: 5.0.4
+## Interface: 50100
+## Version: 5.1.1
 ## Title: oUF |cffffffffmono|r
 ## Notes: oUF layout
-## RequiredDeps: oUF
-## OptionalDeps: oUF_Smooth, oUF_HealComm, oUF_boring_totembar, oUF_Swing
+## OptionalDeps: oUF_Smooth, oUF_HealComm, oUF_Swing
 ## X-Credits: zork for his oUF_Simple and Freebaser for oUF_Freebgrid
 ## X-Category: UnitFrame
+
+oUF\oUF.xml
 
 embeds\Smooth.lua
 embeds\AuraTracker.lua
@@ -18,6 +19,8 @@ embeds\MonkHarmonyBar.lua
 embeds\TotemBar.lua
 
 cfg.lua
+..\!mCFG\mCFG_layer.lua
+
 tags.lua
 embeds\Castbar.lua
 lib.lua

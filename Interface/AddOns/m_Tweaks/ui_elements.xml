@@ -1,16 +1,51 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/"> 
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file='elements\API\cfg.lua' />
+
+	<Script file='elements\API\functions.lua' />
+
 	<Script file='elements\Settings.lua' />
-	<Script file='elements\Mountz.lua' />
-	<Script file='elements\SpellID.lua' />
-	<Script file='elements\StyleDBM.lua' />
-	<Script file='elements\StyleBW.lua' />
-	<Script file='elements\StyleNRun.lua' />
+	
 	<Script file='elements\XP.lua' />
-	<Script file='elements\shoutCD.lua' />
 	<Script file='elements\ThreatMeter.lua' />
-	
 	<Script file='elements\RaidBuffs.lua' />
-	<Script file='elements\MailGet.lua' />
+	<Script file='elements\AlertFramesMover.lua' />
+	<Script file='elements\Fixes.lua' />
 	
+	<Script file='elements\skins\StyleDBM.lua' />
+	<Script file='elements\skins\StyleBW.lua' />
+	<Script file='elements\skins\StyleNRun.lua' />
+	<Script file='elements\skins\StyleBlizTimer.lua' />
+	
+	<Script file='elements\automation\Mountz.lua' />
+	<Script file='elements\automation\shoutCD.lua' />
+	<Script file='elements\automation\MailGet.lua' />
+	<Script file='elements\automation\AutoLog.lua' />
+	<Script file='elements\automation\AchiScreenshot.lua' />
+	<Script file='elements\automation\pullCountdown.lua' />
+	<Script file='elements\automation\shoutDrink.lua' />
+	<Script file='elements\automation\shoutInterrupt.lua' />
+	
+	<Script file='elements\tooltip\SpellID.lua' />
+	
+	<!-- 
+	<Script file='elements\API\media.lua' />
+	<Script file='elements\test\test.lua' />
+	-->
+	
+	
+	
+	<Script file='elements\skins\ScoreFrame.lua' />
+	<Script file='elements\elements\slash_cmd.lua' />
+	<Script file='elements\automation\AutoRepair&Sell.lua' />
+	
+	
+	<Script file='elements\elements\durability.lua' />
+	<Script file='elements\elements\meters_reports.lua' />
+	<Script file='elements\elements\raid_cd.lua' />
+	<Script file='elements\elements\quest.lua' />
+	<Script file='elements\elements\armory_link.lua' />
+	<Script file='elements\elements\raid_mark.lua' />
+	<Script file='elements\elements\timer_LFG.lua' />
+	<Script file='elements\elements\DR_tracker.lua' />
 
 </Ui>

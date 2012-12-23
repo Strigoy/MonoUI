@@ -256,7 +256,7 @@ function tullaRange.UpdateButtonUsable(button)
 	end
  local nt = button:GetNormalTexture()
 	if not nt then return end
-	nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b) 
+	nt:SetVertexColor(unpack(cfg.buttons.colors.normal)) 
 end
 
 function tullaRange.SetButtonColor(button, colorType)
@@ -292,11 +292,11 @@ end
 -- Configuration
 function tullaRange:GetDefaults()
 	return {
-		normal = {cfg.colors.usable.r, cfg.colors.usable.g, cfg.colors.usable.b},
-		oor = {cfg.colors.outofrange.r, cfg.colors.outofrange.g, cfg.colors.outofrange.b},
-		oom = {cfg.colors.outofmana.r, cfg.colors.outofmana.g, cfg.colors.outofmana.b},
+		normal = {unpack(cfg.buttons.colors.usable)},
+		oor = {unpack(cfg.buttons.colors.outofrange)},
+		oom = {unpack(cfg.buttons.colors.outofmana)},
 
-		unusuable = {cfg.colors.unusable.r, cfg.colors.unusable.g, cfg.colors.unusable.b},
+		unusuable = {unpack(cfg.buttons.colors.unusable)},
 	}
 end
 --local TULLARANGE_COLORS = {}

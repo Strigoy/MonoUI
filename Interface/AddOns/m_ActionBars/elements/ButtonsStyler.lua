@@ -2,11 +2,6 @@ local addon, ns = ...
 local cfg = ns.cfg
 local _G = _G
 
-
--- temp. compatibility fix with old cfg.lua files
---if not cfg.textures_btbg then cfg.textures_btbg = "Interface\\Buttons\\WHITE8x8" end
---if not cfg.colors.equipped then	cfg.colors = {equipped={r =.3,g=.6,b=.3}} end
-
 local function SetIconTexture(self, crop)
 	if crop == 1 then self:SetTexCoord(.1, .9, .1, .9) end
 	self:SetPoint("TOPLEFT", 2, -2)
@@ -14,27 +9,27 @@ local function SetIconTexture(self, crop)
 end
 
 local function SetNormalTexture(self)
-	self:SetTexture(cfg.textures_normal)
+	self:SetTexture(cfg.mAB.media.textures_normal)
 	self:SetPoint("TOPLEFT")
 	self:SetPoint("BOTTOMRIGHT")
-	self:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+	self:SetVertexColor(unpack(cfg.buttons.colors.normal))
 end
 
 local function SetPushedTexture(self)
 	if self then											-------- (WTF???) FIX THIS 
-		self:SetTexture(cfg.textures_pushed)
-		self:SetVertexColor(cfg.colors.pushed.r, cfg.colors.pushed.g, cfg.colors.pushed.b)
+		self:SetTexture(cfg.mAB.media.textures_pushed)
+		self:SetVertexColor(unpack(cfg.buttons.colors.pushed))
 	end
 end
 
 local function SetHighlightTexture(self)
-	self:SetTexture(cfg.textures_normal)
-	self:SetVertexColor(cfg.colors.highlight.r, cfg.colors.highlight.g, cfg.colors.highlight.b)
+	self:SetTexture(cfg.mAB.media.textures_normal)
+	self:SetVertexColor(unpack(cfg.buttons.colors.highlight))
 end
 
 local function SetCheckedTexture(self)
-	self:SetTexture(cfg.textures_normal)
-	self:SetVertexColor(cfg.colors.checked.r, cfg.colors.checked.g, cfg.colors.checked.b)
+	self:SetTexture(cfg.mAB.media.textures_normal)
+	self:SetVertexColor(unpack(cfg.buttons.colors.checked))
 end
 
 local function SetTextures(self, checked)
@@ -53,10 +48,10 @@ local function CreateBG(bu)
 	bu.bg:SetFrameLevel(bu:GetFrameLevel()-1)
 
 	local t = bu.bg:CreateTexture(nil,"BACKGROUND")
-	t:SetTexture(cfg.textures_btbg)
+	t:SetTexture(cfg.mAB.media.textures_btbg)
 	t:SetAllPoints(bu)
-	t:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b,.3)
-	bu.bg:SetBackdropColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+	t:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b,.3)
+	bu.bg:SetBackdropColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b)
 end
 
 -- Style action bar buttons
@@ -85,17 +80,17 @@ local function ActionButtons(self)
 		fbg:Hide()
 		--fbg.Show = function() return end
 	end
-	nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b,1)
-    ho:SetFont(cfg.button_font, cfg.hotkey_font_size, "THINOUTLINE")
+	nt:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b,1)
+    ho:SetFont(cfg.mAB.media.button_font, cfg.buttons.hotkey_font_size, "THINOUTLINE")
 	ho:ClearAllPoints()
 	ho:SetPoint("TOPRIGHT")
 	-- show/hide macro name, adjust font
-    if not cfg.hide_macro_name then
-		if mn then mn:SetFont(cfg.button_font, cfg.name_font_size, "THINOUTLINE") end
+    if not cfg.buttons.hide_macro_name then
+		if mn then mn:SetFont(cfg.mAB.media.button_font, cfg.buttons.name_font_size, "THINOUTLINE") end
     else
 		if mn then mn:Hide() end
     end
-    co:SetFont(cfg.button_font, cfg.count_font_size, "THINOUTLINE")
+    co:SetFont(cfg.mAB.media.button_font, cfg.buttons.count_font_size, "THINOUTLINE")
 	SetTextures(self, 1)
     -- cut the border of the icons
     ic:SetTexCoord(0.1,0.9,0.1,0.9)
@@ -107,9 +102,9 @@ local function ActionButtons(self)
 --[[ 	
 	-- apply specific color for equipped items
 	if ( IsEquippedAction(action) ) then
-		nt:SetVertexColor(cfg.colors.equipped.r,cfg.colors.equipped.g,cfg.colors.equipped.b,1)
+		nt:SetVertexColor(cfg.buttons.colors.equipped.r,cfg.buttons.colors.equipped.g,cfg.buttons.colors.equipped.b,1)
     else
-		nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b,1)
+		nt:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b,1)
     end ]]
     --make the normaltexture match the buttonsize
     nt:ClearAllPoints()
@@ -124,13 +119,13 @@ local function ActionButtons_fixgrid(self)
 	--
     local nt  = _G[self:GetName().."NormalTexture"]
 	if not nt then return end
-	nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b,1)
+	nt:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b,1)
 --[[
 	local action = self.action
 	if ( IsEquippedAction(action) ) then
-		nt:SetVertexColor(cfg.colors.equipped.r,cfg.colors.equipped.g,cfg.colors.equipped.b,1)
+		nt:SetVertexColor(cfg.buttons.colors.equipped.r,cfg.buttons.colors.equipped.g,cfg.buttons.colors.equipped.b,1)
     else
-		nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b,1)
+		nt:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b,1)
     end ]]
 end
  
@@ -138,16 +133,16 @@ end
 --[[  function VehicleButtons(self)
 	for i=1, VEHICLE_MAX_ACTIONBUTTONS do
 		local hk = _G["VehicleMenuBarActionButton"..i.."HotKey"]
-	hk:SetFont(cfg.button_font, cfg.hotkey_font_size, "THINOUTLINE")
+	hk:SetFont(cfg.mAB.media.button_font, cfg.buttons.hotkey_font_size, "THINOUTLINE")
 	hk.SetPoint = hk:SetPoint("TOPLEFT")
 	end
 end ]]
 
  -- Totem bar + flyout multicast buttons
 --[[ local function MultiCastSlotButtons(self,slot)
-	self:SetNormalTexture(cfg.textures_normal)
+	self:SetNormalTexture(cfg.mAB.media.textures_normal)
 	local tex = self:GetNormalTexture()
-	tex:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+	tex:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b)
 	SetHighlightTexture(self:GetHighlightTexture())
 	--self.overlayTex.SetTexture = function() end
 	--self.overlayTex.Show = function() end
@@ -158,13 +153,13 @@ local function MultiCastSpellButtons(self)
 	_G[self:GetName().."Highlight"]:Hide()
 	SetTextures(self)
 	local hk = _G[self:GetName().."HotKey"]
-	hk:SetFont(cfg.button_font, cfg.hotkey_font_size, "THINOUTLINE")
+	hk:SetFont(cfg.mAB.media.button_font, cfg.buttons.hotkey_font_size, "THINOUTLINE")
 	hk:SetPoint("TOPRIGHT")
 end 
 local function FlyoutSlotSpells(self, slot, ...)
 	local numSpells = select("#", ...) + 1
 	for i = 1, numSpells do
-		self.buttons[i]:SetNormalTexture(cfg.textures_normal)
+		self.buttons[i]:SetNormalTexture(cfg.mAB.media.textures_normal)
 		local it, ht, nt = self.buttons[i]:GetRegions()
 		if i ~= 1 then
 			SetIconTexture(it, 1)
@@ -172,17 +167,17 @@ local function FlyoutSlotSpells(self, slot, ...)
 			SetIconTexture(it)
 		end
 		SetHighlightTexture(ht)
-		nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+		nt:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b)
 	end
  end
 local function FlyoutPageSpells(self)
 	for i, spellId in next, TOTEM_MULTI_CAST_SUMMON_SPELLS do
 		if IsSpellKnown(spellId) then
-			self.buttons[i]:SetNormalTexture(cfg.textures_normal)
+			self.buttons[i]:SetNormalTexture(cfg.mAB.media.textures_normal)
 			local it, ht, nt = self.buttons[i]:GetRegions()
 			SetIconTexture(it, 1)
 			SetHighlightTexture(ht)
-			nt:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+			nt:SetVertexColor(cfg.buttons.colors.normal.r, cfg.buttons.colors.normal.g, cfg.buttons.colors.normal.b)
 		end
 	end
  end
@@ -218,8 +213,8 @@ local function SetupFlyoutButton()
 		if _G["SpellFlyoutButton"..i] then
 			local self = _G["SpellFlyoutButton"..i]
 			local tex = self:GetNormalTexture()
-			self:SetNormalTexture(cfg.textures_normal)
-			tex:SetVertexColor(cfg.colors.normal.r,cfg.colors.normal.g,cfg.colors.normal.b,1)
+			self:SetNormalTexture(cfg.mAB.media.textures_normal)
+			tex:SetVertexColor(cfg.buttons.colors.normal.r,cfg.buttons.colors.normal.g,cfg.buttons.colors.normal.b,1)
 			SetTextures(self)
 		end
 
@@ -267,7 +262,7 @@ local function updatehotkey(self, actionButtonType)
 	else
 		hotkey:SetText(key)
 	end
-	if cfg.hide_hotkey then
+	if cfg.buttons.hide_hotkey then
 		hotkey:Hide()
 	end
 end

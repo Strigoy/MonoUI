@@ -1,8 +1,11 @@
-## Interface: 50001
+## Interface: 50100
 ## Notes: World Map modifications
 ## Title: mono|cffffffffMap|r
 ## Author: Monolit
 ## X-Credits: Nevcairiel (Mapster)
 ## Version: 3.7
 
+cfg.lua
+..\!mCFG\mCFG_layer.lua
 m_Map.lua
+fog_light.lua

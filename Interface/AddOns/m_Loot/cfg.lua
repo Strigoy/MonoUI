@@ -17,10 +17,13 @@
   -----------------------------
   -- CONFIG
   -----------------------------
-  cfg.iconsize = 30 					-- loot frame icon's size
-  cfg.position = {"BOTTOMRIGHT", -25, 345}  	-- roll frames positioning
-  cfg.bar_width = 360					-- group roll bar width
-  cfg.bar_height = 24					-- group roll bar height
+  
+  cfg.loot = { 
+	iconsize = 30, 							-- loot frame icon's size
+	position = {"BOTTOMRIGHT", -25, 345},  	-- roll frames positioning
+	bar_width = 360,							-- group roll bar width
+	bar_height = 24,							-- group roll bar height
+  }
   
   -- HANDOVER
   ns.cfg = cfg

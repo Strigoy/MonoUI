@@ -81,12 +81,12 @@ raid_debuffs = {
 
 			-- Garalon
 			[GetSpellInfo(122774)] = 7, -- Crush, stun from the crush ability.
-			[GetSpellInfo(123426)] = 7, -- Weak Points, Increased damage done to one leg.
-			[GetSpellInfo(123428)] = 7, -- Weak Points, Increased damage to another leg.
-			[GetSpellInfo(123423)] = 7, -- Weak Points, Increased damage to another leg.
-			[GetSpellInfo(123235)] = 7, -- Weak Points, Increased damage to another leg.
+			--[GetSpellInfo(123426)] = 7, -- Weak Points, Increased damage done to one leg.
+			--[GetSpellInfo(123428)] = 7, -- Weak Points, Increased damage to another leg.
+			--[GetSpellInfo(123423)] = 7, -- Weak Points, Increased damage to another leg.
+			--[GetSpellInfo(123235)] = 7, -- Weak Points, Increased damage to another leg.
 			[GetSpellInfo(122835)] = 7, -- Pheromones, The buff indicating who is carrying the pheramone.
-			[GetSpellInfo(123081)] = 7, -- Punchency, The stacking debuff causing the raid damage.
+			[GetSpellInfo(123081)] = 8, -- Punchency, The stacking debuff causing the raid damage.
 
 			--Wind Lord Mel'jarak
 			[GetSpellInfo(122055)] = 7, -- Residue, The debuff after breaking a prsion preventing further breaking.

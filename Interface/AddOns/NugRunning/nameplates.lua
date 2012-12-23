@@ -4,7 +4,7 @@ local next = next
 local table_remove = table.remove
 
 local makeicon = true
-
+local confignp = NugRunningConfig.nameplates
 local Nplates
 local plates = {}
 
@@ -33,10 +33,19 @@ local function HookFrames(...)
         if  not plates[frame] and
             fname and string.find(fname, "NamePlate")
         then
-            local hp, cb = frame:GetChildren()
-            local threat, hpborder, overlay, oldname, oldlevel, bossicon, raidicon, elite = frame:GetRegions()
-            local _, cbborder, cbshield, cbicon = cb:GetRegions()
-            frame.name = oldname
+            -- local hp, cb = frame:GetChildren()
+            -- local threat, hpborder, overlay, oldname, oldlevel, bossicon, raidicon, elite = frame:GetRegions()
+            -- local _, cbborder, cbshield, cbicon = cb:GetRegions()
+            
+            -- 5.1 format
+            local f = frame --nameplateframe
+            f.barFrame, f.nameFrame = f:GetChildren()
+            -- f.barFrame.threat, f.barFrame.border, f.barFrame.highlight, f.barFrame.level, f.barFrame.boss, f.barFrame.raid, f.barFrame.dragon = f.barFrame:GetRegions()
+            f.nameFrame.name = f.nameFrame:GetRegions()
+            -- f.barFrame.healthbar, f.barFrame.castbar = f.barFrame:GetChildren()
+            -- f.barFrame.healthbar.texture =  f.barFrame.healthbar:GetRegions()
+            -- f.barFrame.castbar.texture, f.barFrame.castbar.border, f.barFrame.castbar.shield, f.barFrame.castbar.icon =  f.barFrame.castbar:GetRegions()
+            frame.name = f.nameFrame.name
             frame.timers = {}
             -- frame.healthBar = healthBar
             -- frame.castBar = castBar
@@ -92,8 +101,11 @@ local backdrop = {
 function NugRunningNameplates:CreateNameplateTimer(frame)
     local f = CreateFrame("StatusBar", nil, frame)
     f:SetStatusBarTexture([[Interface\AddOns\NugRunning\statusbar]], "OVERLAY")
-    f:SetWidth(70)
-    local h = 7
+    local w = confignp.width
+    local h = confignp.height
+    local xo = confignp.x_offset
+    local yo = confignp.y_offset
+    f:SetWidth(w)
     f:SetHeight(h)
 
     if makeicon then
@@ -120,7 +132,7 @@ function NugRunningNameplates:CreateNameplateTimer(frame)
     f:SetScript("OnUpdate", MiniOnUpdate)
 
     if not next(frame.timers) then
-        f:SetPoint("BOTTOM", frame, "TOP", 0,-7)
+        f:SetPoint("BOTTOM", frame, "TOP", 0+xo,-7+yo)
     else
         local prev = frame.timers[#frame.timers]
         f:SetPoint("BOTTOM", prev, "TOP", 0,1)

@@ -1,0 +1,35 @@
+## Interface: 50100
+## Notes: Custom MonoUI configuration
+## Title: mono|cff6FDE90User|r|cffffffffConfig|r
+## Author: Monolit
+## Version: 1.0
+## X-mCFG: mCFG
+
+!mCFG_init.lua
+
+m_Tweaks\cfg.lua
+init\m_Tweaks.lua
+
+m_ActionBars\cfg.lua
+init\m_ActionBars.lua
+
+m_Bags\cfg.lua
+init\m_Bags.lua
+
+m_CombatText\cfg.lua
+init\m_CombatText.lua
+
+m_Loot\cfg.lua
+init\m_Loot.lua
+
+m_Map\cfg.lua
+init\m_Map.lua
+
+m_Nameplates\cfg.lua
+init\m_Nameplates.lua
+
+oUF_mono\cfg.lua
+init\oUF_mono.lua
+
+!mCFG.lua
+

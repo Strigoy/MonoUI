@@ -1,8 +1,5 @@
-local lock_map_position = true						-- lock your map in set position
-local decimal_coords = false						-- displays decimal expansion @ coordinates' values
-local mpos = {"CENTER",UIParent,"CENTER",0,65}		-- set position for locked map
-local map_scale = 0.9								-- Mini World Map scale
-local isize = 20									-- group icons size
+local addon, ns = ...
+local cfg = ns.cfg
 
 ---------------- > Coordinates functions
 local player, cursor
@@ -24,7 +21,7 @@ local function Cursor()
 	return cx, cy
 end
 local formattext
-if decimal_coords then
+if cfg.map.decimal_coords then
 	formattext = '%.1f, %.1f'
 else
 	formattext = '%.2d, %.2d'
@@ -67,7 +64,7 @@ local function gen_coords(self)
 end
 
 ---------------- > Moving/removing world map elements
-if map_scale==1 then map_scale = 0.99 end -- dirty hack to prevent 'division by zero'!
+if cfg.map.scale==1 then cfg.map.scale = 0.99 end -- dirty hack to prevent 'division by zero'!
 --[[ local scaled = false
 local function scaledown(scale)
 	if scaled then return end
@@ -90,16 +87,15 @@ w:SetScript("OnEvent", function(self, event, ...)
 		WorldMapBlobFrame.Show = null
 		WorldMapBlobFrame.Hide = null
 		--WorldMapPositioningGuide:Hide()
-		--scaledown(map_scale)
-		WORLDMAP_RATIO_MINI = map_scale
-		WORLDMAP_WINDOWED_SIZE = map_scale 
-		WORLDMAP_SETTINGS.size = map_scale 
+		--scaledown(cfg.map.scale)
+		WORLDMAP_RATIO_MINI = cfg.map.scale
+		WORLDMAP_WINDOWED_SIZE = cfg.map.scale 
+		WORLDMAP_SETTINGS.size = cfg.map.scale 
 		WorldMap_ToggleSizeDown()
 		
 		for i = 1,40 do
 			local ri = _G["WorldMapRaid"..i]
-			ri:SetWidth(isize)
-			ri:SetHeight(isize)
+			ri:SetSize(cfg.map.raid_icon_size,cfg.map.raid_icon_size)
 		end
 		if FeedbackUIMapTip then 
 			FeedbackUIMapTip:Hide()
@@ -168,29 +164,29 @@ local function m_MapShrink()
 	w.bd:SetPoint("BOTTOMRIGHT", w.bg, -5, 5)
 	w.bd:SetPoint("TOPLEFT", w.bg, 5, -5)
 	w.bd:SetTexture(0, 0, 0, 1)
-	if lock_map_position then
+	if cfg.map.lock_map_position then
 		WorldMapDetailFrame:ClearAllPoints()
-		WorldMapDetailFrame:SetPoint(unpack(mpos))
+		WorldMapDetailFrame:SetPoint(unpack(cfg.map.position))
 	end
-	--WORLDMAP_SETTINGS.size = map_scale 
+	--WORLDMAP_SETTINGS.size = cfg.map.scale 
 	--WORLDMAP_SETTINGS.size = WORLDMAP_WINDOWED_SIZE
-	WorldMapFrame.scale = map_scale
-	WorldMapDetailFrame:SetScale(map_scale)
-	WorldMapButton:SetScale(map_scale)
-	WorldMapFrameAreaFrame:SetScale(map_scale)
+	WorldMapFrame.scale = cfg.map.scale
+	WorldMapDetailFrame:SetScale(cfg.map.scale)
+	WorldMapButton:SetScale(cfg.map.scale)
+	WorldMapFrameAreaFrame:SetScale(cfg.map.scale)
 	WorldMapTitleButton:Show()
 	WorldMapFrameMiniBorderLeft:Hide()
 	WorldMapFrameMiniBorderRight:Hide()
-	WorldMapPOIFrame.ratio = map_scale
+	WorldMapPOIFrame.ratio = cfg.map.scale
 	WorldMapFrameSizeUpButton:Show()
 	WorldMapFrameSizeUpButton:ClearAllPoints()
 	WorldMapFrameSizeUpButton:SetPoint("TOPRIGHT", WorldMapButton, "TOPRIGHT",-10,27)
 	WorldMapFrameSizeUpButton:SetFrameStrata("MEDIUM")
-	WorldMapFrameSizeUpButton:SetScale(map_scale)
+	WorldMapFrameSizeUpButton:SetScale(cfg.map.scale)
 	WorldMapFrameCloseButton:ClearAllPoints()
 	WorldMapFrameCloseButton:SetPoint("TOPRIGHT", WorldMapButton, "TOPRIGHT",10,27)
 	WorldMapFrameCloseButton:SetFrameStrata("MEDIUM")
-	WorldMapFrameCloseButton:SetScale(map_scale)
+	WorldMapFrameCloseButton:SetScale(cfg.map.scale)
 	WorldMapFrameTitle:ClearAllPoints()
 	WorldMapFrameTitle:SetPoint("BOTTOM", WorldMapDetailFrame, "TOP", 0, 0)
 	WorldMapTitleButton:SetFrameStrata("TOOLTIP")
@@ -199,14 +195,14 @@ local function m_MapShrink()
 	WorldMapTooltip:SetFrameStrata("TOOLTIP")
 	WorldMapLevelDropDown.Show = null
 	WorldMapLevelDropDown:Hide()
-	WorldMapQuestShowObjectives:SetScale(map_scale)
-	WorldMapQuestShowObjectives:SetScale(map_scale)
-	WorldMapShowDigSites:SetScale(map_scale)
-	WorldMapTrackQuest:SetScale(map_scale)
-	WorldMapLevelDownButton:SetScale(map_scale)
-	WorldMapLevelUpButton:SetScale(map_scale)
+	WorldMapQuestShowObjectives:SetScale(cfg.map.scale)
+	WorldMapQuestShowObjectives:SetScale(cfg.map.scale)
+	WorldMapShowDigSites:SetScale(cfg.map.scale)
+	WorldMapTrackQuest:SetScale(cfg.map.scale)
+	WorldMapLevelDownButton:SetScale(cfg.map.scale)
+	WorldMapLevelUpButton:SetScale(cfg.map.scale)
 	WorldMapShowDropDown:ClearAllPoints()
-	WorldMapShowDropDown:SetPoint("TOPRIGHT", WorldMapButton, "BOTTOMRIGHT",15,2)
+	WorldMapShowDropDown:SetPoint("TOPLEFT", WorldMapButton, "BOTTOMLEFT",-15,2)
 	WorldMapFrame_SetOpacity(WORLDMAP_SETTINGS.opacity)
 	WorldMapQuestShowObjectives_AdjustPosition()
 	--hooksecurefunc("WorldMapQuestPOI_OnLeave", function() WorldMapTooltip:Hide() end)
@@ -225,8 +221,17 @@ local function m_MapEnlarge()
 	WorldMapFrame:EnableKeyboard(nil)
 	WorldMapFrame:EnableMouse(nil)
 	WorldMapShowDropDown:ClearAllPoints()
-	WorldMapShowDropDown:SetPoint("LEFT", WorldMapShowDigSites, "RIGHT",115,0)
+	WorldMapShowDropDown:SetPoint("LEFT", WorldMapShowDigSites, "RIGHT",80,0)
 	UIPanelWindows["WorldMapFrame"].area = "center"
 	WorldMapFrame:SetAttribute("UIPanelLayout-defined", nil)
 end
 hooksecurefunc("WorldMap_ToggleSizeUp", m_MapEnlarge)
+
+--	scroll map levels
+WorldMapButton:SetScript("OnMouseWheel", function(self, lvl)
+	local level = GetCurrentMapDungeonLevel() - lvl
+	if level >= 1 and level <= GetNumDungeonMapLevels() then
+		SetDungeonMapLevel(level)
+		PlaySound("UChatScrollButton")
+	end
+end)

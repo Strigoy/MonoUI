@@ -1,7 +1,0 @@
-## Interface: 50001
-## Title: alTooltip
-## Author: Allez
-## Notes: Tooltip styling
-## Version^ 40200.1
-
-alTooltip.lua

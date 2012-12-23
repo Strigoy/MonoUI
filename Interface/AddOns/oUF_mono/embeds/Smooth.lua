@@ -6,6 +6,16 @@ local smoothing = {}
 local function Smooth(self, value)
 	if value ~= self:GetValue() then
 		smoothing[self] = value
+--[[  		if self.Spark then
+			local d = select(2,self:GetMinMaxValues())
+			local x = (value / d) * self:GetWidth()
+			if value < d and value >0 then
+				self.Spark:Show()
+				self.Spark:SetPoint("CENTER", self, "LEFT", x, 0)
+			else
+				self.Spark:Hide()
+			end
+		end  ]]
 	else
 		smoothing[self] = nil
 		self:SetValue_(value)
@@ -45,7 +55,10 @@ f:SetScript('OnUpdate', function()
 		bar:SetValue_(new)
 		if cur == value or abs(new - value) < 2 then
 			bar:SetValue_(value)
+			
+
 			smoothing[bar] = nil
 		end
+
 	end
 end)

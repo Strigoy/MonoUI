@@ -1,4 +1,4 @@
-## Interface: 50001
+## Interface: 50100
 ## Notes: Scrolling combat text
 ## Title: mono|cffffffffCombatText|r
 ## Author: Monolit
@@ -6,5 +6,6 @@
 ## Credits: Affli, Alza
 
 cfg.lua
+..\!mCFG\mCFG_layer.lua
 aoe_spells.lua
 mCT.lua

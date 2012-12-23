@@ -9,8 +9,13 @@ local myclass = select(2, UnitClass("player"))
 mAB.CreateHolder = function(name, pos)
 	local bar = CreateFrame("Frame", name, UIParent, "SecureHandlerStateTemplate")
 	bar:SetPoint(pos.a, pos.x, pos.y)
+	bar:SetFrameStrata("MEDIUM")
 	return bar
 end 
+
+-- I always wanted to have my personal death star to destroy stuff!
+local DeathStar = mAB.CreateHolder("DeathStar", {a="TOP", x=0, y=100})
+DeathStar:Hide()
 
 -- style function for bars
 --mAB.SetBar = function(bar, btn, num, orient, rows, visnum, bsize, spacing)
@@ -58,13 +63,9 @@ mAB.SetBar = function(bar, btn, num, cfgn)
 				end
 			end
 			if i > visnum then 
-				button:UnregisterAllEvents()
-				button:SetScale(0.00001)
-				button:SetAlpha(0)
-				--_G[button..i]:Hide()
+				button:SetParent(DeathStar)
 			end
 		end
-		--button.SetPoint = function() end
 	end
 	if orient == "HORIZONTAL" then
 		if rows == 1 then
@@ -125,13 +126,9 @@ mAB.SetExtraBar = function(bar, bname, orient, rows, visnum, bsize, spacing)
 				end
 			end
  			if i > visnum+12 then 
-				btn:UnregisterAllEvents()
-				btn:SetScale(0.00001)
-				btn:SetAlpha(0)
-				--btn:Hide()
+				btn:SetParent(DeathStar)
 			end
 		end
-		--btn.SetPoint = function() end
 	end
 	if orient == "HORIZONTAL" then
 		if rows == 1 then
@@ -182,15 +179,19 @@ mAB.SetVisibility = function(n,bar)
 	local ncfg = cfg.bars[n]
 	if ncfg.hide_bar then 
 		bar:Hide() 
+	elseif ncfg.custom_visibility_macro then
+		RegisterStateDriver(bar, "visibility", ncfg.custom_visibility_macro)
+		return
 	elseif ncfg.show_in_combat then
 		if n == "Bar1" then
-			RegisterStateDriver(bar, "visibility", "[petbattle][overridebar][vehicleui]hide;[combat,novehicleui] show;hide")
+			--RegisterStateDriver(bar, "visibility", "[petbattle][overridebar][vehicleui]hide;[combat,novehicleui] show;hide")
+			RegisterStateDriver(bar, "visibility", "[petbattle][overridebar][vehicleui][possessbar,@vehicle,exists]hide;[combat,novehicleui] show;hide")
 		else
 			RegisterStateDriver(bar, "visibility", "[petbattle]hide;[combat] show; hide")
 		end
 	else
 		if n == "Bar1" then
-			RegisterStateDriver(bar, "visibility", "[petbattle][overridebar][vehicleui]hide;show")
+			RegisterStateDriver(bar, "visibility", "[petbattle][overridebar][vehicleui][possessbar,@vehicle,exists]hide;show")
 		else
 			RegisterStateDriver(bar, "visibility", "[petbattle]hide;show")
 		end

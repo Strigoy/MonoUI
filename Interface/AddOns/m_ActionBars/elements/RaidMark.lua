@@ -12,11 +12,11 @@ local SetRaidIconButton = function(icon,name,marknum,point,anchor,rpoint,offX,of
 	icon:GetNormalTexture():SetTexCoord(x1,x2,y1,y2)
 	icon:EnableMouse(true)
 	icon:SetScript("OnClick", function(self) SetRaidTarget("target", 0); SetRaidTarget("target", marknum) end)
-	icon.bd = icon:CreateTexture(cfg.textures_normal)
-	icon.bd:SetTexture(cfg.textures_normal)
+	icon.bd = icon:CreateTexture(cfg.mAB.media.textures_normal)
+	icon.bd:SetTexture(cfg.mAB.media.textures_normal)
 	icon.bd:SetPoint("TOPLEFT",-1,1)
 	icon.bd:SetPoint("BOTTOMRIGHT",1,-1)
-	icon.bd:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+	icon.bd:SetVertexColor(unpack(cfg.buttons.colors.normal))
 	icon.bg = CreateFrame("Frame",nil,icon)
 	icon.bg:SetBackdrop({bgFile="interface\\Tooltips\\UI-Tooltip-Background"})
 	icon.bg:SetBackdropColor(0,0,0,.8)
@@ -24,9 +24,9 @@ local SetRaidIconButton = function(icon,name,marknum,point,anchor,rpoint,offX,of
 	icon.bg:SetFrameStrata("BACKGROUND")
 	icon:SetScript("OnEnter", function(self) 
 		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT"); GameTooltip:ClearLines(); GameTooltip:AddLine(name, 0.88,0.65,0); GameTooltip:Show() 
-		icon.bd:SetVertexColor(cfg.colors.highlight.r, cfg.colors.highlight.g, cfg.colors.highlight.b)
+		icon.bd:SetVertexColor(unpack(cfg.buttons.colors.highlight))
 	end)
-	icon:SetScript("OnLeave", function(self) GameTooltip:Hide() icon.bd:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b) end)
+	icon:SetScript("OnLeave", function(self) GameTooltip:Hide() icon.bd:SetVertexColor(unpack(cfg.buttons.colors.normal)) end)
 end
 local i_rpoint, i_point, i_offX, i_offY
 local icontextable = "interface\\targetingframe\\ui-raidtargetingicons"
@@ -64,11 +64,11 @@ local SetFlareButton = function(flare,name,flarenum,point,anchor,rpoint,offX,off
 	flare:SetPoint(point, anchor, rpoint, offX, offY)
 	flare:SetAttribute("type", "macro")
 	flare:SetAttribute("macrotext1", "/click CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton\n/click DropDownList1Button"..flarenum)
-	flare.bd = flare:CreateTexture(cfg.textures_normal)
-	flare.bd:SetTexture(cfg.textures_normal)
+	flare.bd = flare:CreateTexture(cfg.mAB.media.textures_normal)
+	flare.bd:SetTexture(cfg.mAB.media.textures_normal)
 	flare.bd:SetPoint("TOPLEFT",-1,1)
 	flare.bd:SetPoint("BOTTOMRIGHT",1,-1)
-	flare.bd:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b)
+	flare.bd:SetVertexColor(unpack(cfg.buttons.colors.normal))
 	flare.bg = CreateFrame("Frame",nil,flare)
 	flare.bg:SetBackdrop({bgFile="interface\\Tooltips\\UI-Tooltip-Background"})
 	flare.bg:SetBackdropColor(0,0,0,.8)
@@ -76,9 +76,9 @@ local SetFlareButton = function(flare,name,flarenum,point,anchor,rpoint,offX,off
 	flare.bg:SetFrameStrata("BACKGROUND")
 	flare:SetScript("OnEnter", function(self) 
 		GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT"); GameTooltip:ClearLines(); GameTooltip:AddLine(name.." world marker",0.88,0.65,0); GameTooltip:Show() 
-		flare.bd:SetVertexColor(cfg.colors.highlight.r, cfg.colors.highlight.g, cfg.colors.highlight.b)
+		flare.bd:SetVertexColor(unpack(cfg.buttons.colors.highlight))
 	end)
-	flare:SetScript("OnLeave", function(self) GameTooltip:Hide() flare.bd:SetVertexColor(cfg.colors.normal.r, cfg.colors.normal.g, cfg.colors.normal.b) end)
+	flare:SetScript("OnLeave", function(self) GameTooltip:Hide() flare.bd:SetVertexColor(unpack(cfg.buttons.colors.normal)) end)
 end
 
 local f_rpoint, f_point, f_offX, f_offY

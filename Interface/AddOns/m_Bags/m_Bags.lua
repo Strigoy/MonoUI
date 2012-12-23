@@ -1,6 +1,7 @@
 local addon, ns = ...
 local cargBags = ns.cargBags
 local cfg = ns.cfg
+local sorting = ns.sorting
 
 local m_Bags = cargBags:NewImplementation("m_Bags")	-- Let the magic begin!
 m_Bags:RegisterBlizzard() -- register the frame for use with BLizzard's ToggleBag()-functions
@@ -16,13 +17,20 @@ function m_Bags:OnInit()
 	-- The filters control which items go into which container
 	local INVERTED = -1 -- with inverted filters (using -1), everything goes into this bag when the filter returns false
 	local onlyBags
-	if cfg.filter_sets then
+	if cfg.bags.sets then
 		onlyBags = function(item) return item.bagID >= 0 and item.bagID <= 4 and not cargBags.itemKeys["setID"](item) end
 	else
 		onlyBags = function(item) return item.bagID >= 0 and item.bagID <= 4 end
 	end
-	local onlySets =		function(item) return cargBags.itemKeys["setID"](item) end
-	local onlyBank =		function(item) return item.bagID == -1 or item.bagID >= 5 and item.bagID <= 11 end
+	local onlyBank
+	if cfg.bank.sets then
+		onlyBank =		function(item) return item.bagID == -1 or item.bagID >= 5 and item.bagID <= 11 and not cargBags.itemKeys["setID"](item) end
+	else
+		onlyBank =		function(item) return item.bagID == -1 or item.bagID >= 5 and item.bagID <= 11  end
+	end
+	local onlyBagSets =		function(item) return cargBags.itemKeys["setID"](item) and not (item.bagID == -1 or item.bagID >= 5 and item.bagID <= 11) end
+	local onlyBankSets =	function(item) return cargBags.itemKeys["setID"](item) and not (item.bagID >= 0 and item.bagID <= 4) end
+--	local onlyBank =		function(item) return item.bagID == -1 or item.bagID >= 5 and item.bagID <= 11 end
 	local onlyRareEpics =	function(item) return item.rarity and item.rarity > 3 end
 	local onlyEpics =		function(item) return item.rarity and item.rarity > 3 end
 	local hideJunk =		function(item) return not item.rarity or item.rarity > 0 end
@@ -32,27 +40,31 @@ function m_Bags:OnInit()
 	
 	-- Bagpack
 	f.main = MyContainer:New("Main", {
-			Columns = cfg.bags_columns,
-			Scale = cfg.bags_scale,
+			Columns = cfg.bags.columns,
+			Scale = cfg.bags.scale,
 			Bags = "backpack+bags",
 			Movable = true,
 	})
 	f.main:SetFilter(onlyBags, true)
-	f.main:SetPoint(cfg.bags_position[1], cfg.bags_position[2], cfg.bags_position[3], cfg.bags_position[4]*f.main.Settings.Scale, cfg.bags_position[5]*f.main.Settings.Scale) -- bagpack position
+	f.main:SetPoint(cfg.bags.position[1], cfg.bags.position[2], cfg.bags.position[3], cfg.bags.position[4]*f.main.Settings.Scale, cfg.bags.position[5]*f.main.Settings.Scale) -- bagpack position
 
 	-- Bank frame and bank bags
 	f.bank = MyContainer:New("Bank", {
-			Columns = cfg.bank_columns,
-			Scale = cfg.bank_scale,
+			Columns = cfg.bank.columns,
+			Scale = cfg.bank.scale,
 			Bags = "bankframe+bank",
 	})
 	f.bank:SetFilter(onlyBank, true) -- Take only items from the bank frame
-	f.bank:SetPoint(cfg.bank_position[1], cfg.bank_position[2], cfg.bank_position[3], cfg.bank_position[4]*f.main.Settings.Scale, cfg.bank_position[5]) -- bank frame position
+	f.bank:SetPoint(cfg.bank.position[1], cfg.bank.position[2], cfg.bank.position[3], cfg.bank.position[4]*f.main.Settings.Scale, cfg.bank.position[5]) -- bank frame position
 	f.bank:Hide() -- Hide at the beginning
 	
 	f.sets = MyContainer:New("ItemSets", {Columns = f.main.Settings.Columns, Scale = f.main.Settings.Scale, Bags = "backpack+bags"})
-	f.sets:SetFilter(onlySets, true)
+	f.sets:SetFilter(onlyBagSets, true)
 	f.sets:SetPoint("BOTTOMLEFT", f.main,"TOPLEFT", 0, 3*f.main.Settings.Scale)
+	
+	f.banksets = MyContainer:New("BankItemSets", {Columns = f.bank.Settings.Columns, Scale = f.bank.Settings.Scale, Bags = "bankframe+bank"})
+	f.banksets:SetFilter(onlyBankSets, true)
+	f.banksets:SetPoint("BOTTOMLEFT", f.bank,"TOPLEFT", 0, 3*f.bank.Settings.Scale)
 	
 	--m_Bags:CreateAnchors()
 end
@@ -161,10 +173,20 @@ function MyContainer:OnContentsChanged()
 		self:SetSize(width + 12, height + 32)
 	end
 	
-	if m_BagsItemSets:GetHeight()<33 or not cfg.filter_sets then -- dirty.... but works so whatever
+	if self.name == "BankItemSets" then
+		local width, height = self:LayoutButtons("grid", self.Settings.Columns, 3, 6, -25)
+		self:SetSize(width + 12, height + 32)
+	end
+	
+	if m_BagsItemSets:GetHeight()<33 or not cfg.bags.sets then -- dirty.... but works so whatever
 		f.sets:Hide()
 	else
 		f.sets:Show()
+	end 
+	if m_BagsBankItemSets:GetHeight()<33 or not cfg.bank.sets then -- dirty.... but works so whatever
+		f.banksets:Hide()
+	else
+		f.banksets:Show()
 	end 
 end
 
@@ -202,25 +224,35 @@ function MyContainer:OnCreate(name, settings)
 
 	settings.Columns = settings.Columns or 10
 	self:SetScale(settings.Scale or 1)
-	if not (name == "ItemSets") then -- don't need all that junk on "other" sections
+	if not (name == "ItemSets" or name == "BankItemSets") then -- don't need all that junk on "other" sections
 		-- Creating infoFrame which serves as a basic bar for information and extra buttons
 		local infoFrame = CreateFrame("Button", nil, self)
-		infoFrame:SetPoint("BOTTOMLEFT", 45, 3)
-		infoFrame:SetPoint("BOTTOMRIGHT", -10, 3)
+		infoFrame:SetPoint("BOTTOMLEFT", 135, 3)
+		infoFrame:SetPoint("BOTTOMRIGHT", -30, 3)
 		infoFrame:SetHeight(32)
-
-		-- Plugin: TagDisplay
-		-- Creating font strings to display space, currencies, ammo and money
-		local space = self:SpawnPlugin("TagDisplay", "[space:free/max] free", infoFrame)
-		space:SetFont("Fonts\\FrizQT__.ttf", 14)
-		space:SetPoint("LEFT", infoFrame, "LEFT")
-		space.bags = cargBags:ParseBags(settings.Bags) -- Temporary until I find a better solution
-
+--[[ 
+		local searchFrame = CreateFrame("Button", nil, infoFrame)
+		searchFrame:SetPoint("BOTTOMLEFT", 45, 0)
+		searchFrame:SetPoint("BOTTOMRIGHT", -30, 0)
+		searchFrame:SetHeight(32) 
+]]
 		-- This one shows currencies, ammo and - most important - money!
 		local tagDisplay = self:SpawnPlugin("TagDisplay", "[money]", infoFrame)
-		tagDisplay:SetFontObject("NumberFontNormal")
-		tagDisplay:SetFont("Fonts\\FrizQT__.ttf", 14)
-		tagDisplay:SetPoint("RIGHT", infoFrame, "RIGHT", -20, -2)
+		tagDisplay:SetFont(cfg.bags.general.font, cfg.bags.general.font_size)
+		tagDisplay:SetPoint("RIGHT", infoFrame, "RIGHT", 0, -2)
+		
+		-- Plugin: SearchBar
+		local searchText = infoFrame:CreateFontString(nil, "OVERLAY")
+		searchText:SetPoint("LEFT", infoFrame, "LEFT", 0, -2)
+		searchText:SetFont(cfg.bags.general.font, cfg.bags.general.font_size)
+		searchText:SetText("|cffFF9D3BSearch|r") -- our searchbar comes up when we click on infoFrame
+		infoFrame:SetScript( "OnLeave", function() searchText:SetText("|cffFF9D3BSearch|r") end )
+		infoFrame:SetScript( "OnEnter", function() searchText:SetText("|cffFF5252Search|r") end )		
+		
+		local search = self:SpawnPlugin("SearchBar", infoFrame)
+		search.highlightFunction = highlightFunction -- same as above, only for search
+		search.isGlobal = true -- This would make the search apply to all containers instead of just this one
+		search:SetPoint("BOTTOMRIGHT", infoFrame, 0, -2)
 		
 		-- Plugin: BagBar
 		local bagBar = self:SpawnPlugin("BagBar", settings.Bags)
@@ -229,42 +261,37 @@ function MyContainer:OnCreate(name, settings)
 		bagBar.highlightFunction = highlightFunction -- from above, optional, used when hovering over bag buttons
 		bagBar.isGlobal = true -- This would make the hover-effect apply to all containers instead of the current one
 		bagBar:Hide()
+		bagBar:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 47, 46)
 		self.BagBar = bagBar
-		
-		-- positioning our BagBar
-		bagBar:SetPoint("BOTTOMLEFT", self, "BOTTOMLEFT", 10, 46)
 		-- creating button for toggling BagBar on and off
 		self:UpdateDimensions()
 		local bagToggle = CreateFrame("CheckButton", nil, self)
-		bagToggle:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square", "ADD")
+		--bagToggle:SetHighlightTexture("Interface\\Buttons\\ButtonHilight-Square", "ADD")
 		bagToggle:SetWidth(36)
 		bagToggle:SetHeight(20)
-		bagToggle:SetPoint("RIGHT", infoFrame,"LEFT",-3,0)
-		--bagToggle:RegisterForClicks("LeftButtonUp")
+		bagToggle:SetPoint("BOTTOMLEFT", self,"BOTTOMLEFT",7,7)
 		bagToggle:SetScript("OnClick", function()
 			if(self.BagBar:IsShown()) then
 				self.BagBar:Hide()
 			else
 				self.BagBar:Show()
 			end
-				self:UpdateDimensions()
+			self:UpdateDimensions()
 		end)
 		local bagToggleText = bagToggle:CreateFontString(nil, "OVERLAY")
 		bagToggleText:SetPoint("CENTER", bagToggle)
 		bagToggleText:SetFontObject(GameFontNormalSmall)
-		bagToggleText:SetFont("Fonts\\FrizQT__.ttf", 14)
-		bagToggleText:SetText("Bags")
-
-		-- Plugin: SearchBar
-		local searchText = infoFrame:CreateFontString(nil, "OVERLAY")
-		searchText:SetPoint("CENTER", infoFrame, "CENTER", -25, -1)
-		searchText:SetFont("Fonts\\FrizQT__.ttf", 14)
-		searchText:SetText("Search") -- our searchbar comes up when we click on infoFrame
-
-		local search = self:SpawnPlugin("SearchBar", infoFrame)
-		search.highlightFunction = highlightFunction -- same as above, only for search
-		search.isGlobal = true -- This would make the search apply to all containers instead of just this one
-		search:SetPoint("BOTTOMRIGHT", infoFrame, -20, 0)
+		bagToggleText:SetFont(cfg.bags.general.font, cfg.bags.general.font_size)
+		bagToggleText:SetText("|cffFF9D3BBags|r")
+		bagToggle:SetScript( "OnLeave", function() bagToggleText:SetText("|cffFF9D3BBags|r") end )
+		bagToggle:SetScript( "OnEnter", function() bagToggleText:SetText("|cffFF5252Bags|r") end )
+		
+		-- Plugin: TagDisplay
+		-- Creating font strings to display space, currencies, ammo and money
+		local space = self:SpawnPlugin("TagDisplay", "[space:free/max] free")
+		space:SetFont(cfg.bags.general.font, cfg.bags.general.font_size)
+		space:SetPoint("LEFT", bagToggle, "RIGHT", 6, 0)
+		space.bags = cargBags:ParseBags(settings.Bags) -- Temporary until I find a better solution
 
 		local closebutton = CreateFrame("Button", nil, self)
 		closebutton:SetFrameLevel(30)
@@ -287,10 +314,49 @@ function MyContainer:OnCreate(name, settings)
 				CloseAllBags() 
 			end 
 		end)
- 	elseif name == "ItemSets" then
-		setname = self:CreateFontString(nil,"OVERLAY")
+		
+		local sortbutton = CreateFrame("Button", nil, bagBar, "UIPanelButtonTemplate")
+		sortbutton:SetParent(bagBar)
+		sortbutton:SetSize(32, 32)
+		sortbutton:SetPoint("RIGHT",bagBar,"LEFT", -7, 0)
+		--sortbutton:SetText("Sort")
+		sortbutton:SetScript("OnEnter", function(self) 
+			GameTooltip:SetOwner(sortbutton, "ANCHOR_LEFT", -10, 10)
+			GameTooltip:AddLine("LeftButton - sort items\nRightButton - sort in reverse order")
+			GameTooltip:Show() 
+		end)
+		
+		local sortbtex =	"Interface\\BUTTONS\\UI-ScrollBar-ScrollDownButton-Disabled.png"
+		local sortb = sortbutton:CreateTexture(nil, "ARTWORK")
+		sortb:SetTexture(sortbtex)
+		sortb:SetTexCoord(.2, .8, .2, .75)
+		sortb:SetAllPoints(sortbutton)
+		sortb:SetVertexColor(.7, .7, .7, 1)
+		
+		sortbutton:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
+		sortbutton:RegisterForClicks("LeftButtonDown", "RightButtonDown")
+		
+		if name == "Bank" then
+			sortbutton:SetScript('OnClick', function(self, button)
+				if button == "LeftButton" then
+					sorting.BankSort(0)
+				else
+					sorting.BankSort(1)
+				end
+			end)
+		else
+			sortbutton:SetScript('OnClick', function(self, button)
+				if button == "LeftButton" then
+					sorting.BagSort(0)
+				else
+					sorting.BagSort(1)
+				end
+			end)
+		end
+ 	elseif name == "ItemSets" or name == "BankItemSets" then
+		local setname = self:CreateFontString(nil,"OVERLAY")
 		setname:SetPoint("TOPLEFT", self, "TOPLEFT",5,-5)
-		setname:SetFont("Fonts\\FRIZQT__.TTF", 14, "THINOUTLINE")
+		setname:SetFont(cfg.bags.general.font, cfg.bags.general.font_size, "THINOUTLINE")
 		setname:SetText(string.format(EQUIPMENT_SETS,' ')) 
 	end
 end

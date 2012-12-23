@@ -1,10 +1,12 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: mono|cffffffffActionBars|r
 ## Author: Monolit
 ## Notes: Action bar styling
 ## Version:  5.0.3
 ## Credits: Zork, Allez, Iceblink, Tuller, Tukz, Nightcracker
+## OptionalDeps: !mCFG
 cfg.lua
+..\!mCFG\mCFG_layer.lua
 elements\ActionBarsLib.lua
 ActionBars.lua
 elements\RaidMark.lua

@@ -1,0 +1,46 @@
+﻿local addon, ns = ...
+local cfg = ns.cfg
+local A = ns.A
+
+----------------- > Cloak / Helm toggle check boxes at PaperDollFrame
+local GameTooltip = GameTooltip
+local helmcb = CreateFrame("CheckButton", nil, PaperDollFrame)
+helmcb:ClearAllPoints()
+helmcb:SetSize(22,22)
+helmcb:SetFrameLevel(10)
+helmcb:SetPoint("TOPLEFT", CharacterHeadSlot, "BOTTOMRIGHT", 5, 5)
+helmcb:SetScript("OnClick", function() ShowHelm(not ShowingHelm()) end)
+helmcb:SetScript("OnEnter", function(self)
+ 	GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+	GameTooltip:SetText("Toggle helm")
+end)
+helmcb:SetScript("OnLeave", function() GameTooltip:Hide() end)
+helmcb:SetScript("OnEvent", function() helmcb:SetChecked(ShowingHelm()) end)
+helmcb:SetNormalTexture("Interface\\Buttons\\UI-CheckBox-Up")
+helmcb:SetPushedTexture("Interface\\Buttons\\UI-CheckBox-Down")
+helmcb:SetHighlightTexture("Interface\\Buttons\\UI-CheckBox-Highlight")
+helmcb:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+helmcb:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
+helmcb:RegisterEvent("UNIT_MODEL_CHANGED")
+
+local cloakcb = CreateFrame("CheckButton", nil, PaperDollFrame)
+cloakcb:ClearAllPoints()
+cloakcb:SetSize(22,22)
+cloakcb:SetFrameLevel(10)
+cloakcb:SetPoint("TOPLEFT", CharacterBackSlot, "BOTTOMRIGHT", 5, 5)
+cloakcb:SetScript("OnClick", function() ShowCloak(not ShowingCloak()) end)
+cloakcb:SetScript("OnEnter", function(self)
+	GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+	GameTooltip:SetText("Toggle cloak")
+end)
+cloakcb:SetScript("OnLeave", function() GameTooltip:Hide() end)
+cloakcb:SetScript("OnEvent", function() cloakcb:SetChecked(ShowingCloak()) end)
+cloakcb:SetNormalTexture("Interface\\Buttons\\UI-CheckBox-Up")
+cloakcb:SetPushedTexture("Interface\\Buttons\\UI-CheckBox-Down")
+cloakcb:SetHighlightTexture("Interface\\Buttons\\UI-CheckBox-Highlight")
+cloakcb:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+cloakcb:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
+cloakcb:RegisterEvent("UNIT_MODEL_CHANGED")
+
+helmcb:SetChecked(ShowingHelm())
+cloakcb:SetChecked(ShowingCloak())

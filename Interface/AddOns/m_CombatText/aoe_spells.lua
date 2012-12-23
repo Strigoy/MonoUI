@@ -2,11 +2,11 @@ local addon, ns = ...
 local cfg = ns.cfg
 local aoe = CreateFrame("Frame")  
 
-if not cfg.merge_aoe_spam then return end
+if not cfg.combattext.merge_aoe_spam then return end
 aoe.spell = {}
 local player_class=select(2,UnitClass("player"))
 if player_class=="WARLOCK" then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[27243]=true		-- Seed of Corruption (DoT)
 		aoe.spell[27285]=true		-- Seed of Corruption (Explosion)
 		aoe.spell[87385]=true		-- Seed of Corruption (Explosion Soulburned)
@@ -27,7 +27,7 @@ if player_class=="WARLOCK" then
 		aoe.spell[20153]=true		-- Immolation (Infrenal)
 	end
 elseif player_class=="DRUID"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		-- Healer spells
 		aoe.spell[774]=true			-- Rejuvenation (Normal)
 		aoe.spell[64801]=true		-- Rejuvenation (First tick)
@@ -51,7 +51,7 @@ elseif player_class=="DRUID"then
 		aoe.spell[1079]=true		-- Rip
 	end
 elseif player_class=="PALADIN"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[81297]=true		-- Consecration
 		aoe.spell[2812]=true		-- Holy Wrath
 		aoe.spell[53385]=true		-- Divine Storm
@@ -67,7 +67,7 @@ elseif player_class=="PALADIN"then
 		aoe.spell[85222]=true		-- Light of Dawn		
 	end
 elseif player_class=="PRIEST"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		-- Healer spells
 --		aoe.spell[47750]=true		-- Penance (Heal Effect)
 		aoe.spell[139]=true			-- Renew
@@ -93,7 +93,7 @@ elseif player_class=="PRIEST"then
 		aoe.spell[87532]=true		-- Shadowy Apparition
 	end
 elseif player_class=="SHAMAN"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[73921]=true		-- Healing Rain
 		aoe.spell[1064]=true		-- Chain Healing
 		aoe.spell[51945]=true		-- Earthliving
@@ -101,6 +101,7 @@ elseif player_class=="SHAMAN"then
 		
 		aoe.spell[421]=true			-- Chain Lightning
 		aoe.spell[45297]=true		-- Chain Lightning (mastery proc)
+		aoe.spell[114074]=true		-- Lava Beam
 		aoe.spell[8349]=true		-- Fire Nova
 		aoe.spell[77478]=true 		-- Earhquake
 		aoe.spell[51490]=true 		-- Thunderstorm
@@ -108,7 +109,7 @@ elseif player_class=="SHAMAN"then
 		aoe.spell[8050]=true		-- Flame Shock
 	end
 elseif player_class=="MAGE"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[44461]=true		-- Living Bomb Explosion
 		aoe.spell[44457]=true		-- Living Bomb Dot
 		aoe.spell[2120]=true		-- Flamestrike
@@ -122,7 +123,7 @@ elseif player_class=="MAGE"then
 		aoe.spell[33395]=true		-- Freeze (Water Elemental)
 	end
 elseif player_class=="WARRIOR"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[845]=true			-- Cleave
 		aoe.spell[46968]=true		-- Shockwave
 		aoe.spell[6343]=true		-- Thunder Clap
@@ -131,11 +132,11 @@ elseif player_class=="WARRIOR"then
 		aoe.spell[12721]=true		-- Deep Wounds
 	end
 elseif player_class=="HUNTER"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[2643]=true		-- Multi-Shot
 	end
 elseif player_class=="DEATHKNIGHT"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[55095]=true		-- Frost Fever
 		aoe.spell[55078]=true		-- Blood Plague
 		aoe.spell[55536]=true		-- Unholy Blight
@@ -157,7 +158,7 @@ elseif player_class=="DEATHKNIGHT"then
 		aoe.spell[66215]=45902          -- Blood Strike OH
 	end
 elseif player_class=="ROGUE"then
-	if(cfg.merge_aoe_spam)then
+	if(cfg.combattext.merge_aoe_spam)then
 		aoe.spell[51723]=true		-- Fan of Knives
 		aoe.spell[2818]=true		-- Deadly Poison
 		aoe.spell[8680]=true		-- Instant Poison
@@ -165,9 +166,9 @@ elseif player_class=="ROGUE"then
 end
 
 aoe.SQ={}
-if (cfg.show_damage or cfg.show_healing) then
-	if not cfg.merge_aoe_time then
-		cfg.merge_aoe_time=0
+if (cfg.combattext.show_damage or cfg.combattext.show_healing) then
+	if not cfg.combattext.merge_aoe_time then
+		cfg.combattext.merge_aoe_time=0
 	end
 	local pairs=pairs
 	for k,v in pairs(aoe.spell) do
@@ -192,7 +193,7 @@ if (cfg.show_damage or cfg.show_healing) then
 			tslu=0
 			local utime=time()
 			for k,v in pairs(aoe.SQ) do
-				if not aoe.SQ[k]["locked"] and aoe.SQ[k]["queue"]>0 and aoe.SQ[k]["utime"]+cfg.merge_aoe_time<=utime then
+				if not aoe.SQ[k]["locked"] and aoe.SQ[k]["queue"]>0 and aoe.SQ[k]["utime"]+cfg.combattext.merge_aoe_time<=utime then
 					count = aoe.SQ[k]["count"]>1 and "|cffFFAD29("..aoe.SQ[k]["count"]..") |r" or ""
 					local queue = aoe.SQ[k]["queueFormatted"] or aoe.SQ[k]["queue"]
 					mCT3:AddMessage(count..queue..aoe.SQ[k]["msg"], unpack(aoe.SQ[k]["color"]))

@@ -1,6 +1,6 @@
 ## Interface: 50100
-## Notes: A combination of few UI tweaks. 
-## Title: mono|cffffffffTweaks|r
+## Notes: Compilation of essential UI elements.
+## Title: mono|cffffffffUIelements|r
 ## Author: Monolit
 ## Version: 5.1.0
 ## OptionalDeps: !mCFG, DBM-Core, NugRunning, Bigwigs, oUF_mono, Skada

@@ -116,7 +116,7 @@ GuildInstanceDifficulty:SetFrameStrata("LOW")
 -- Mail icon
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:SetPoint("BOTTOMRIGHT", Minimap, "BOTTOMRIGHT", 2, -6)
-MiniMapMailIcon:SetTexture("Interface\\AddOns\\m_Tweaks\\media\\mail")
+MiniMapMailIcon:SetTexture(cfg.media.mail_icon)
 
 -- Invites Icon
 GameTimeCalendarInvitesTexture:ClearAllPoints()

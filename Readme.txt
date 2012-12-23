@@ -106,7 +106,7 @@ the addon will pick a propper mount depends on the location you are in (includin
 [*]	[COLOR="Wheat"]m_Loot[/COLOR] - Butsu + MasterLoot + sGroupLoot compilation with some stylization
 [*]	[COLOR="Wheat"]m_Map[/COLOR] - WorldMap modification
 [*]	[COLOR="Wheat"]m_Nameplates[/COLOR] - minimalistic name plates
-[*]	[COLOR="Wheat"]m_Tweaks[/COLOR] - essential UI elements
+[*]	[COLOR="Wheat"]m_UI[/COLOR] - essential UI elements
 [*]	[COLOR="Wheat"]NugRunning[/COLOR] - Buff/Debuff tracking
 [*]	[COLOR="Wheat"]oUF_mono[/COLOR] - oUF-based lightweight UnitFrames
 [/LIST]

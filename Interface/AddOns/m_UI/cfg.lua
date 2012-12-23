@@ -1,12 +1,13 @@
 local addon, ns = ...
 local cfg = CreateFrame("Frame")
 
-cfg.media = { -- cfg.media.statusbar
-	auratex = "Interface\\Addons\\m_Tweaks\\media\\iconborder", 
-	font = "Interface\\Addons\\m_Tweaks\\media\\font.ttf",
-	backdrop_texture = "Interface\\Addons\\m_Tweaks\\media\\backdrop",
-	backdrop_edge_texture = "Interface\\Addons\\m_Tweaks\\media\\backdrop_edge",
-	statusbar = "Interface\\Addons\\m_Tweaks\\media\\statusbar.tga",
+cfg.media = { -- cfg.media.mail_icon
+	auratex = "Interface\\Addons\\m_UI\\media\\iconborder", 
+	font = "Interface\\Addons\\m_UI\\media\\font.ttf",
+	backdrop_texture = "Interface\\Addons\\m_UI\\media\\backdrop",
+	backdrop_edge_texture = "Interface\\Addons\\m_UI\\media\\backdrop_edge",
+	statusbar = "Interface\\Addons\\m_UI\\media\\statusbar.tga",
+	mail_icon = "Interface\\AddOns\\m_UI\\media\\mail",
 }
 
 cfg.script = { 

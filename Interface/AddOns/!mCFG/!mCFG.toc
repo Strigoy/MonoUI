@@ -7,8 +7,8 @@
 
 !mCFG_init.lua
 
-m_Tweaks\cfg.lua
-init\m_Tweaks.lua
+m_UI\cfg.lua
+init\m_UI.lua
 
 m_ActionBars\cfg.lua
 init\m_ActionBars.lua

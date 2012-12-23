@@ -5,7 +5,7 @@ MonoUI: m_Chat, m_Minimap, m_Buffs, m_Chat, m_Panels, alTooltip, tullaCC: remove
 MonoUI: all cfg.lua files were updated
 oUF: removed (now part of oUF_mono)
 !mCFG: implemented add-on that provides user the ability to keep his cfg.lua files in 1 place for easier updates, just drop your cfg.lua in the respective folder and you are good
-m_Tweaks: restructured, added allot of new modules and functionality, just too many to list (again), make sure to go through cfg.lua file and check the latest additions
+m_Tweaks: restructured and renamed to m_UI, added allot of new modules and functionality, just too many to list (again), make sure to go through cfg.lua file and check the latest additions
 
 ====== v. 11.2 rev 3 ======
 5.1 fixes + few changes, more info with the next update

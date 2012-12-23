@@ -80,8 +80,9 @@
 		custom_visibility_macro = false
 		},
 	["MicroMenu"] = {
-		hide_bar = true,				show_on_mouseover = true,	scale = 0.85,
-		position = {a="BOTTOMRIGHT", x=-25, y=300},
+		hide_bar = false,				show_on_mouseover = false,	scale = 0.85,
+		lock_to_CharacterFrame = true,					-- position MicroMenu bar right on top of your CharacterFrame
+		position = {a="BOTTOMRIGHT", x=-25, y=300},  	-- if not locked
 		},
 		
 	["ExitVehicleButton"] = {

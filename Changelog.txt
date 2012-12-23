@@ -1,8 +1,14 @@
-TODO / KNOWN ISSUES:
-- resize postupdate for class bars
-- threat indication for target frame
-? alternative class indication @ unitframes?
-x The Spell IDs in talents window are doubled (seems to be OnTooltipSetSpell handler bug, it fires twice).
+====== v. 12.0 rev 1 ======
+-- I lost the entire change log due to misstimed Git commit during GitHub maintanence and it did overwrite the original file, GG.
+-- The list of v.12 changes was huge, so I am not going to spend my time restoring it, however I will breifly list the important changes here.
+MonoUI: m_Chat, m_Minimap, m_Buffs, m_Chat, m_Panels, alTooltip, tullaCC: removed (merged within m_Tweaks)
+MonoUI: all cfg.lua files were updated
+oUF: removed (now part of oUF_mono)
+!mCFG: implemented add-on that provides user the ability to keep his cfg.lua files in 1 place for easier updates, just drop your cfg.lua in the respective folder and you are good
+m_Tweaks: restructured, added allot of new modules and functionality, just too many to list (again), make sure to go through cfg.lua file and check the latest additions
+
+====== v. 11.2 rev 3 ======
+5.1 fixes + few changes, more info with the next update
 
 ====== v. 11.2 rev 2 ======
 alTooltip: tooltip style for caged battle pets
@@ -850,7 +856,7 @@ slow party and raid frames "click detection" (can't do a jack about that untill 
 ====== v. 0.9 rev 3 ======
 m_BrokerStuff: removed equipmentManager cvar
 m_Minimap: StreamingIcon repositioned to the topright map corner
-m_UIconfig: altered dominos layout and posses bar ¹
+m_UIconfig: altered dominos layout and posses bar &#8470;
 m_Tweaks: temporary FeedbackUI_CompanionHook() fix by SDPhantom added
 m_Map: fixed "Show dig sites" button scale and positioning
 oUF_mono: added orbs display for shadow priests like one of the specific powers

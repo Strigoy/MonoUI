@@ -332,6 +332,10 @@ if cfg.bars["MicroMenu"].show_on_mouseover then
 	hooksecurefunc(TalentMicroButton, "SetAlpha", TalentSwitchAlphaFix)
 end
 if cfg.bars["MicroMenu"].hide_bar then MicroMenu:Hide() end
+if cfg.bars["MicroMenu"].lock_to_CharacterFrame then 
+	MicroMenu:SetParent(PaperDollFrame)
+	MicroMenu:SetPoint("BOTTOMLEFT", PaperDollFrame, "TOPLEFT",65,2)
+end
 
 -- fix main bar keybind not working after a talent switch
 hooksecurefunc('TalentFrame_LoadUI', function()

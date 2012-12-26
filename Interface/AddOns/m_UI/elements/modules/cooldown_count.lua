@@ -54,24 +54,26 @@ local CreateTimer = function(self)
 end
 
 local StartTimer = function(self, start, duration)
+	if self.noOCC then return end
 	local text = self.text or CreateTimer(self)
 	if text then
 		self.start = start
 		self.duration = duration
 		self.nextUpdate = 0
 		self:SetScript('OnUpdate', UpdateTimer)
-		text:Show()
+		--text:Show()
+		
+		if start > 0 and duration > 2 then
+			text:Show()
+		else
+			HideTimer(text)
+		end
 	end
 end
 
 local methods = getmetatable(CreateFrame("Cooldown")).__index
-hooksecurefunc(methods, 'SetCooldown', function(self, start, duration)
-	if start > 0 and duration > 3 and not self.noCooldownCount then
-		StartTimer(self, start, duration)
-	else
-		HideTimer(self)
-	end
-end)
+hooksecurefunc(methods, 'SetCooldown', StartTimer)
+--hooksecurefunc(getmetatable(ActionButton1Cooldown).__index, "SetCooldown", StartTimer)
 
 local active = {}
 local hooked = {}
@@ -95,11 +97,12 @@ end
 local function cooldown_Update(self)
 	local button = self:GetParent()
 	local start, duration, enable = GetActionCooldown(button.action)
-
+	local charges, maxCharges, chargeStart, chargeDuration = GetActionCharges(button.action)
+	
+	if charges and charges > 0 then return end
+	
 	if cooldown_ShouldUpdateTimer(self, start, duration) then
-		if duration > 3 then
-			StartTimer(self, start, duration)
-		end
+		StartTimer(self, start, duration)
 	end
 end
 
@@ -111,6 +114,7 @@ EventWatcher:SetScript("OnEvent", function(self, event)
 	end
 end)
 EventWatcher:RegisterEvent("ACTIONBAR_UPDATE_COOLDOWN")
+--EventWatcher:RegisterEvent("ACTIONBAR_UPDATE_STATE")
 
 local function actionButton_Register(frame)
 	local cooldown = frame.cooldown

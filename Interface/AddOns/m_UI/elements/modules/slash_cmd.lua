@@ -21,7 +21,7 @@ local A = ns.A
 /teleport				teleports to instance when in LFG instance
 /pc <#seconds>			pull countdown
 
-/model <CREATURE ID>	easy creature model display for fancy screenshots
+/model <CREATURE ID> or "dj"	easy creature model display for fancy screenshots use "dj" when dungeon journal is opened to get the model shown the same way
 /setbw					set Bigwigs settings (for 1920*x resolutions only)
 /setdbm					set DeadlyBossMods settings (for 1920*x resolutions only)
 
@@ -297,13 +297,33 @@ SLASH_FRAME2 = "/gf"
 
 -- something simple to make a good screenshot of a boss model
 SlashCmdList["MODEL"] = function(s)
---displaymodel = function(s)
+	if s == "dj" then
+		local d = EncounterJournalEncounterFrameModelFrame
+		d:ClearAllPoints() 
+		d:SetPoint("CENTER",UIParent,"CENTER",0,0)
+		d:SetSize(750,750)
+		--d:SetScale(0.8)
+		d:SetFrameStrata("TOOLTIP")
+		EncounterJournalEncounterFrameModelFrameShadow:Hide()
+		EncounterJournalEncounterFrameModelFrameTitleBG:Hide()
+		A.make_backdrop(d)
+		d.backdrop:SetPoint("TOPLEFT", -3, 4)
+		d.backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
+		d.backdrop:SetFrameLevel(CharacterModelFrame:GetFrameLevel()-1)
+		d.backdrop:SetBackdropColor(0.9,0.3,0.3)
+		return
+	end
+	local holder = CreateFrame"Frame"
+	holder:SetSize(700,700)
+	holder:SetPoint("CENTER")
+	holder:SetFrameStrata("HIGH")
+
 	local f=CharacterModelFrame 
 	f:SetCreature(s) -- 62397
-	f:SetScale(2)
+	f:SetSize(550,550)
 	f:ClearAllPoints()
 	f:SetPoint("CENTER",UIParent,"CENTER",0,50)
-	f:SetFrameStrata("HIGH")
+	f:SetParent(holder)
 	
 	A.make_backdrop(f)
 	f.backdrop:SetPoint("TOPLEFT", -3, 4)

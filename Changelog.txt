@@ -1,5 +1,10 @@
+====== v. 12.0 rev 2 ======
+m_UI: implemented a fix for cooldown_count module so it updates propperly on cooldown reset
+m_UI: reworked /model command, now it allows to get the model directly from Dungeon Journal with /model dj
+
+
 ====== v. 12.0 rev 1 ======
--- I lost the entire change log due to misstimed Git commit during GitHub maintanence and it did overwrite the original file, GG.
+-- I lost the entire change log due to misstimed Git commit during GitHub maintenance and it did overwrite the original file, GG.
 -- The list of v.12 changes was huge, so I am not going to spend my time restoring it, however I will breifly list the important changes here.
 MonoUI: m_Chat, m_Minimap, m_Buffs, m_Chat, m_Panels, alTooltip, tullaCC: removed (merged within m_Tweaks)
 MonoUI: all cfg.lua files were updated

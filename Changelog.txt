@@ -1,7 +1,12 @@
-====== v. 12.0 rev 2 ======
-m_UI: implemented a fix for cooldown_count module so it updates propperly on cooldown reset
-m_UI: reworked /model command, now it allows to get the model directly from Dungeon Journal with /model dj
+====== v. 12.0 rev 3 ======
+oUF_mono: fixed events list for mono:hp tag to properly indicate when unit is dead or offline
+m_UI: little update for tooltip module
+m_UI: skada skin was updated and disabled by default as it still needs some testing to be done
+m_CombatText: added restorative mists to aoe list (resto shamans)
 
+====== v. 12.0 rev 2 ======
+m_UI: implemented a fix for cooldown_count module so it updates properly on cooldown reset
+m_UI: reworked /model command, now it allows to get the model directly from Dungeon Journal with /model dj
 
 ====== v. 12.0 rev 1 ======
 -- I lost the entire change log due to misstimed Git commit during GitHub maintenance and it did overwrite the original file, GG.
@@ -29,7 +34,7 @@ m_Chat: removed styling of default time stamps (for now)
 m_Map: added option to display decimal part of map coordinates
 m_Map: removed tooltip fix for quest blobs
 m_ActionBars: exit vehicle button when docked will always have its position locked by last available Bar1 button
-m_ActionBars: PARTY/RAID events replaced with new GROUP_ROSTER_UPDATE event to propperly handle mark bars
+m_ActionBars: PARTY/RAID events replaced with new GROUP_ROSTER_UPDATE event to properly handle mark bars
 m_ActionBars: removed couple config values from RaidMark and WorldMarker bars
 m_Loot: adjusted size and position of several elements; overall made loot frames bigger
 
@@ -110,7 +115,7 @@ m_Tweaks: cfg.ThreatBar will function as intended now
 m_ActionBars: added possess bar (swaps with stance bar)
 m_ActionBars: added styling for possess bar
 m_ActionBars: reworked how the main bar works
-m_ActionBars: propperly implemented OverrideBar
+m_ActionBars: properly implemented OverrideBar
 m_ActionBars: fixed taint issues with extra action bar (bar6)
 m_ActionBars: updated raid / world mark bars spawning logic
 m_ActionBars: code refactoring cfg.lua MUST BE UPDATED
@@ -428,7 +433,7 @@ m_Panels: fixed panels' bg insets in panels spawning functions
 m_Panels: entire layout adjusted to work with modified functions
 m_Panels: fixed /pnl
 m_Minimap: fixed the issue with right and middle clicks on minimap producing pings instead of just opening menus
-m_Minimap: fixed right click on the Time Frame causing TimeManager to toggle, now it will propperly open just Calendar frame as intended
+m_Minimap: fixed right click on the Time Frame causing TimeManager to toggle, now it will properly open just Calendar frame as intended
 m_CombatText: simplified the way this add-on loads to avoid confusion with blizzard's built in combat text
 m_BrokerStuff: implemented world latency display in latency tooltip
 m_BrokerStuff: removed unnecesarry tekKonfigScroll lib 
@@ -553,7 +558,7 @@ m_Loot: added suppress_loot_spam option to the very top of m_LootGroup.lua
 m_Map: small adjustments to the coordinates font string
 
 ====== v. 10.1 rev 0 ======
-oUF_mono: fixed typo in core.lua preventing target frame from scaling propperly
+oUF_mono: fixed typo in core.lua preventing target frame from scaling properly
 m_ActionBars: RangeCheck module update: Removed Holy power spells that only do linear scaling © Tuller
 m_Tweaks: removed temp. code for Mountz function thus it's now working on live realms
 eXPiritia_basic: removed temp. code so now XP bar will be visible untill you hit level 85
@@ -605,7 +610,7 @@ m_BrokerStuff: added "wipe gathered gold data" functionality to the broker_money
 
 ====== v. 10.0 rev 3 ======
 oUF_mono: reverted TagEvents change
-oUF_mono: added frequentUpdate to the hpval tag for raid frames in attempt to fix impropperly updated names
+oUF_mono: added frequentUpdate to the hpval tag for raid frames in attempt to fix improperly updated names
 oUF_mono: removed safezone on player vehicle's castbar to avoid it overlapping whole cast bar after relog
 oUF_mono: removed dynamic castbar cooring for cast bar, thus added option to set specific cast bar color in cfg.lua (cfg.cbcolor)
 oUF_mono: resting indicator moved few pixels to the right to avoid overlapping with level text
@@ -649,7 +654,7 @@ m_ActionBars: added /tm or /mab function allows user to enter testmode to see ba
 m_ActionBars: the buttons grid on main actionbar will be hidden by default to prevent it overlaping exit vehicle button
 m_ActionBars: new border texture for exit vehicle button to match other bars style
 m_ActionBars: adjusted exit vehicle button's dimensions so it fits exactly @ 8th button slot
-m_ActionBars: exit vehicle button now propperly anchored to ActionButton8 slot
+m_ActionBars: exit vehicle button now properly anchored to ActionButton8 slot
 m_ActionBars: added overlay for totembar's holder
 m_ActionBars: added 2 special bars: RaidIcon and WorldMarker
 m_ActionBars: applied buttons style for RaidIcon and WorldMarker bars
@@ -1278,7 +1283,7 @@ m_ChatMods: fixed editbox error, /chatmove command should be fully functional no
 FreebTip: tooltip scale increased
 
 ====== v. 7.9 rev 1 ======
-oUF_mono, oUF_Freebgrid, m_Panels: adjusted to propperly fit HD resolutions
+oUF_mono, oUF_Freebgrid, m_Panels: adjusted to properly fit HD resolutions
 m_Panels: tiny cluster adjustments in main layout
 oUF_mono: fixed runebar position
 oUF_Freebgrid: fixed bad arguments for range check for Mages and Warlocks
@@ -1373,7 +1378,7 @@ m_ChatMods: further code optimisations, few new options now available + spammfil
 oUF_Freebgrid: raid debuffs update
 
 ====== v. 7.7 rev. 6.6 ======
-m_ChatMods: (bugfix) new fix for /tt function, it now works propperly even if the target is out of range
+m_ChatMods: (bugfix) new fix for /tt function, it now works properly even if the target is out of range
 oUF_mono: (bugfix) fixed the error on boss targets frames despawn
 oUF_mono: (bugfix) tot and pets debuffs are back!
 
@@ -1393,7 +1398,7 @@ m_ChatMods: fixed small issue which caused garbage leak (again)
 m_ChatMods: fixed small issue which caused garbage leak
 
 ====== v. 7.7 rev. 6 ======
-oUF_mono: fixed pets/arenaframes' targets not coloring propperly
+oUF_mono: fixed pets/arenaframes' targets not coloring properly
 m_Minimap: fixed strata issue for minimap itself and LFD tooltip
 m_UISettings -> m_Settings: added some quick options
 m_Loot: autoacceptDE function moved to m_Settings
@@ -1418,7 +1423,7 @@ oUF_Freebgrid: new way of handling pets (beta state, so yes its buggy)
 oUF_Freebgrid: added oRA3 MT list sorting support from original freebgrid
 Broker_Equipment: updated
 m_Loot: added new option to group loot module for auto accepting DE roll in partys
-NugRunning: (updated) now propperly handles haste buffs and recast mark, slightly modified looks and position
+NugRunning: (updated) now properly handles haste buffs and recast mark, slightly modified looks and position
 m_UIconfig: minor position updates for NugRunning options
 oUF_mono: health text on target boss frames now displayed as shorten values (i.e. 1k,2m etc.)
 m_Minimap: difficulty flag strata changed so it doesn't hide behind minimap
@@ -1473,7 +1478,7 @@ m_Panels: fixed alignment grid
 m_Panels: fixed updater for raid backgrop NOW FOR REAL!
 
 ====== v. 7.6 rev. 2 ======
-oUF_Freebgrid: (bugfix) applyAuraIndicators() now in place and spawns indicators propperly
+oUF_Freebgrid: (bugfix) applyAuraIndicators() now in place and spawns indicators properly
 FreebTip: changed guild tag color
 m_Panels: fixed updater for Freebgrid backgrop
 
@@ -1713,11 +1718,11 @@ Replaced old version of DBM broker plugin with official one + modified cargoship
 ====== v. 6.4 rev. 5 ======
 doh! I accidentally removed m_BasicChatMods, it's there now!
 oUF_mono is updated and now fully supports oUF_WeaponEnchant
-Mirror cast bars will be stylized propperly now
+Mirror cast bars will be stylized properly now
 DBM update (Onyxia)
 
 ====== v. 6.4 rev. 4 ======
 small adjustments of temp. enchant frame in oUF_mono
 added changelog (yaaay!)
 
-Lets see if i'll be patient enough to propperly log all the changes..
+Lets see if i'll be patient enough to properly log all the changes..

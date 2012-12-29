@@ -169,7 +169,7 @@ oUF.Tags.Methods['mono:hp']  = function(u) -- THIS IS FUCKING MADNESS!!!
     end
   end
 end
-oUF.Tags.Events['mono:hp'] = oUF.Tags.Events.missinghp
+oUF.Tags.Events['mono:hp'] = 'UNIT_HEALTH UNIT_MAXHEALTH UNIT_CONNECTION'--oUF.Tags.Events.missinghp
 
 oUF.Tags.Methods['mono:hpperc']  = function(u) 
 	local per = oUF.Tags.Methods['perhp'](u)

@@ -183,7 +183,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 		end
 		if UnitIsPVP(unit) then
 			for i = 2, GameTooltip:NumLines() do
-				if _G["GameTooltipTextLeft"..i]:GetText():find(PVP) then
+				if _G["GameTooltipTextLeft"..i] and _G["GameTooltipTextLeft"..i]:GetText():find(PVP) then -- does this line exist?
 					_G["GameTooltipTextLeft"..i]:SetText(nil)
 					break
 				end

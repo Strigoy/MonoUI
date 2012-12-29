@@ -97,11 +97,11 @@ elseif player_class=="SHAMAN"then
 		aoe.spell[73921]=true		-- Healing Rain
 		aoe.spell[1064]=true		-- Chain Healing
 		aoe.spell[51945]=true		-- Earthliving
-		aoe.spell[114942]=true		-- Healing tide
-		
+		aoe.spell[114942]=true		-- Healing tide 
+		aoe.spell[114083]=true		-- Restorative mists (ascendence)
 		aoe.spell[421]=true			-- Chain Lightning
 		aoe.spell[45297]=true		-- Chain Lightning (mastery proc)
-		aoe.spell[114074]=true		-- Lava Beam
+		aoe.spell[114074]=true		-- Lava Beam (ascendence)
 		aoe.spell[8349]=true		-- Fire Nova
 		aoe.spell[77478]=true 		-- Earhquake
 		aoe.spell[51490]=true 		-- Thunderstorm

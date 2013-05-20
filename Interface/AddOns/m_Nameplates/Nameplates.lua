@@ -1,6 +1,10 @@
 local addon, ns = ...
 local cfg = ns.cfg
 
+if cfg.nameplates.font == "Fonts\\FRIZQT__.ttf" then
+	cfg.nameplates.font = "Interface\\Addons\\mCT\\font.ttf"
+end
+
 local backdrop = {
 	edgeFile = cfg.nameplates.backdrop_edge, edgeSize = 3,
 	insets = {left = 3, right = 3, top = 3, bottom = 3}}

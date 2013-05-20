@@ -7,6 +7,7 @@ local L = {
 	["Heart of Fear"] = 897, --330, 
 	["Terrace of Endless Spring"] = 886, --320,
 	["Pandaria"] = 809, --322,
+	["Throne of Thunder"] = 930, -- 362
 }
 
 raid_debuffs = {
@@ -34,6 +35,84 @@ raid_debuffs = {
 		[GetSpellInfo(5484)] = 3 -- Howl of Terror 
 	},
 	instances = {
+		[L["Throne of Thunder"]] = {
+		-- Throne of Thunder
+			-- Jin'rokh the Breaker
+			[GetSpellInfo(138349)] = 5,	-- Static Wound (Tank stacks)
+			[GetSpellInfo(138349)] = 5,	-- Thundering Throw (Tank stun)
+			[GetSpellInfo(138732)] = 8,	-- Ionization (Heroic-Dispel)
+			[GetSpellInfo(137422)] = 7,	-- Focused Lightning (Fixated - Kiting)
+			[GetSpellInfo(138006)] = 6,	-- Electrified Waters (Pool)
+			-- Horridon
+			[GetSpellInfo(136767)] = 5,	-- Triple Puncture (Tank stacks)
+			[GetSpellInfo(136654)] = 7,	-- Rending Charge (DoT)
+			[GetSpellInfo(136708)] = 8,	-- Stone Gaze (Stun)
+			[GetSpellInfo(136723)] = 7,	-- Sand Trap (Pool)
+			[GetSpellInfo(136710)] = 7,	-- Deadly Plague (Dispel)
+			[GetSpellInfo(136719)] = 7,	-- Blazing Sunlight (Dispel)
+			[GetSpellInfo(136587)] = 7,	-- Venom Bolt Volley (Dispel)
+			[GetSpellInfo(136512)] = 8,	-- Hex of Confusion (Dispel)
+			-- Council of Elders
+			[GetSpellInfo(136903)] = 5,	-- Frigid Assault (Tank stacks)
+			[GetSpellInfo(136922)] = 8,	-- Frostbite (DoT + stun)
+			[GetSpellInfo(136857)] = 7,	-- Entrapped (Dispel)
+			[GetSpellInfo(137359)] = 7,	-- Marked Soul (Fixated - Kiting)
+			[GetSpellInfo(137641)] = 7,	-- Soul Fragment (Heroic)
+			[GetSpellInfo(137650)] = 6,	-- Shadowed Soul
+			-- Tortos
+			[GetSpellInfo(136753)] = 5,	-- Slashing Talons (Tank DoT)
+			[GetSpellInfo(137633)] = 7,	-- Crystal Shell (Heroic)
+			[GetSpellInfo(140701)] = 8, -- Crystal Shell: Full Capacity! (Heroic)
+			-- Megaera
+			[GetSpellInfo(137731)] = 5,	-- Ignite Flesh (Tank DoT)
+			[GetSpellInfo(139843)] = 5,	-- Arctic Freeze (Tank Stun)
+			[GetSpellInfo(139840)] = 5,	-- Rot Armor (Tank stacks)
+			[GetSpellInfo(134391)] = 8,	-- Cinder (DoT Dispell)
+			[GetSpellInfo(139857)] = 7,	-- Torrent of Ice (Fixated - Kiting)
+			[GetSpellInfo(140179)] = 7,	-- Suppression (Heroic Dispell)
+			[GetSpellInfo(139909)] = 7,	-- Icy Ground (Pool)
+			-- Ji-Kun
+			[GetSpellInfo(140092)] = 5,	-- Infected Talons (Tank DoT)
+			[GetSpellInfo(134256)] = 7,	-- Slimed (DoT)
+			-- Durumu the Forgotten
+			[GetSpellInfo(133768)] = 4,	-- Arterial Cut (Tank stacks)
+			[GetSpellInfo(133767)] = 5,	-- Serious Wound (Tank only)
+			[GetSpellInfo(133798)] = 7,	-- Life Drain (Stun)
+			[GetSpellInfo(133597)] = 7,	-- Dark Parasite (Heroic Dispel)
+			-- Primordius
+			[GetSpellInfo(136050)] = 5,	-- Malformed Blood (Tank stacks)
+			[GetSpellInfo(136228)] = 8,	-- Volatile Pathogen (DoT)
+			[GetSpellInfo(137000)] = 7, -- Black Blood
+			-- Dark Animus
+			[GetSpellInfo(138569)] = 5,	-- Explosive Slam (Tank stacks)
+			[GetSpellInfo(138659)] = 7,	-- Touch of the Animus (DoT)
+			[GetSpellInfo(138486)] = 8, -- Crimson Wake Target Debuff
+			[GetSpellInfo(138609)] = 8, -- Matter Swap
+			[GetSpellInfo(136962)] = 7, -- Anima Ring
+			-- Iron Qon
+			[GetSpellInfo(134691)] = 5,	-- Impale (Tank stacks)
+			[GetSpellInfo(134628)] = 7,	-- Unleashed Flame (Damage staks)
+			[GetSpellInfo(136192)] = 7,	-- Lightning Storm (Stun)
+			[GetSpellInfo(135145)] = 7,	-- Freeze (Stun+aoe damage)
+			[GetSpellInfo(137668)] = 8, -- Burning Cinders
+			[GetSpellInfo(137669)] = 8, -- Arcing Lightning
+			[GetSpellInfo(135145)] = 8, -- Freeze
+			-- Twin Consorts
+			[GetSpellInfo(137408)] = 5,	-- Fan of Flames (Tank stacks)
+			[GetSpellInfo(136722)] = 7,	-- Slumber Spores (Dispel)
+			[GetSpellInfo(137341)] = 7,	-- Beast of Nightmares (Fixate - DON"T HEAL THE TARGET SO MUCH)
+			[GetSpellInfo(137360)] = 7,	-- Corrupted Healing (Oh, did you heal the target. So prepare to massive damage, haha)
+			[GetSpellInfo(137440)] = 8, -- Icy Shadows
+			-- Lei Shen
+			--[GetSpellInfo(135000)] = 5,	-- Decapitate (Tank only)
+			[GetSpellInfo(136478)] = 5,	-- Fusion Slash (Tank only)
+			[GetSpellInfo(136914)] = 5,	-- Electrical Shock (Tank only)
+			[GetSpellInfo(135695)] = 7,	-- Static Shock (Damage Split)
+			[GetSpellInfo(136295)] = 8, -- Overcharge
+			[GetSpellInfo(139011)] = 9, -- Helm of Command
+			-- Ra-den
+		},
+	
 		[L["Mogu'shan Vaults"]] = {
 			-- The Stone Guard
 			[GetSpellInfo(116281)] = 7, -- Cobalt Mine Blast, Magic root
@@ -102,14 +181,21 @@ raid_debuffs = {
 			[GetSpellInfo(122395)] = 7, -- Struggle for Control, the self stun used to interupt the channel.
 			[GetSpellInfo(122457)] = 7, -- Rough Landing, The stun from being tossed and being hit by the toss from the add in Phase 2.
 			[GetSpellInfo(121949)] = 7, -- Parasitic Growth, the dot that scales with healing taken.
+			
+			-- Empress
+			[GetSpellInfo(125390)] = 7, -- Fixate
+			[GetSpellInfo(123184)] = 7, -- Dissonance Field
+			[GetSpellInfo(123788)] = 6, -- Cry of terror
+			[GetSpellInfo(126122)] = 7, -- Corrupted Dissonance Field
+			
 		},
 		[L["Terrace of Endless Spring"]] = {
 			--Protectors Of the Endless
-			[GetSpellInfo(117519)] = 7, -- Touch of Sha, Dot that lasts untill Kaolan is defeated.
-			[GetSpellInfo(117235)] = 7, -- Purified, haste buff gained by killing mist and being in range.
-			[GetSpellInfo(117353)] = 7, -- Overwhelming Corruption, stacking raidwide softenrage debuff.
+			--[GetSpellInfo(117519)] = 7, -- Touch of Sha, Dot that lasts untill Kaolan is defeated.
+			--[GetSpellInfo(117235)] = 7, -- Purified, haste buff gained by killing mist and being in range.
+			--[GetSpellInfo(117353)] = 7, -- Overwhelming Corruption, stacking raidwide softenrage debuff.
 			[GetSpellInfo(118091)] = 7, -- Defiled Ground, Increased damage taken from Defiled ground debuff.
-			[GetSpellInfo(117436)] = 7, -- Lightning Prison, Magic stun.
+			[GetSpellInfo(117436)] = 12, -- Lightning Prison, Magic stun.
 
 			--Tsulong
 			[GetSpellInfo(122768)] = 7, -- Dread Shadows, Stacking raid damage debuff (ragnaros superheated style) 
@@ -130,6 +216,8 @@ raid_debuffs = {
 			[GetSpellInfo(119985)] = 7, -- Dread Spray, stacking magic debuff, fears at 2 stacks.
 			[GetSpellInfo(119983)] = 7, -- Dread Spray, is also used.
 			[GetSpellInfo(119414)] = 7, -- Breath of Fear, Fear+Massiv damage.
+			
+			[GetSpellInfo(120629)] = 10, -- Huddle in Terror
 		},
 		[L["Dragon Soul"]] = {
 			-- Morchok

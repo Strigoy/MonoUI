@@ -4,6 +4,10 @@ local mCT = ns.mCT
 local aoe = ns.aoe
 cfg.blank="Interface\\Addons\\mCT\\blank"
 
+if cfg.combattext.font == "Fonts\\FRIZQT__.ttf" then
+	cfg.combattext.font = "Interface\\Addons\\m_CombatText\\media\\font.ttf"
+end
+
 --[[ -- Making sure that combat text is enabled
 local d=CreateFrame"Frame"
 d:RegisterEvent("VARIABLES_LOADED")
@@ -23,9 +27,13 @@ if UnitLevel("player") == MAX_PLAYER_LEVEL then
 	cfg.combattext.threshold.damage = cfg.combattext.threshold.damage_maxlvl
 end
 -- Create scrolling frames
+-- local t = CreateFrame"Frame"
+-- t:RegisterEvent"VARIABLES_LOADED"
+-- t:SetScript("OnEvent", function()
 local frames = {}
 for i = 1, 3 do
 	local f = CreateFrame("ScrollingMessageFrame", "mCT"..i, UIParent)
+	--f:SetFont(GameFontNormal:GetFont(),cfg.combattext.fontsize,cfg.combattext.fontstyle)
 	f:SetFont(cfg.combattext.font,cfg.combattext.fontsize,cfg.combattext.fontstyle)
 	f:SetShadowColor(0, 0, 0, 0)
 	f:SetFadeDuration(0.3)
@@ -47,6 +55,7 @@ for i = 1, 3 do
 	end
 	frames[i] = f
 end
+--end)
 -- Incoming damage/healing events
 local tbl = {
 	["DAMAGE"] = 			{frame = 1, prefix =  "-", arg2 = true, r = 1, g = 0.1, b = 0.1},
@@ -201,7 +210,10 @@ if cfg.combattext.show_damage then
 				end 
 				mCT3:AddMessage(missType)
 			elseif(eventType=="SPELL_DISPEL") then
-				local target,_, _, id, effect, _, etype = select(12,...)
+				--[[	spellId,spellName,spellSchool
+						extraSpellID,extraSpellName,extraSchool,auraType ]]
+				local id, effect, _, etype = select(12,...) -- due to a bug in 5.2 the order was changed
+				--local _, _, _, id, effect, _, etype = select(12,...)
 				local color
 				if(cfg.combattext.show_icons)then
 					icon=GetSpellTexture(id)
@@ -218,9 +230,10 @@ if cfg.combattext.show_damage then
 				else
 					color={1,0,.5}
 				end
+				--print(id,effect,etype)
 				mCT3:AddMessage(ACTION_SPELL_DISPEL..": "..effect..msg,unpack(color))
 			elseif(eventType=="SPELL_INTERRUPT") then
-				local target,_, _, id, effect = select(12,...)
+				local _,_, _, id, effect = select(12,...)
 				local color={1,.5,0}
 				if(cfg.combattext.show_icons)then
 					icon=GetSpellTexture(id)

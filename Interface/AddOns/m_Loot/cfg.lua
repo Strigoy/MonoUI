@@ -8,7 +8,7 @@
   
   cfg.bartex =		MediaPath.."statusbar"
   cfg.bordertex =	MediaPath.."icon_clean"	
-  cfg.fontn =		"Fonts\\FRIZQT__.ttf"	
+  cfg.fontn =		MediaPath.."font.ttf"	
   cfg.closebtex =	MediaPath.."black-close"
   cfg.edgetex = 	"Interface\\Tooltips\\UI-Tooltip-Border"
   cfg.loottex =		"Interface\\QuestFrame\\UI-QuestLogTitleHighlight"

@@ -9,7 +9,7 @@ local SPELL_POWER_DEMONIC_FURY = SPELL_POWER_DEMONIC_FURY
 local SPELL_POWER_BURNING_EMBERS = SPELL_POWER_BURNING_EMBERS
 local SPELL_POWER_SOUL_SHARDS = SPELL_POWER_SOUL_SHARDS
 local SPEC_WARLOCK_DESTRUCTION = SPEC_WARLOCK_DESTRUCTION
-local SPEC_WARLOCK_DESTRUCTION_GLYPH_EMBERS = 63304
+--local SPEC_WARLOCK_DESTRUCTION_GLYPH_EMBERS = 63304
 local SPEC_WARLOCK_AFFLICTION = SPEC_WARLOCK_AFFLICTION
 local SPEC_WARLOCK_AFFLICTION_GLYPH_SHARDS = 63302
 local SPEC_WARLOCK_DEMONOLOGY = SPEC_WARLOCK_DEMONOLOGY
@@ -96,13 +96,13 @@ local function Visibility(self, event, unit)
 		end
 		
 		if spec == SPEC_WARLOCK_DESTRUCTION then
-			local maxembers = 3
-						
+			local maxembers = 4
+--[[ 						
 			for i = 1, GetNumGlyphSockets() do
 				local glyphID = select(4, GetGlyphSocketInfo(i))
 				if glyphID == SPEC_WARLOCK_DESTRUCTION_GLYPH_EMBERS then maxembers = 4 end
 			end			
-
+ ]]
 			for i = 1, maxembers do
 				if i ~= maxembers then
 					wsb[i]:SetWidth(w / maxembers - spacing)
@@ -127,15 +127,15 @@ local function Visibility(self, event, unit)
 				end
 			end
 			
-			if maxembers == 3 then wsb[4]:Hide() else wsb[4]:Show() end
+			--if maxembers == 3 then wsb[4]:Hide() else wsb[4]:Show() end
 		elseif spec == SPEC_WARLOCK_AFFLICTION then
-			local maxshards = 3
-			
+			local maxshards = 4
+--[[ 			
 			for i = 1, GetNumGlyphSockets() do
 				local glyphID = select(4, GetGlyphSocketInfo(i))
 				if glyphID == SPEC_WARLOCK_AFFLICTION_GLYPH_SHARDS then maxshards = 4 end
 			end			
-
+ ]]
 			for i = 1, maxshards do
 				if i ~= maxshards then
 					wsb[i]:Show()
@@ -146,7 +146,7 @@ local function Visibility(self, event, unit)
 				end
 			end
 			
-			if maxshards == 3 then wsb[4]:Hide() else wsb[4]:Show() end
+			--if maxshards == 3 then wsb[4]:Hide() else wsb[4]:Show() end
 		elseif spec == SPEC_WARLOCK_DEMONOLOGY then
 			wsb[2]:Hide()
 			wsb[3]:Hide()

@@ -1,7 +1,7 @@
-local anchor = "BOTTOMRIGHT"
-local x, y = -169, 33
+local anchor = "TOPLEFT"
+local x, y = 12, -12
 local font = GameFontNormal:GetFont()
-local texture = "Interface\\TargetingFrame\\UI-StatusBar"
+local texture = "Interface\\Addons\\alDamageMeter\\media\\UI-StatusBar"
 
 local defaults = {
 	barheight = 13,
@@ -21,8 +21,15 @@ local defaults = {
 	onlyboss = false,
 	classcolorname = false,
 	mergeHealAbsorbs = false,
+	
+	pos = {"BOTTOMRIGHT",-169, 33},
+	texture = "Interface\\TargetingFrame\\UI-StatusBar",
 }
 dmconf = defaults
+
+local anchor, x, y = unpack(dmconf.pos)
+local texture = dmconf.texture
+--local font = GameFontNormal:GetFont()
 
 local addon_name, ns = ...
 local boss = LibStub("LibBossIDs-1.0")
@@ -118,7 +125,7 @@ end
 
 local CreateFS = CreateFS or function(frame)
 	local fstring = frame:CreateFontString(nil, 'OVERLAY')
-	fstring:SetFont(font, dmconf.font_size, dmconf.font_style)
+	fstring:SetFont(GameFontNormal:GetFont(), dmconf.font_size, dmconf.font_style)
 	fstring:SetShadowColor(0, 0, 0, 1)
 	fstring:SetShadowOffset(0.5, -0.5)
 	return fstring
@@ -358,6 +365,10 @@ end
 
 local UpdateWindow = function()
 	MainFrame:SetSize(dmconf.width, dmconf.maxbars*(dmconf.barheight+dmconf.spacing)-dmconf.spacing)
+	if not IsAddOnLoaded("alInterface") then
+		MainFrame.bg:SetBackdropColor(unpack(dmconf.backdrop_color))
+		MainFrame.bg:SetBackdropBorderColor(unpack(dmconf.border_color))
+	end
 	if dmconf.hidetitle then
 		MainFrame.title:Hide()
 	else
@@ -367,6 +378,10 @@ local UpdateWindow = function()
 		v:SetWidth(MainFrame:GetWidth())
 		v:SetHeight(dmconf.barheight)
 		v:SetPoint("TOP", 0, -(dmconf.barheight + dmconf.spacing) * (i-1))
+		if not IsAddOnLoaded("alInterface") then
+			v.left:SetFont(font, dmconf.font_size, dmconf.font_style)
+			v.right:SetFont(font, dmconf.font_size, dmconf.font_style)
+		end
 	end
 	UpdateBars()
 end
@@ -441,7 +456,8 @@ local CreateMenu = function(self, level)
 		wipe(info)
 		info.text = HIDE
 		info.func = function()
-			MainFrame:Hide()
+			MainFrame:SetAlpha(0)
+			MainFrame:EnableMouse(false)
 		end
 		info.notCheckable = 1
 		UIDropDownMenu_AddButton(info, level)
@@ -912,14 +928,8 @@ function dataobj.OnLeave()
 	GameTooltip:Hide()
 end
 
--- Broker stuff
 function dataobj.OnTooltipShow(tooltip)
 	tooltip:AddLine("Damage Meter", 1, 1, 1)
-	tooltip:AddLine("The displayed data feed can be changed")
-	tooltip:AddLine("simply by setting your group role")
-	tooltip:AddDoubleLine("  [|cffFF6161Damage Dealer|r]", "|cffffffffD|ramage |cffffffffP|rer |cffffffffS|recond")
-	tooltip:AddDoubleLine("  [|cff8AFF30Healer|r]", "|cffffffffH|realing |cffffffffP|rer |cffffffffS|recond")
-	tooltip:AddDoubleLine("  [|cffFFF130Tank|r]", "|cffffffffT|rotal |cffffffffA|rvoidance")
 	tooltip:AddLine("|cffeda55fClick|r to switch between Damage/Healing mode", 1, 1, 1)
 end
 
@@ -945,10 +955,12 @@ addon:RegisterEvent("PLAYER_REGEN_DISABLED")
 addon:RegisterEvent("UNIT_PET")
 
 SlashCmdList["alDamage"] = function(msg)
-	if MainFrame:IsShown() then
-		MainFrame:Hide()
+	if MainFrame:GetAlpha() > 0 then
+		MainFrame:SetAlpha(0)
+		MainFrame:EnableMouse(false)
 	else
-		MainFrame:Show()
+		MainFrame:SetAlpha(1)
+		MainFrame:EnableMouse(true)
 	end
 end
 SLASH_alDamage1 = "/dmg"

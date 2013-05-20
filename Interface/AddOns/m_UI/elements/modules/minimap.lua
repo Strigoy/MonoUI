@@ -153,9 +153,23 @@ local menuList = {
     {text = "Guild",
     func = function() ToggleGuildFrame(1) end},
     {text = "PvP",
-    func = function() ToggleFrame(PVPFrame) end},
+    func = function() 
+		--ToggleFrame(PVPUIFrame) 
+		if PVPUIFrame then
+			if UnitLevel("player") >= 10 then
+				if PVPUIFrame:IsShown() then
+					HideUIPanel(PVPUIFrame)
+				else
+					ShowUIPanel(PVPUIFrame)
+				end
+			end
+		else
+			LoadAddOn("Blizzard_PVPUI")
+			ShowUIPanel(PVPUIFrame)
+		end
+	end},
     {text = "Dungeon Finder",
-    func = function() ToggleFrame(PVEFrame) end},
+    func = function() ToggleLFDParentFrame() end},
 	{text = "Pets and Mounts",
     func = function() TogglePetJournal(1) end},
     {text = "Help",
@@ -195,7 +209,7 @@ if not IsAddOnLoaded("Blizzard_TimeManager") then
 end
 local clockFrame, clockTime = TimeManagerClockButton:GetRegions()
 clockFrame:Hide()
-clockTime:SetFont("Fonts\\FRIZQT__.ttf", 12, "THINOUTLINE")
+clockTime:SetFont(cfg.media.font, 12, "THINOUTLINE")
 clockTime:SetTextColor(1,1,1)
 TimeManagerClockButton:SetPoint("BOTTOM", Minimap, "BOTTOM", 0, -3)
 TimeManagerClockButton:SetScript("OnClick", function(_,btn)

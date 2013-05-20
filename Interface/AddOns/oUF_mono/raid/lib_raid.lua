@@ -324,6 +324,15 @@
 	  ht:SetJustifyH("LEFT")
 	  f:Tag(ht, '[mono:heal]')
 	end
+	--absorbs
+	local a = CreateFrame"Frame" a:SetParent(f.Health) a:SetAllPoints(f.Health) a:SetFrameLevel(20)
+	if cfg.oUF.frames.raid.absorbtext then
+	  local at = lib.gen_fontstring(a, cfg.oUF.media.font, cfg.oUF.frames.raid.font_size-2)
+	  at:SetPoint("CENTER", f.Health, "RIGHT",0,1)
+	  at:SetShadowOffset(1.25, -1.25)
+	  at:SetJustifyH("LEFT")
+	  f:Tag(at, '[mono:absorb]')
+	end
   end
   
   lib_raid.upd_elements = function(f)

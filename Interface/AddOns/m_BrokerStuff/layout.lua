@@ -30,30 +30,35 @@ local cargoShip = LibStub("LibCargoShip-2.1")
 --------> BOTTOM LEFT PANEL
 local LPx, LPy = 282, 10
 local LPspacing = 10
+local normal_font =  "Interface\\Addons\\m_BrokerStuff\\media\\font.ttf"
 
 local equip = cargoShip("Broker_Equipment",{
 scale = 1.2,
 alpha = 1,
 width = 70,
 noIcon = true,
+font = normal_font,
 })
 equip:SetPoint("CENTER", UIParent, "BOTTOMLEFT", LPx, LPy)
 
 local fps = cargoShip("Broker_FPS",{
 parent = equip,
 noIcon = true,
+font = normal_font,
 })
 fps:SetPoint("CENTER", UIParent, "BOTTOMLEFT", LPx-70, LPy)
 
 local memory = cargoShip("Broker_Memory",{
 parent = fps,
 noIcon = true,
+font = normal_font,
 })
 memory:SetPoint("CENTER", UIParent, "BOTTOMLEFT", LPx-140, LPy)
 
 local ping = cargoShip("Broker_Latency",{
 parent = fps,
 noIcon = true,
+font = normal_font,
 })
 ping:SetPoint("CENTER", UIParent, "BOTTOMLEFT", LPx-210, LPy)
 
@@ -66,6 +71,7 @@ width = 60,
 scale = 1.2,
 alpha = 1,
 noIcon = true,
+font = normal_font,
 })
 money:SetPoint("CENTER", UIParent, "BOTTOMRIGHT", RPx, RPy)
 
@@ -75,6 +81,7 @@ if IsAddOnLoaded("alDamageMeter") then
 	scale = 1.2,
 	alpha = 1,
 	noIcon = true,
+	font = normal_font,
 	})
 	dps:SetPoint("CENTER", UIParent, "BOTTOMRIGHT", RPx+70, RPy)
 else
@@ -83,6 +90,7 @@ else
 	scale = 1.2,
 	alpha = 1,
 	noIcon = true,
+	font = normal_font,
 	})
 	skada:SetPoint("CENTER", UIParent, "BOTTOMRIGHT", RPx+70, RPy)
 end
@@ -90,12 +98,14 @@ end
 local durability = cargoShip("Durability",{
 parent = money,
 noIcon = true,
+font = normal_font,
 })
 durability:SetPoint("CENTER", UIParent, "BOTTOMRIGHT", RPx+140, RPy)
 
 local ampere = cargoShip("Ampere",{
 parent = money,
 noIcon = true,
+font = normal_font,
 })
 ampere:SetPoint("CENTER", UIParent, "BOTTOMRIGHT", RPx+210, RPy)
 --[[

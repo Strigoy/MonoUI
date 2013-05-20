@@ -81,7 +81,6 @@
     lib.gen_InfoIcons(self)
     lib.gen_specificpower(self)
     lib.gen_combat_feedback(self)
-    lib.gen_swing_timer(self)
 	if cfg.oUF.settings.playerauras=="AURAS" then lib.createAuras(self) end
 	if cfg.oUF.settings.playerauras=="BUFFS" then lib.createBuffs(self) end
 	if cfg.oUF.settings.playerauras=="DEBUFFS" then lib.createDebuffs(self) end

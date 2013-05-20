@@ -176,7 +176,7 @@ local function ApplyChatStyle(self)
 	--chat tab skinning
 	local tab = _G[name.."Tab"]
 	local tabFs = tab:GetFontString()
-	tabFs:SetFont("Fonts\\FRIZQT__.TTF",12)--,"THINOUTLINE")
+	tabFs:SetFont(cfg.media.font,12)--,"THINOUTLINE")
 	tabFs:SetShadowOffset(1.75, -1.75)
 	tabFs:SetShadowColor(0,0,0,0.6)
 	tabFs:SetTextColor(.9,.8,.5) -- 1,.7,.2

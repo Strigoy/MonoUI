@@ -7,8 +7,8 @@ local dummy = function()end
 local styled = false
 
 local buttonsize=19--23
-local font="Fonts\\FRIZQT__.ttf"
-local tex="Interface\\TargetingFrame\\UI-StatusBar.blp"
+local font=cfg.media.font
+local tex=cfg.media.statusbar
 
 -- make sure vars are available.
 local ds=CreateFrame"Frame"

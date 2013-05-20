@@ -20,7 +20,6 @@
 			["size"] = 16,					-- raid mark size
 		},
 		CombatFeedback = false,				-- enables CombatFeedback on player and target unit frames
-		SwingTimer = false,					-- enables oUF_Swing module for player's auto attack/shot timer
 		Portrait = true,					-- enables 3d portraits on player and target unit frames
 		ClassBars = {
 			["enable"] = true,				-- enable class specific bars (totems, runes etc.)
@@ -137,6 +136,7 @@
 				["healoverflow"] = 1, 						-- overhealing display (1 = disabled, may take values higher than 1)
 				["healtext"] = false, 						-- show/hide heal prediction text
 			},
+			["absorbtext"] = false,							-- display total absorbs text
 		},
 	},
 	castbar = {			-- cast bars settings

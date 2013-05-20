@@ -1208,31 +1208,7 @@
 		f.CombatFeedbackText = cfbt
 	end
   end
-  -- oUF_Swing
-  lib.gen_swing_timer = function(f)
-	if not IsAddOnLoaded("oUF_Swing") then return end
-	if cfg.oUF.settings.SwingTimer then
-		sw = CreateFrame("StatusBar", f:GetName().."_Swing", f)
-		sw:SetStatusBarTexture(cfg.oUF.media.statusbar)
-		sw:SetStatusBarColor(.3, .3, .3)
-		sw:SetHeight(4)
-		sw:SetWidth(f.width)
-		sw:SetPoint("TOP", f.Power, "BOTTOM", 0, -3)
-		sw.bg = sw:CreateTexture(nil, "BORDER")
-		sw.bg:SetAllPoints(sw)
-		sw.bg:SetTexture(cfg.oUF.media.statusbar)
-		sw.bg:SetVertexColor(.1, .1, .1, 0.25)
-		sw.bd = CreateFrame("Frame", nil, sw)
-		sw.bd:SetFrameLevel(1)
-		sw.bd:SetPoint("TOPLEFT", -4, 4)
-		sw.bd:SetPoint("BOTTOMRIGHT", 4, -4)
-		lib.gen_backdrop(sw.bd)
-		sw.Text = lib.gen_fontstring(sw, cfg.oUF.media.font, 10, "THINOUTLINE")
-		sw.Text:SetPoint("CENTER", 0, 0)
-		sw.Text:SetTextColor(1, 1, 1)
-		f.Swing = sw
-	end
-  end
+
   -- alt power bar
   local AltPowerPostUpdate = function(app, min, cur, max)
 	--app.v:SetText(cur)

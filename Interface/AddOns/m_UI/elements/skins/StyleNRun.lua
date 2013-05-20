@@ -3,8 +3,8 @@ local cfg = ns.cfg
 local A = ns.A
 if not cfg.skins.nugrunning.enable or not IsAddOnLoaded("NugRunning") then return end
 
-local font="Fonts\\FRIZQT__.ttf"
-local tex="Interface\\TargetingFrame\\UI-StatusBar.blp"
+local font=cfg.media.font--"Fonts\\FRIZQT__.ttf"
+local tex=cfg.media.statusbar--"Interface\\TargetingFrame\\UI-StatusBar.blp"
 local fontflags = {font, 11, "THINOUTLINE"}
 
 local timeonleft = cfg.skins.nugrunning.time_on_left
@@ -134,7 +134,7 @@ end
 		NRunDB_Global.MonoUIskin = "12.0"
 		print'|cffFF9D3BMonoUI:|r NugRunningSkin was updated, |cffFF0000please reload UI|r'
     end
-	if cfg.skins.nugrunning.lock_position then
+	if cfg.skins.nugrunning.lock_default_position then
 		local up = CreateFrame"Frame"
 		up:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED")
 		up:RegisterEvent("PLAYER_ENTERING_WORLD")

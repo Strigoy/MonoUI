@@ -1,13 +1,16 @@
-## Interface: 50100
+## Interface: 50200
 ## Notes: Compilation of essential UI elements.
 ## Title: mono|cffffffffUIelements|r
 ## Author: Monolit
-## Version: 5.1.0
+## Version: 5.1.3
 ## OptionalDeps: !mCFG, DBM-Core, NugRunning, Bigwigs, oUF_mono, Skada
 
 cfg.lua
 ..\!mCFG\mCFG_layer.lua
 API\functions.lua
+
+elements\modules\noTaint.lua
+elements\modules\font.lua
 
 elements\panels\panels.lua
 elements\panels\layout.lua

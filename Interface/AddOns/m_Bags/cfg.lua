@@ -4,7 +4,7 @@ local cfg = CreateFrame("Frame")
 -- Player bags settings
 cfg.bags = { 
 	general = {
-		font = "Fonts\\FRIZQT__.TTF",
+		font = "Interface\\Addons\\m_Bags\\media\\font.ttf",
 		font_size = 14,
 	},
 	position = {"BOTTOMRIGHT", "UIParent", "BOTTOMRIGHT", -20, 215},

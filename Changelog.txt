@@ -1,3 +1,25 @@
+====== v. 12.0 rev 5 ======
+alDamageMeter: updated font string function so it applies apropriate font
+oUF_mono: fix for warlocks soul shards bar (drain life glyph)
+m_UI: implemented font module based on Tekkub's teckticles
+m_UI: updated several modules to reflect the font change
+m_UI: updated minimap font for time value
+m_UI: skada skin updated
+m_UI: added NoTaint module that reduces the ammount of taint errors you get (when changing glyphs/talents etc for example)
+m_UI: updated BigWigs skin, huge props to Funkydude for implementing MonoUI bars style into BigWigs
+m_UI: fixed PVP/dungeon finder buttons in minimap module
+m_CombatText: fixed SPELL_DISPEL vars (5.2 bug)
+oUF_mono: added absorbs indicator (need to enable this in cfg)
+oUF_mono: removed oUF_Swing code / support as this plugin have not been updated for a while
+m_BrokerStuff: added font overrides for broker modules
+MonoUI: removed Fonts folder
+
+====== v. 12.0 rev 4 ======
+m_UI: fixed lock_default_position var in NugRunning skin
+m_UI: raid buff module updated, removed deprecated spellids
+oUF_mono: added raid debuffs for Empress Shek'zeer
+MonoUI: .toc update for 5.2
+
 ====== v. 12.0 rev 3 ======
 oUF_mono: fixed events list for mono:hp tag to properly indicate when unit is dead or offline
 m_UI: little update for tooltip module

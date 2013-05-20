@@ -278,6 +278,15 @@ oUF.Tags.Methods['mono:heal'] = function(u)
 end
 oUF.Tags.Events['mono:heal'] = 'UNIT_HEAL_PREDICTION'
 
+-- absorbs
+oUF.Tags.Methods['mono:absorb'] = function(u)
+	local absorb = UnitGetTotalAbsorbs(u) or 0
+	if absorb > 0 then
+		return "|cffEEFF30"..SVal(absorb).."|r"				
+	end
+end
+oUF.Tags.Events['mono:absorb'] = 'UNIT_ABSORB_AMOUNT_CHANGED'
+
 -- AltPower value tag
 oUF.Tags.Methods['mono:altpower'] = function(unit)
 	local cur = UnitPower(unit, ALTERNATE_POWER_INDEX)

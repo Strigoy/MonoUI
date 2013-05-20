@@ -2,9 +2,9 @@ local addon, ns = ...
 local cfg = CreateFrame("Frame")
 
 cfg.combattext = {
-	font = "Fonts\\FRIZQT__.ttf",	-- font
-	fontsize = 15,					-- font size
-	fontstyle = "OUTLINE",			-- font style
+	font = "Interface\\Addons\\m_CombatText\\media\\font.ttf",	-- font
+	fontsize = 15,												-- font size
+	fontstyle = "OUTLINE",										-- font style
 	
 	frame1_pos = {"CENTER", "UIParent", "CENTER", 15, 50},	-- incoming healing frame position
 	frame2_pos = {"CENTER", "UIParent", "CENTER", -15, 50},	-- incoming damage frame position

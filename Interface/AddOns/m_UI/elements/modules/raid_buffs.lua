@@ -26,9 +26,8 @@ local function SetCasterOnlyBuffs()
 	}
 	buff2list = {	-- Total Stamina
         469, -- Commanding Shout
-        6307, -- Blood Pact
-		103127, -- Imp: Blood Pact
         90364, -- Qiraji Fortitude
+		109773, -- Dark Intent
 		21562, -- Power Word: Fortitude	
 	}
 	buff3list = {	-- Spell power
@@ -41,6 +40,7 @@ local function SetCasterOnlyBuffs()
 	buff4list = {	-- Mastery
 		116956, -- grace of air
 		19740,	-- Blessing of Might
+		116781, -- Legacy of the White Tiger
 	}
 end
 
@@ -54,9 +54,8 @@ local function SetBuffs()
 	}
 	buff2list = {	-- Total Stamina
         469, -- Commanding Shout
-        6307, -- Blood Pact
-		103127, -- Imp: Blood Pact
         90364, -- Qiraji Fortitude
+		109773, -- Dark Intent
 		21562, -- Power Word: Fortitude	
 	}
 	buff3list = {	 -- Total AP
@@ -67,6 +66,7 @@ local function SetBuffs()
 	buff4list = {	-- Mastery
 		116956, -- grace of air
 		19740,	-- Blessing of Might
+		116781, -- Legacy of the White Tiger
 	}
 end
 

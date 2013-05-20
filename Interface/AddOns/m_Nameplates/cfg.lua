@@ -4,7 +4,7 @@
   cfg.nameplates = {
   
   -- MEDIA
-	font = "Fonts\\FRIZQT__.ttf",
+	font = "Interface\\Addons\\m_Nameplates\\media\\font.ttf",
 	icontex = "Interface\\AddOns\\m_Nameplates\\media\\iconborder",
 	backdrop_edge = "Interface\\AddOns\\m_Nameplates\\media\\glowTex",
 	statusbar = "Interface\\AddOns\\m_Nameplates\\media\\statusbar",

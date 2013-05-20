@@ -1,11 +1,12 @@
 local addon, ns = ...
 local cfg = CreateFrame("Frame")
 
-cfg.media = { -- cfg.media.mail_icon
+cfg.media = { -- cfg.media.font
 	auratex = "Interface\\Addons\\m_UI\\media\\iconborder", 
 	font = "Interface\\Addons\\m_UI\\media\\font.ttf",
-	backdrop_texture = "Interface\\Addons\\m_UI\\media\\backdrop",
-	backdrop_edge_texture = "Interface\\Addons\\m_UI\\media\\backdrop_edge",
+	fontn = "Interface\\Addons\\m_UI\\media\\font_narrow.ttf",
+	backdrop_texture = "Interface\\Addons\\m_UI\\media\\backdrop.tga",
+	backdrop_edge_texture = "Interface\\Addons\\m_UI\\media\\backdrop_edge.tga",
 	statusbar = "Interface\\Addons\\m_UI\\media\\statusbar.tga",
 	mail_icon = "Interface\\AddOns\\m_UI\\media\\mail",
 }
@@ -88,7 +89,7 @@ cfg.modules = {
 		["only_in_raid"] = true,			-- enable raidBuffs module only in raid instances
 	},
 	raid_cd = {
-		["enable"] = true,					-- Enable raid cooldowns
+		["enable"] = false,					-- Enable raid cooldowns
 		["height"] = 6,						-- Bars height
 		["width"] = 186,					-- Bars width(if show_icon = false, bar width+28)
 		["upwards"] = false,				-- Sort upwards bars
@@ -133,7 +134,7 @@ cfg.modules = {
 
 cfg.automation = {		-- automation settings 
 	screenshot 			= true,							-- automatic screenshot when you get achivement
-	log 				= true,							-- enable combat log writing when in instance
+	log 				= false,							-- enable combat log writing when in instance
 	sell_junk 			= true,							-- sell all the grey junk to the vendor
 	repair				= true,							-- auromatic repair at vendors
 	accept_invites		= true,							-- accept invites from guild/friends
@@ -186,7 +187,7 @@ cfg.skins = {
 		["lock_default_position"] = false,		-- locks nugRunning anchor in place
 		["lock_color"] = true,					-- apply custom color to NugRunning bars
 		["bar_color"] = {0.45,0.45,0.45},		-- bar colors in r/255, g/255, b/255 format
-		["position"] = {"BOTTOM", "UIParent", "BOTTOM", -393, 257},
+		["position"] = {"BOTTOM", "UIParent", "BOTTOM", -393, 257},	-- default position (loads only once if anchor is not locked)
 		["time_on_left"] = true,				-- display timer on the left side of the bar
 		["better_time"] = true,					-- display time with digits
 	},
@@ -199,6 +200,7 @@ if GetUnitName("player") == "Strigoy" or GetUnitName("player") == "Strig" then
 		{	id = 16190,	AnnounceChan = "SAY",   	WarnChan = "CHANNEL",	WarnTime = 30,	ChanIndex = 5,	Duration = 16}, -- mana tide totem
 		{	id = 98008,	AnnounceChan = "CHANNEL",  	WarnChan = "CHANNEL",  	WarnTime = 30,	ChanIndex = 5,	Duration = 6}, -- spirit link totem
 		{	id = 120668,AnnounceChan = "RAID",		WarnChan = "RAID",  	WarnTime = 30,	ChanIndex = 6,	Duration = 10}, -- stormlash totem
+		{	id = 120668,AnnounceChan = "CHANNEL",	WarnChan = "CHANNEL",  	WarnTime = 30,	ChanIndex = 7,	Duration = 10}, -- stormlash totem 2
 		{	id = 108280,AnnounceChan = "CHANNEL",	WarnChan = "RAID",  	WarnTime = 30,	ChanIndex = 5,	Duration = 10}, -- healing tide totem
 		{	id = 86659,	AnnounceChan = "CHANNEL",	WarnChan = "CHANNEL",	WarnTime = 30,	ChanIndex = 5,	Duration = 12}, -- guardian of ancient kings
 		{	id = 47788,	AnnounceChan = "CHANNEL",	WarnChan = "CHANNEL",	WarnTime = 30,	ChanIndex = 5}, -- guardian spirit

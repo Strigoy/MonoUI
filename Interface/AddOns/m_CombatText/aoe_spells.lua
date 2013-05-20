@@ -99,6 +99,7 @@ elseif player_class=="SHAMAN"then
 		aoe.spell[51945]=true		-- Earthliving
 		aoe.spell[114942]=true		-- Healing tide 
 		aoe.spell[114083]=true		-- Restorative mists (ascendence)
+		aoe.spell[114911]=true		-- Ancestral Guidence
 		aoe.spell[421]=true			-- Chain Lightning
 		aoe.spell[45297]=true		-- Chain Lightning (mastery proc)
 		aoe.spell[114074]=true		-- Lava Beam (ascendence)

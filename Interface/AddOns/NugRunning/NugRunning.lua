@@ -113,6 +113,7 @@ local defaults = {
     width = 150,
     height = 20,
     cooldownsEnabled = true,
+    missesEnabled = true,
     spellTextEnabled = true,
     shortTextEnabled = true,
     swapTarget = true,
@@ -163,6 +164,7 @@ function NugRunning.PLAYER_LOGIN(self,event,arg1)
     else
         NRunDB = NRunDB_Global
     end
+    NugRunning.db = NRunDB
 
     --migration
     if not NRunDB.anchors then
@@ -270,6 +272,10 @@ function NugRunning.COMBAT_LOG_EVENT_UNFILTERED( self, event, timestamp, eventTy
                 return self:DeactivateTimer(srcGUID, dstGUID, spellID, spellName, opts, auraType)
             elseif eventType == "SPELL_AURA_REMOVED_DOSE" then
                 return self:RemoveDose(srcGUID, dstGUID, spellID, spellName, auraType, amount)
+            elseif eventType == "SPELL_MISSED" then
+                if NRunDB.missesEnabled then
+                    return self:ActivateTimer(srcGUID, dstGUID, dstName, dstFlags, spellID, spellName, opts, "MISSED", auraType) -- auraType = missType in this case
+                end
             end
         end
     end
@@ -377,7 +383,8 @@ function NugRunning.SPELL_UPDATE_COOLDOWN(self,event)
                             opts.timer = timer
                         end
                     else
-                        if timer.cd_startTime < startTime or timer.cd_duration ~= duration then
+                        -- print("1", spellID, startTime, duration)
+                        if timer.cd_startTime ~= startTime or timer.cd_duration ~= duration then
                             timer.cd_startTime = startTime
                             timer.fixedoffset = timer.opts.fixedlen and duration - timer.opts.fixedlen or 0
                             timer:SetTime(startTime +  timer.fixedoffset, startTime + duration)
@@ -405,6 +412,11 @@ end
 local helpful = "HELPFUL"
 local harmful = "HARMFUL"
 function NugRunning.ActivateTimer(self,srcGUID,dstGUID,dstName,dstFlags, spellID, spellName, opts, timerType, override, amount, from_unitaura)  -- duration override
+    if timerType == "MISSED" then
+        if override == "IMMUNE" then return end
+        opts = { duration = 3, color = NugRunningConfig.colors.MISSED, scale = .8, priority = opts.priority or 100501, shine = true }
+    end
+
     if opts.specmask then
         local spec = GetSpecialization()
         if spec then
@@ -462,7 +474,9 @@ function NugRunning.ActivateTimer(self,srcGUID,dstGUID,dstName,dstFlags, spellID
     timer.opts = opts
         
     local time
-    if override then time = override
+    if timerType == "MISSED" then
+        time = opts.duration
+    elseif override then time = override
     else
         time = NugRunning.SetDefaultDuration(dstFlags, opts, timer)
         -- print( "DEFAULT TIME", spellName, time, timerType)
@@ -513,6 +527,8 @@ function NugRunning.ActivateTimer(self,srcGUID,dstGUID,dstName,dstFlags, spellID
     
     if opts.textfunc and type(opts.textfunc) == "function" then
         nameText = opts.textfunc(timer)
+    elseif timerType == "MISSED" then
+        nameText = override:sub(1,1)..override:sub(2):lower()
     else
         nameText = NugRunning:MakeName(opts, spellName)
     end
@@ -521,6 +537,7 @@ function NugRunning.ActivateTimer(self,srcGUID,dstGUID,dstName,dstFlags, spellID
     if timer.glow:IsPlaying() then timer.glow:Stop() end
     timer:Show()
     if not timer.animIn:IsPlaying() and not from_unitaura then timer.animIn:Play() end
+    timer.shine.tex:SetAlpha(0)
     if opts.shine and not timer.shine:IsPlaying() then timer.shine:Play() end
     
     self:ArrangeTimers()
@@ -1079,6 +1096,7 @@ function NugRunning.SlashCmd(msg)
       |cff00ff00/nrun reset|r
       |cff00ff00/nrun clear|r
       |cff00ff00/nrun charopts|r : enable character specific settings
+      |cff00ff00/nrun misses|r : toggle showing cooldowns
       |cff00ff00/nrun cooldowns|r : toggle showing cooldowns
       |cff00ff00/nrun spelltext|r : toggle spell text on bars
       |cff00ff00/nrun shorttext|r : toggle using short names
@@ -1089,7 +1107,7 @@ function NugRunning.SlashCmd(msg)
       |cff00ff00/nrun localnames|r: toggle localized spell names
       |cff00ff00/nrun leaveghost|r: don't hide target/player ghosts in combat
       |cff00ff00/nrun set|r width=120 height=20 fontscale=1.1 growth=up/down
-      |cff00ff00/nrun setpos|r point=CENTER parent=UIParent to=CENTER x=0 y=0]]
+      |cff00ff00/nrun setpos|r anchor=main point=CENTER parent=UIParent to=CENTER x=0 y=0]]
     )end
     if k == "unlock" then
         for name, anchor in pairs(NugRunning.anchors) do
@@ -1112,10 +1130,10 @@ function NugRunning.SlashCmd(msg)
         local unit = v
         local h = false
         for i=1, 100 do
-            local name, _,_,_,_,_,_,_,_,_, spellID = UnitAura(unit, i, "HELPFUL")
+            local name, _,_,_,_,duration,_,_,_,_, spellID = UnitAura(unit, i, "HELPFUL")
             if not name then break end
             if not h then print("BUFFS:"); h = true; end
-            print(string.format("    %s (id: %d)", name, spellID))
+            print(string.format("    %s (id: %d) Duration: %s", name, spellID, duration or "none" ))
         end
         h = false
         for i=1, 100 do
@@ -1127,13 +1145,15 @@ function NugRunning.SlashCmd(msg)
 
     end
     if k == "reset" then
-        NRunDB.anchor.point = "CENTER"
-        NRunDB.anchor.parent = "UIParent"
-        NRunDB.anchor.to = "CENTER"
-        NRunDB.anchor.x = 0
-        NRunDB.anchor.y = 0
-        local pos = NRunDB.anchor
-        NugRunning.anchor:SetPoint(pos.point, pos.parent, pos.to, pos.x, pos.y)
+        for name, anchor in pairs(NRunDB.anchors) do
+            anchor.point = "CENTER"
+            anchor.parent = "UIParent"
+            anchor.to = "CENTER"
+            anchor.x = 0
+            anchor.y = 0
+            local pos = anchor
+            NugRunning.anchors[name]:SetPoint(pos.point, pos.parent, pos.to, pos.x, pos.y)
+        end
     end
     if k == "clear" then
         NugRunning:ClearTimers(true)
@@ -1171,6 +1191,10 @@ function NugRunning.SlashCmd(msg)
         NRunDB.localNames = not NRunDB.localNames
         print("NRun localized spell names "..(NRunDB.localNames and "enabled" or "disabled"))
     end
+    if k == "misses" then
+        NRunDB.missesEnabled = not NRunDB.missesEnabled
+        print("NRun miss timers "..(NRunDB.missesEnabled and "enabled" or "disabled"))
+    end
     if k == "swaptarget" then
         NRunDB.swapTarget = not NRunDB.swapTarget
         NugRunning:SetupArrange()
@@ -1207,13 +1231,16 @@ function NugRunning.SlashCmd(msg)
     end
     if k == "setpos" then
         local p = ParseOpts(v)
-        NRunDB.anchor.point = p["point"] or NRunDB.anchor.point
-        NRunDB.anchor.parent = p["parent"] or NRunDB.anchor.parent
-        NRunDB.anchor.to = p["to"] or NRunDB.anchor.to
-        NRunDB.anchor.x = p["x"] or NRunDB.anchor.x
-        NRunDB.anchor.y = p["y"] or NRunDB.anchor.y
-        local pos = NRunDB.anchor
-        NugRunning.anchor:SetPoint(pos.point, pos.parent, pos.to, pos.x, pos.y)
+        local aname = p["anchor"]
+        local anchor = NRunDB.anchors[aname]
+        if not anchor then print(string.format("Anchor '%s' doesn't exist", aname)) end
+        anchor.point = p["point"] or anchor.point
+        anchor.parent = p["parent"] or anchor.parent
+        anchor.to = p["to"] or anchor.to
+        anchor.x = p["x"] or anchor.x
+        anchor.y = p["y"] or anchor.y
+        local pos = anchor
+        NugRunning.anchors[aname]:SetPoint(pos.point, pos.parent, pos.to, pos.x, pos.y)
     end
     if k == "debug" then
         if not NugRunning.debug then
